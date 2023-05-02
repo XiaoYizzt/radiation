@@ -1,0 +1,304 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>浙江省杭州市下雨天采集的样本光谱</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <link rel="stylesheet" type="text/css" href="spviewer.css">
+  <script language="javascript" type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+  <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="js/jquery.flot.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/jquery.flot.crosshair.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/jquery.flot.selection.min.js"></script>
+  <script language="javascript" type="text/javascript" src="spviewer.js"></script>
+
+</head>
+<body>
+
+<h1 id="result">辐射光谱显示工具 WESViewer——雨天样本光谱</h1>
+
+<p>使用方法参见：<a href="../index.html">WESViewer 说明</a></p>
+	
+<img src="../IMG/A1.jpg" width="427" height="240" alt="丢失或加载失败的图像：IMG">
+	
+<h2>光谱选择</h2>
+
+<p>
+	<form id="file_select">
+	</form>
+</p>
+
+
+<h2>光谱显示</h2>
+
+<div id="sp_sel">
+</div>
+
+<div id="sp_info">
+	■ 光谱信息<br>
+</div>
+
+
+<div id="sp_graph" style="width: 800px; height: 400px;"></div>
+
+<div>
+	<form>
+		<input type="button" id="zoom" value="放大选取">
+		<input type="button" id="zoomout" value="缩小">
+		<span id="bg_range_selector">
+		BG计算宽度<select id="bgrange">
+			<option value="0.001">0.1%
+			<option value="0.002">0.2%
+			<option value="0.005">0.5%
+			<option value="0.01" selected>1%
+			<option value="0.02">2%
+			<option value="0.03">3%
+		</select>
+		</span>
+		<span id="bg_range_selector_manual">
+		<input type="button" id="bg_range_left" value="选择左侧 BG 范围">
+		<input type="button" id="bg_range_right" value="选择右侧 BG 范围">
+		</span>
+		<br>
+		垂直轴显示范围<select id="max_range">
+			<option value="100">100%
+			<option value="90">90%
+			<option value="80">80%
+			<option value="70">70%
+			<option value="60">60%
+			<option value="50">50%
+			<option value="40">40%
+			<option value="30">30%
+			<option value="20">20%
+			<option value="10">10%
+			<option value="5">5%
+			<option value="3">3%
+		</select>
+		筛选
+		<select id="filter_type">
+			<option value="none">None
+			<option value="sma">简单平均
+			<option value="wma">加权移动平均
+		</select>
+		平均范围<select id="filter">
+			<option value="0">None
+			<option value="1">3ch
+			<option value="2">5ch
+			<option value="3">7ch
+			<option value="4">9ch
+			<option value="5">11ch
+			<option value="6">13ch
+			<option value="7">15ch
+		</select>
+		<input type="checkbox" id="log" value="on">显示对数
+		<input type="button" id="save_tsv" value="TSV变换">
+		<br>
+		<div id="range_preset">
+		</div>
+	</form>
+</div>
+
+<div id="sp_cursor_info" style="float: left;">
+	■ 光标位置信息<br>
+	<table class="csv">
+		<tr>
+			<th style="width: 5em;">ch</th>
+			<td style="width: 7em; text-align: right;"><span id="ch"></span>ch</td>
+		</tr>
+		<tr>
+			<th>energy</th>
+			<td style="text-align: right;"><span id="energy"></span>keV</td>
+		</tr>
+		<tr>
+			<th>cps</th>
+			<td style="text-align: right;"><span id="cps"></span></td>
+		</tr>
+		<tr>
+			<th>count</th>
+			<td style="text-align: right;"><span id="count"></span></td>
+		</tr>
+	</table>
+</div>
+
+<div id="sp_cursor_info_compare" style="float: left; margin-left: 1em;">
+	■ 光标位置信息<br>
+	<table class="csv">
+		<tr>
+			<th>energy</th>
+			<td style="text-align: right;"><span id="cmp_energy"></span>keV</td>
+		</tr>
+		<tr>
+			<th>[A] cps</th>
+			<td style="text-align: right;"><span id="cmp_cpsA"></span></td>
+		</tr>
+		<tr>
+			<th>[B] cps</th>
+			<td style="text-align: right;"><span id="cmp_cpsB"></span></td>
+		</tr>
+		<tr>
+			<th>[B-A] cps</th>
+			<td style="text-align: right;"><span id="cmp_cps_diff"></span></td>
+		</tr>
+	</table>
+</div>
+
+<div id="sp_cursor_info_multi" style="float: left; margin-left: 1em;">
+	■ 光标位置信息<br>
+	<table class="csv">
+		<tr>
+			<th>energy</th>
+			<td style="text-align: right;"><span id="multi_energy"></span>keV</td>
+		</tr>
+		<tr>
+			<th>[1] cps</th>
+			<td style="text-align: right;"><span id="multi_cps1"></span></td>
+		</tr>
+		<tr>
+			<th>[2] cps</th>
+			<td style="text-align: right;"><span id="multi_cps2"></span></td>
+		</tr>
+		<tr>
+			<th>[3] cps</th>
+			<td style="text-align: right;"><span id="multi_cps3"></span></td>
+		</tr>
+		<tr>
+			<th>[4] cps</th>
+			<td style="text-align: right;"><span id="multi_cps4"></span></td>
+		</tr>
+		<tr>
+			<th>[5] cps</th>
+			<td style="text-align: right;"><span id="multi_cps5"></span></td>
+		</tr>
+	</table>
+</div>
+
+<div id="sp_cursor_nuclear" style="float: left; margin-left: 1em;">
+	■ 光标位置核素分析<br>
+	<table class="csv">
+		<tr id="sp_cursor_nuclear_table">
+			<th style="width: 6em;">能量</th>
+			<th style="width: 9em;">核素</th>
+			<th style="width: 13em;">半衰期</th>
+			<th style="width: 4em;">排比</th>
+		</tr>
+	</table>
+</div>
+
+<div id="sp_cursor_selection" style="float: left; margin-left: 1em;">
+	■ 选择范围信息<br>
+	<table class="csv">
+		<tr>
+			<th style="width: 9em;">开始通道</th>
+			<td style="width: 7em; text-align: right;"><span id="sel_s_ch"></span>ch</td>
+		</tr>
+		<tr>
+			<th>结束通道</th>
+			<td style="text-align: right;"><span id="sel_e_ch"></span>ch</td>
+		</tr>
+		<tr>
+			<th>开始ev</th>
+			<td style="text-align: right;"><span id="sel_s_ev"></span>keV</td>
+		</tr>
+		<tr>
+			<th>结束ev</th>
+			<td style="text-align: right;"><span id="sel_e_ev"></span>keV</td>
+		</tr>
+		<tr>
+			<th>总cps(含BG)</th>
+			<td style="text-align: right;"><span id="sel_gross"></span></td>
+		</tr>
+		<tr>
+			<th>净cps(不包括BG)</th>
+			<td style="text-align: right;"><span id="sel_net"></span></td>
+		</tr>
+		<tr>
+			<th>总计数count(含BG)</th>
+			<td style="text-align: right;"><span id="sel_gross_count"></span></td>
+		</tr>
+		<tr>
+			<th>净count(不包括BG)</th>
+			<td style="text-align: right;"><span id="sel_net_count"></span></td>
+		</tr>
+	</table>
+</div>
+
+<div id="sp_cursor_selection_compare" style="float: left; margin-left: 1em;">
+	■ 选择范围信息<br>
+	<table class="csv">
+		<tr>
+			<th>开始ev</th>
+			<td style="text-align: right;"><span id="cmp_sel_s_ev"></span>keV</td>
+		</tr>
+		<tr>
+			<th>结束ev</th>
+			<td style="text-align: right;"><span id="cmp_sel_e_ev"></span>keV</td>
+		</tr>
+		<tr>
+			<th>[A] cps</th>
+			<td style="text-align: right;"><span id="cmp_sel_cpsA"></span></td>
+		</tr>
+		<tr>
+			<th>[B] cps</th>
+			<td style="text-align: right;"><span id="cmp_sel_cpsB"></span></td>
+		</tr>
+		<tr>
+			<th>[B-A] cps</th>
+			<td style="text-align: right;"><span id="cmp_sel_cps_diff"></span></td>
+		</tr>
+	</table>
+</div>
+
+<div id="sp_cursor_selection_multi" style="float: left; margin-left: 1em;">
+	■ 选择范围信息<br>
+	<table class="csv">
+		<tr>
+			<th>开始ev</th>
+			<td style="text-align: right;"><span id="multi_sel_s_ev"></span>keV</td>
+		</tr>
+		<tr>
+			<th>结束ev</th>
+			<td style="text-align: right;"><span id="multi_sel_e_ev"></span>keV</td>
+		</tr>
+		<tr>
+			<th>[1] cps<br>
+				<font color="#edc240">■</font>
+			</th>
+			<td style="text-align: right;"><span id="multi_sel_cps1"></span></td>
+		</tr>
+		<tr>
+			<th>[2] cps<br>
+				<font color="#afd8f8">■</font>
+			</th>
+			<td style="text-align: right;"><span id="multi_sel_cps2"></span></td>
+		</tr>
+		<tr>
+			<th>[3] cps<br>
+				<font color="#cb4b4b">■</font>
+			</th>
+			<td style="text-align: right;"><span id="multi_sel_cps3"></span></td>
+		</tr>
+		<tr>
+			<th>[4] cps<br>
+				<font color="#4da74d">■</font>
+			</th>
+			<td style="text-align: right;"><span id="multi_sel_cps4"></span></td>
+		</tr>
+		<tr>
+			<th>[5] cps<br>
+				<font color="#9440ed">■</font>
+			</th>
+			<td style="text-align: right;"><span id="multi_sel_cps5"></span></td>
+		</tr>
+	</table>
+</div>
+
+<div style="clear: left;">
+</div>
+
+<div id="tsv_data"></div>
+
+<hr>
+<div style="text-align: right;"><a href="../index.html">WESViewer Ver 1.0</a></div>
+<body background="../../../img/bg1.gif">
+</body>
+</html>
