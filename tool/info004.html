@@ -1,0 +1,445 @@
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>辐射测量仪器的灵敏度</title>
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../css/TX.css">
+  <script language="javascript" type="text/javascript" src="jquery-1.5.2.min.js"></script>
+  <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../flot/excanvas.min.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="flot/jquery.flot.min.js"></script>
+<script src="js/jquery.socialbutton-1.9.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22952947-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script type="text/javascript">
+var graph_length = 600; // 秒
+$(document).ready(function() {
+	$(".update_link").click(function() {
+		setTimeout(function() {
+			restore_hash();
+			graph_update();
+			scroll_result();
+		}, 1);
+	});
+	restore_hash();
+});
+function restore_hash() {
+	if(location.hash != "") {
+		if(location.hash.match(/^#([0-9\.]+)_([0-9\.]+)_([0-9\.]+)_([0-9\.]+)_([0-9\.]+)$/)) {
+			var sv_h_1 = RegExp.$1;
+			var sv_h_2 = RegExp.$2;
+			var cpm = RegExp.$3;
+			var second = RegExp.$4;
+			var avg = RegExp.$5;
+			$("#sv_h_1").val(sv_h_1);
+			$("#sv_h_2").val(sv_h_2);
+			$("#cpm").val(cpm);
+			$("#second").val(second);
+			$("#avg").val(avg);
+		}
+		graph_update();
+		scroll_result();
+	} else {
+		graph_update();
+	}
+}
+function scroll_result() {
+	var targetOffset = $('#result_url').offset().top;
+	$('html,body').animate({scrollTop: targetOffset}, 500);
+}
+
+function graph_update() {
+	var sv_h_1 = parseFloat($("#sv_h_1").val());
+	var sv_h_2 = parseFloat($("#sv_h_2").val());
+	var cpm_sv_h = parseFloat($("#cpm").val());
+	
+	var second = parseFloat($("#second").val());
+	var avg = parseFloat($("#avg").val());
+	
+	var radiation = [];
+	var radiation_count_graph = [];
+	var radiation_graph = [];
+	var total_avg = 0;
+	var change_sv_h = graph_length/3*2;
+	for(var i = 1; i <= graph_length; i++) {
+		var sv_h;
+		if(i <= change_sv_h) {
+			sv_h = sv_h_1;
+		} else {
+			sv_h = sv_h_2;
+		}
+		var cps = sv_h * cpm_sv_h / 60;
+		
+		var val = poisson(cps);
+		radiation.push(val);
+		radiation_count_graph.push([i, val]);
+		radiation_graph.push([i, sv_h]);
+		total_avg += val;
+	}
+	total_avg /= graph_length;
+	total_avg = total_avg * 60 / cpm_sv_h;
+	$("#total_avg").text(total_avg.toFixed(5));
+	
+	var detector_graph = [];
+	var max_sv_h = -1;
+	var min_sv_h = -1;
+	for(var t = 0; t <= graph_length; t += second) {
+		if(t >= avg) {
+			var sum = 0;
+			for(var t2 = (t - avg); t2 < t; t2++) {
+				sum += radiation[t2];
+			}
+			var val = (sum/avg) * 60 / cpm_sv_h;
+			detector_graph.push([t, val]);
+			if(max_sv_h < 0 || max_sv_h < val) {
+				max_sv_h = val;
+			}
+			if(min_sv_h < 0 || min_sv_h > val) {
+				min_sv_h = val;
+			}
+		}
+	}
+	$("#max_sv_h").text(max_sv_h.toFixed(5));
+	$("#min_sv_h").text(min_sv_h.toFixed(5));
+	$("#width_sv_h").text((max_sv_h - min_sv_h).toFixed(5));
+	
+	var href = location.href.replace(/#.*$/, "");
+	var hash = $("#sv_h_1").val() + "_"
+		+ $("#sv_h_2").val() + "_"
+		+ $("#cpm").val() + "_"
+		+ $("#second").val() + "_"
+		+ $("#avg").val();
+	$("#link_url").attr("href", href + "#" + hash);
+	$("#link_url").text(href + "#" + hash);
+	
+	$.plot($("#placeholder"), [
+		{
+			data: radiation_count_graph,
+			label: "辐射检测次数(cps)",
+			lines: { show: false },
+			points: { show: true, fill: true, radius: 1 },
+			shadowSize: 0,
+			color: "rgba(255, 0, 0, 0.8)"
+		},
+		{
+			data: radiation_graph,
+			label: "实际剂量值(μSv/h)",
+			yaxis: 2,
+			lines: { show: true, steps: true }
+		},
+		{
+			data: detector_graph,
+			label: "剂量显示值(μSv/h)",
+			yaxis: 2,
+			lines: { show: true, steps: true }
+		}
+	], {
+		legend: {
+			container: "#legend"
+		},
+		yaxes: [
+			{ min: 0, tickFormatter: cpsFormatter },
+			{ min: 0, tickFormatter: svhFormatter },
+		]
+	});
+}
+function poisson(lambda) {
+	var mag = 1;
+	if(lambda > 100) {
+		mag = Math.ceil(lambda / 100);
+		lambda /= mag;
+	}
+	var sum_k = 0;
+	for(var m = 0; m < mag; m++) {
+		var l = Math.exp(lambda) * Math.random();
+		var k;
+		for(k = 0; l > 1.0; k++) {
+			l *= Math.random();
+		}
+		sum_k += k;
+	}
+	return sum_k;
+}
+function cpsFormatter(val, axis) {
+	return val.toFixed(axis.tickDecimals) + "cps";
+}
+function svhFormatter(val, axis) {
+	return val.toFixed(axis.tickDecimals) + "μSv/h";
+}
+
+</script>
+
+</head>
+<body>
+
+<a href="../index.html" title=" *描述文本* " style="font-size:32px;">返回关于辐射及辐射测量仪器相关</a> <hr />
+
+
+
+
+<h1>辐射测量仪器的灵敏度</h1><hr />
+
+
+<p>
+	辐射测量仪器具有灵敏度，一般越灵敏的型号越贵。<br>
+	<br>
+	就低价的辐射测量仪器而言，其<br>
+	<ul>
+	  <li>显示的数值在不同的读数之间徘徊，很难确定正确的数值。</li>
+		<li>显示的数值是稳定的，但会逐渐变化，需要时间来稳定下来。</li>
+</ul>
+	我认为在很多情况下您都会有这种感觉。<br>
+	<br>
+	辐射是随机出现的，但如果灵敏度低，可以检测到的辐射次数就会减少。<br>
+	然后，由于随机性的影响，测量值波动很大。<br>
+	如果你花时间增加检测辐射次数，测量值就会稳定下来，但不会立即改变，如果你不花时间，反应会很快，但数值会波动。<br>
+	<br>
+	在此页面，您可以模拟随机检测辐射
+	，看看辐射计如何计算和显示数值。<br>
+	
+	<br>
+	相关工具：<a href="error simulation.html">辐射测量仪器（盖革计数器）的误差模拟。</a><br>
+	相关工具：<a href="jitter simulation.html">辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟</a>
+</p>
+<br>
+	
+<h2>辐射测量仪器灵敏度模拟工具</h2>
+<hr />
+
+<p>
+<form action="#" onsubmit="graph_update(); return false;">
+	<table class="csv">
+		<tr>
+			<th rowspan="2">
+				辐射源设置	
+			</th>
+			<th>前半2/3</th>
+			<td>
+				<input type="text" id="sv_h_1" value="0.1" size="7">μSv/h<br>
+				*如果设置较大的值，模拟将花费时间。
+			</td>
+		</tr>
+		<tr>
+			<th>后半1/3</th>
+			<td>
+				<input type="text" id="sv_h_2" value="0.1" size="7">μSv/h<br>
+				*如果设置较大的值，模拟将花费时间。
+			</td>
+		</tr>
+		<tr>
+			<th rowspan="3">
+				辐射测量仪器设置
+			</th>
+			<th>
+				灵敏度
+			</th>
+			<td>
+				<input type="text" id="cpm" value="100" size="7">cpm/μSv/h<br>
+				*如果设置较大的值，模拟将花费时间。
+			</td>
+		</tr>
+		<tr>
+			<th>
+				刷新间隔
+			</th>
+			<td>
+				<input type="text" id="second" value="10" size="7">秒刷新
+			</td>
+		</tr>
+		<tr>
+			<th>
+				平均处理
+			</th>
+			<td>
+				从过去<input type="text" id="avg" value="60" size="7">秒的值计算
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align: center;">
+			  <input type="submit" value="　开始模拟和更新图　">
+			</td>
+		</tr>
+	</table>
+	
+	<p id="result_url" style="font-size: 0.8em;">
+		此次模拟的URL：<a class="update_link" id="link_url" href="#"></a><br>
+	</p>
+	
+	<table class="csv">
+		<tr>
+			<th colspan="1" style="text-align: right;">
+				平均剂量率
+			</td>
+			<td colspan="1" style="text-align: right;">
+				<span id="total_avg"></span>μSv/h<br>
+			</td>
+			<th colspan="1" style="text-align: right;">
+				显示值范围
+			</td>
+			<td colspan="1" style="text-align: right;">
+				<span id="width_sv_h"></span>μSv/h<br>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="1" style="text-align: right;">
+				最小剂量率
+			</td>
+			<td colspan="1" style="text-align: right;">
+				<span id="min_sv_h"></span>μSv/h<br>
+			</td>
+			<th colspan="1" style="text-align: right;">
+				最大剂量率
+			</td>
+			<td colspan="1" style="text-align: right;">
+				<span id="max_sv_h"></span>μSv/h<br>
+			</td>
+		</tr>
+	</table>
+</form>
+</p>
+
+<div id="placeholder" style="width: 700px; height: 400px; float: left;"></div>
+<div id="legend" style="float: left;"></div>
+
+<p style="clear: left;">
+	<br>
+	*模拟时间为600秒（10分钟）<br>
+</p>
+<br>
+
+
+<h2>低灵敏度下数值波动和反应慢的原因</h2>
+<hr />
+
+<p>
+	首先，让我们模拟一个价格在 200-1000 CN¥ 之间的盖革计数器。
+	这个级别的灵敏度大约为 100cpm/μSv/h。
+	假设我们在 0.1 μSv/h 的环境中测量<br>
+	仪器每10秒根据这10秒内检测到的辐射数量计算并显示μSv/h，具体如下<br>
+	单击以滚动到图表并更新图表。<br>
+	<ul>
+	  <li><a class="update_link" href="#0.1_0.1_100_10_10">当每 10 秒以 100cpm/μSv/h 的计数器在 0.1μSv/h 显示时</a></li>
+	</ul>
+	黄色是模拟过程中确定的辐射剂量。<br>
+	每秒实际检测到辐射的次数用红点显示。（看左边的cps刻度）<br>
+	蓝线是测量仪器上显示的数字。（看左边的μSv/h刻度）<br>
+	<br>
+	每次模拟结果都不同，但你可以看到数值变化很大，有时会达到 0μSv/h，有时会高得多。<br>
+	图中显示了最大值/最小值和显示值的宽度（最大值和最小值之差），但我认为这个显示值的宽度相当大。<br>
+	测量 0.1μSv/h 时，如果显示值的宽度为 0.3μSv/h，则很难知道如何看数值。<br>
+	<br>
+	因此，取过去一段时间的平均值，这样数值就会稳定下来。<br>
+	<ul>
+	  <li><a class="update_link" href="#0.1_0.1_100_10_30">过去 30 秒的平均值</a></li>
+		<li><a class="update_link" href="#0.1_0.1_100_10_60">过去 60 秒的平均值</a></li>
+		<li><a class="update_link" href="#0.1_0.1_100_10_300">过去 300 秒的平均值</a></li>
+	</ul>
+	可以看到在过去的时间里取平均值的时间越长，数值就越稳定，显示的数值范围就越小。<br>
+	<br>
+	然而，在过去的很长一段时间内取平均值会减慢数值变化时的反应。<br>
+	我们假设开始时剂量是 0.1μSv/h，中间增加到 0.5μSv/h。<br>
+	<ul>
+	  <li><a class="update_link" href="#0.1_0.5_100_10_10">过去 10 秒的平均值</a></li>
+		<li><a class="update_link" href="#0.1_0.5_100_10_30">过去 30 秒的平均值</a></li>
+		<li><a class="update_link" href="#0.1_0.5_100_10_60">过去 60 秒的平均值</a></li>
+		<li><a class="update_link" href="#0.1_0.5_100_10_300">过去 300 秒的平均值</a></li>
+	</ul>
+	可以看到过去 300 秒明显变慢了。<br>
+	还可以看到，过去 60 秒，因为测量值波动很大，所以很难说是不是延迟了。
+<br>
+	<br>
+	<br>
+	在这个模拟中给出了一个相当糟糕的结果，但如果剂量高或灵敏度高，则可以改善。
+	<ul>
+	  <li><a class="update_link" href="#1_1_100_10_10">过去 10 秒的平均值 灵敏度 100cpm/μSv/h 剂量 1μSv/h</a></li>
+		<li><a class="update_link" href="#10_10_100_10_10">过去 10 秒的平均值 灵敏度 100cpm/μSv/h 剂量 10μSv/h</a></li>
+		<li><a class="update_link" href="#100_100_100_10_10">过去 10 秒的平均值 灵敏度 100cpm/μSv/h 剂量 100μSv/h</a></li>
+	  <li><a class="update_link" href="#1_1_1000_10_10">过去 10 秒的平均值 灵敏度 1000cpm/μSv/h 剂量 1μSv/h</a></li>
+	  <li><a class="update_link" href="#1_1_10000_10_10">过去 10 秒的平均值 灵敏度 10000cpm/μSv/h 剂量 1μSv/h</a></li>
+	</ul>
+	在剂量高的地方，灵敏度低的机型效果很好，
+    但是在剂量低的地方，你可以看到灵敏度高的模型在反应速度和测量值的稳定性方面更好。
+</p>
+<br>
+
+<h2>食品等微量辐射无法在低灵敏度检测的原因</h2><hr />
+
+<p>
+	难以测量食物的原因有两个。<br>
+<ul>
+		<li>灵敏度低，无法检查细微的数值差异</li>
+		<li>测量环境中的辐射水平高，无法确定食品的辐射水平。</li>
+</ul>
+	<br>
+	如果灵敏度低，数值会有很大的波动，正如您从前面的模拟中看到的那样。
+	略低于标准的食物会发出大约 0.01 μSv/h 的辐射。<br>
+	<br>
+	由于中国的空气剂量率平均约为 0.1 μSv/h，我们可以通过将剂量为 0.01 μSv/h 的食物放在剂量为 0.1 μSv/h 的环境中来模拟差异。<br>
+	如果能读到剂量从 0.10μSv/h 变化到 0.11μSv/h，就可以判断食物是否被污染了。<br>
+	尝试多次更新模拟，看是否能确定食品被污染。<br>
+	<ul>
+		<li><a class="update_link" href="#0.1_0.11_100_10_60">过去 60 秒的平均值 灵敏度 100cpm/μSv/h</a></li>
+		<li><a class="update_link" href="#0.1_0.11_1000_10_60">过去 60 秒的平均值 灵敏度 1000cpm/μSv/h</a></li>
+		<li><a class="update_link" href="#0.1_0.11_10000_10_60">过去 60 秒的平均值 灵敏度 10000cpm/μSv/h</a></li>
+	</ul>
+	灵敏度低的话，根本看不出来，即使是 10000cpm/µSv/h，你也可以看到，很难判断。<br>
+	<br>
+	如果我们花更多的时间来测量呢？
+	如果把时间间隔设置为 1 分钟刷新，过去 300 秒的平均值，你也许可以判断是否是10000cpm/μSv/h。
+	如果是1000cpm/μSv/h左右，你会发现花再多的时间也没用。
+	<ul>
+		<li><a class="update_link" href="#0.1_0.11_100_60_300">1分钟刷新，过去300秒的平均值，灵敏度100cpm/μSv/h</a></li>
+		<li><a class="update_link" href="#0.1_0.11_1000_60_300">1分钟刷新，过去300秒的平均值，灵敏度1000cpm/μSv/h</a></li>
+		<li><a class="update_link" href="#0.1_0.11_10000_60_300">1分钟刷新，过去300秒的平均值，灵敏度10000cpm/μSv/h</a></li>
+	</ul>
+	<br>
+	测量食品最有效的方法是屏蔽测量环境中的辐射剂量。<br>
+	让我们模拟一下如果空间剂量减少到 1/10 会发生什么。<br>
+	由于空间剂量变成 0.01μSv/h，如果我们能读到它从 0.01μSv/h 变为 0.02μSv/h，
+    我们就可以判断它是否是被污染的食物。<br>
+	<ul>
+		<li><a class="update_link" href="#0.01_0.02_100_10_60">过去 60 秒的平均值 灵敏度 100cpm/μSv/h</a></li>
+		<li><a class="update_link" href="#0.01_0.02_1000_10_60">过去 60 秒的平均值 灵敏度 1000cpm/μSv/h</a></li>
+		<li><a class="update_link" href="#0.01_0.02_10000_10_60">去 60 秒的平均值 灵敏度 10000cpm/μSv/h</a></li>
+	</ul>
+	这样一来，如果是10000cpm/μSv/h，就可以清楚地读出差异。<br>
+	另一方面，在1000cpm/μSv/h左右，有时可以读取差异，有时则无法读取差异。很难做出可靠的决定。<br>
+</p>
+
+<h2>辐射测量仪器和盖革计数器的实际处理</h2>
+
+<p>
+	根据型号的不同，手册中可能会或可能不会描述实际辐射测量仪器和盖革计数器的处理方式。<br>
+	<br>
+	即使屏幕更新间隔是固定的，
+	也有一些改变过去多少秒的平均值来根据当时的剂量来计算。
+	在低剂量（低 µSv/h）下，除非经过长时间的平均，否则数值不稳定，
+	但在高剂量（高 µSv/h）下，数值即使在短时间内也很稳定。
+	因此，对低剂量使用较长的时间，对高剂量使用较短的时间更容易使用。<br>
+	<br>
+	也可能有一些机型不是简单地按平均数计算的。
+	我认为每个机型都有自己的想法，
+	例如，当剂量增加时发出早期警报，以预测未来的增加。<br>
+</p>
+
+
+
+ <body background="../img/bg1.gif">
+
+</body>
+
+<!-- Mirrored from mikage 11 Jan 2023 05:05:32 GMT -->
+</html>
