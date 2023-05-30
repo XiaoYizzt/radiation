@@ -17,3 +17,7 @@ h3
 {
   color: #03a3df
 }
+
+img {
+    max-width: 100%;
+    height: auto;
