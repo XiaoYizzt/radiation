@@ -20,8 +20,8 @@
         <Guid>5325A057-6164-CFFF-9B4A-4EB8964AF8EB</Guid>
       </ROIConfigReference>
       <BackgroundSpectrumFile />
-      <StartTime>2023-05-21T16:42:01.9922425+08:00</StartTime>
-      <EndTime>2023-05-21T16:52:37.4103445+08:00</EndTime>
+      <StartTime>2023-05-21T16:42:01.9922425+01:00</StartTime>
+      <EndTime>2023-05-21T16:52:37.4103445+01:00</EndTime>
       <PresetTime>3600</PresetTime>
       <EnergySpectrum>
         <NumberOfChannels>2500</NumberOfChannels>
