@@ -1,5 +1,6 @@
 BG.xml,BG背景谱
 Am-241.xml,Am-241
+Am-241_Pa-233.xml,Am-241+Pa-233
 Cs-137.xml,Cs-137
 Ba-133.xml,Ba-133
 Eu-152.xml,Eu-152
