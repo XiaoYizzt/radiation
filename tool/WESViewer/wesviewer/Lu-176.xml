@@ -12,7 +12,7 @@
         <Note>氧化镥 5g</Note>
       </SampleInfo>
       <DeviceConfigReference>
-        <Name>AtomSpectra API25</Name>
+        <Name>Spectra API25</Name>
         <Guid>5F84D498-4288-3C04-763C-FEC18E2D1C74</Guid>
       </DeviceConfigReference>
       <ROIConfigReference>
