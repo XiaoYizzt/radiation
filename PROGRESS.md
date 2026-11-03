@@ -2,7 +2,7 @@
 
 > 最后更新：2026-11-03（Asia/Singapore）
 > 项目根目录：`C:\Users\XkXia\Desktop\radiation`
-> 当前状态：核心重构已完成，可部署；WESViewer 已新增 CSV/TXT 光谱支持并通过示例测试；无阻塞性开发任务。
+> 当前状态：核心重构已完成，可部署；WESViewer 已新增 CSV/TXT 光谱支持并通过示例测试，手机端图表空白问题已修复；无阻塞性开发任务。
 > 本文件是交接记录；详细操作说明见 [README.md](README.md)。
 
 ---
@@ -224,6 +224,45 @@ node _build/tests/test_parsers.js
 - CSV/TXT 若没有能量列，不支持双/多光谱比较（会提示）。
 - 能量必须严格递增；重复/乱序会报错，避免绘图映射错误。
 
+### WESViewer 手机端图表修复（2026-11-03）
+
+**现象**：PC 端曲线正常，手机 390px 下 WESViewer 只剩下坐标标签，曲线和网格消失；截图中的 Cs-137 页面即为该问题。
+
+**根因**：
+
+- `viewer.css` 的移动端（`max-width: 900px`）规则原本用于取消旧页面 `style="float:..."` 的浮动布局：
+  `.viewer-prose [style*="float"] { float:none !important; width:auto !important; }`
+- Flot 0.7 在测量横轴标签高度时，会临时创建带 `style="float:left;width:...px"` 的 `.tickLabel` 元素。该规则误命中了这些临时元素，取消了它们的 `float` 和固定宽度。
+- 结果：横轴标签被按块级元素堆叠，`labelHeight` 被放大到 132–200px；两个横轴（通道 + 能量）把 300px 高度占满，Flot 计算出的绘图区高度变成负数，曲线和网格被裁掉，只剩绝对定位的刻度标签。
+
+**修复**：
+
+- 将该规则改为排除 Flot 的刻度标签：
+  `.viewer-prose [style*="float"]:not(.tickLabel) { ... }`
+- 只改全局 [css/viewer.css](css/viewer.css)，不改各工作区的 `spviewer.js`；PC 端（>900px）不受影响。
+- 未改动 `spviewer.js` 的绘图逻辑，也未用固定宽度或隐藏能量轴来规避问题。
+
+**验证**：
+
+- 390px Chrome Headless，禁用缓存重新加载：
+  - Cs-137：曲线、网格、通道轴和能量副轴全部恢复；Y 轴刻度正常分布。
+  - Am-241：曲线正常。
+  - Ra-226.csv / Am241.txt：曲线、双轴和原有 CSV/TXT 信息正常。
+- 桌面 1440px 重新检查 Cs-137，原有布局不变。
+- 修复后截图：[wesviewer-mobile-cs137.png](_build/screenshots/wesviewer-mobile-cs137.png)、[wesviewer-mobile-csv.png](_build/screenshots/wesviewer-mobile-csv.png)、[wesviewer-mobile-am241.png](_build/screenshots/wesviewer-mobile-am241.png)、[wesviewer-mobile-txt.png](_build/screenshots/wesviewer-mobile-txt.png)。
+
+**本次移动端修复修改文件**：
+
+- [css/viewer.css](css/viewer.css)（一行选择器修正）
+- [README.md](README.md)（维护注意事项）
+- [PROGRESS.md](PROGRESS.md)
+
+**边界**：
+
+- 移动端图表仍需至少约 300px 宽度；更窄的 280px 以下未做专项验收。
+- 只在 Chrome Headless 的 390px 视口验证，未在真实 iOS Safari / Android Chrome 上验收。
+- 若线上仍显示旧版，需要部署新的 `css/viewer.css` 并强制刷新浏览器缓存。
+
 ### 清理
 
 - 清理了 `_build/` 中的临时 Chrome profile、调试截图、临时补丁与测试脚本。
@@ -294,7 +333,7 @@ node _build/tests/test_parsers.js
 - 全部 75 个原有 HTML 页面重写为统一模板。
 - 9 个 WESViewer 工作区页面加入站点壳与 `viewer.css`，原有业务脚本保留。
 - [tool/WESViewer/wesviewer/spviewer.js](tool/WESViewer/wesviewer/spviewer.js)：新增 CSV/TXT 解析、无能量刻度分支、错误提示和零索引映射修正。
-- [css/viewer.css](css/viewer.css)：增加无能量刻度提示样式。
+- [css/viewer.css](css/viewer.css)：增加无能量刻度提示样式；修正手机端浮动重置规则误命中 Flot `.tickLabel` 导致图表空白的问题。
 - [README.md](README.md)、[PROGRESS.md](PROGRESS.md) 文档更新。
 
 ### 删除
@@ -378,7 +417,7 @@ WESViewer 解析器另有离线回归测试：`node _build/tests/test_parsers.js
 - 抖动模拟：点击提交后生成 Canvas 与误差表。
 - β 射程：结果表 19 行正常。
 - 灵敏度模拟：Canvas 正常。
-- WESViewer：原有 Am-241 XML 正常；Ra-226 CSV 与 Am241 TXT 正常绘图；计数-only CSV 的通道轴/无能量提示正常；500px 移动视口无横向溢出。
+- WESViewer：原有 Am-241 XML 正常；Ra-226 CSV 与 Am241 TXT 正常绘图；计数-only CSV 的通道轴/无能量提示正常；390px 手机视口下 Cs-137、Am-241、CSV/TXT 图表修复后均能看到曲线和双轴；500px 无横向溢出。
 
 ---
 
@@ -502,6 +541,6 @@ python -m http.server 8000
 
 - 网站已经是可部署的正式版本，**不是** `_build/orig`。
 - 内容完整性、链接目标、锚点、图片引用和页面结构自动校验均通过。
-- WESViewer 已支持 CSV/TXT 并完成示例文件、旧 XML 和计数-only 场景的实际浏览器测试。
+- WESViewer 已支持 CSV/TXT 并完成示例文件、旧 XML 和计数-only 场景的实际浏览器测试；手机端 390px 图表空白问题已修复并复测。
 - 没有阻塞性 Bug。
 - 需要你决策的是：旧站遗留失效链接是否修复、是否扩大搜索范围、是否压缩媒体资源、是否继续扩展其他仪器格式，以及真实设备验收。

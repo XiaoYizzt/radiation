@@ -77,6 +77,8 @@ WESViewer 的 CSV/TXT 解析器位于 `tool/WESViewer/wesviewer/spviewer.js`。�
 node _build/tests/test_parsers.js
 ```
 
+注意：`css/viewer.css` 中移动端的 `[style*="float"]:not(.tickLabel)` 选择器用于避开 Flot 的刻度测量元素；不要去掉 `:not(.tickLabel)`，否则手机会因轴标签换行导致图表绘图区高度变成负数。
+
 ## 第三方资源
 
 - Google Analytics（gtag.js）与 51.LA：沿用原站的访问统计。加载失败不影响阅读。

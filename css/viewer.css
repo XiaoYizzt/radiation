@@ -75,7 +75,7 @@
 
 @media (max-width: 900px) {
   .viewer-bar { align-items: flex-start; flex-direction: column; gap: 8px; }
-  .viewer-prose [style*="float"] { float: none !important; margin-left: 0 !important; width: auto !important; }
+  .viewer-prose [style*="float"]:not(.tickLabel) { float: none !important; margin-left: 0 !important; width: auto !important; }
   .viewer-prose #sp_cursor_info, .viewer-prose #sp_cursor_info_compare,
   .viewer-prose #sp_cursor_info_multi, .viewer-prose #sp_cursor_nuclear,
   .viewer-prose #sp_cursor_selection, .viewer-prose #sp_cursor_selection_compare,
