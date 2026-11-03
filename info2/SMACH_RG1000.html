@@ -1,221 +1,231 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-base="../">
 <head>
-<meta charset="UTF-8">
-<link rel="shortcut icon" href="../img/icon.png">
-<link rel="stylesheet" type="text/css" href="../css/t1.css" media="screen" />
-<title>盖革计数器 SMACH RG1000 评测</title>
-<meta name="keywords" content="SMACH RG1000 评测" />
-<meta name="description" content="我很早就注意到这款中国盖革计数器了，所以我买了，总结一下使用感受。我见过有很多核相关从业者也选择了这款，感觉是个不错的测量仪器" />
-	<style>
-	.divider {
-  border-top: 1px solid #f0f; /* 线的颜色为粉色 */
-		width: 50%; /* 线条的长度为50% */
-}
-		</style>
-	
-	<!-- Google tag (gtag.js) -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>盖革计数器 SMACH RG1000 评测 · 辐射备忘录</title>
+<meta name="description" content="国产 GM 管剂量计：能量补偿、统计测量、β 测量与方向特性。">
+<meta name="theme-color" content="#f5f4ef">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="辐射及辐射测量仪器备忘录">
+<meta property="og:title" content="盖革计数器 SMACH RG1000 评测 · 辐射备忘录">
+<meta property="og:description" content="国产 GM 管剂量计：能量补偿、统计测量、β 测量与方向特性。">
+<link rel="icon" href="../img/icon.png" sizes="512x512">
+<link rel="stylesheet" href="../css/site.css">
+<!-- Existing site analytics, kept from the original pages. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YGG4B16Z2G"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YGG4B16Z2G');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YGG4B16Z2G');
 </script>
-	
+
 </head>
-<a href="../index.html " title=" *描述文本* " style="font-size:32px;"> 返回关于辐射及辐射测量仪器相关</a> 
-<br />
-<br>
-<h1 style="color: #9c3552">盖革计数器 SMACH RG1000 评测</h1><hr />
+<body class="">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header" data-header>
+<div class="shell header-inner">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<nav class="primary-nav" aria-label="主导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html">测量与仪器</a><a href="../reviews.html" aria-current="page">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<div class="header-tools">
+<a class="search-link" href="../search.html" data-search-open aria-label="搜索本站">
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg><span class="search-link-text">搜索</span><kbd class="key-hint">/</kbd>
+</a>
+<details class="nav-drawer" data-nav-drawer>
+<summary class="nav-toggle" aria-label="打开菜单"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>菜单</span></summary>
+<div class="nav-panel">
+<nav aria-label="移动端导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html">测量与仪器</a><a href="../reviews.html" aria-current="page">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<a class="nav-panel-search" href="../search.html" data-search-open><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg> 搜索文章与仪器</a>
+<div class="nav-panel-meta">
+<a href="../sitemap.html">全部页面</a>
+<a href="../about.html">关于本站</a>
+</div>
+</div>
+</details>
+</div>
+</div>
+</header>
+<main id="main" class="page page-article">
+<div class="shell">
+<nav class="breadcrumb" aria-label="面包屑"><a href="../index.html">首页</a><span class="crumb-sep" aria-hidden="true">/</span><a href="../reviews.html">仪器评测</a><span class="crumb-sep" aria-hidden="true">/</span><span aria-current="page">盖革计数器 SMACH RG1000 评测</span></nav>
+<div class="article-grid">
+<article class="article">
+<header class="article-head">
+<p class="kicker"><a href="../reviews.html">仪器评测</a><span class="kicker-sep">/</span><span>盖革计数器</span></p>
+<h1>盖革计数器 SMACH RG1000 评测</h1>
+
+<div class="article-meta">
+<span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> 阅读约 5 分钟</span>
+<span class="meta-item"><time datetime="2023-05-24">更新于 2023/05/24</time></span>
+<span class="badge badge-mid">进阶</span>
+</div>
+<ul class="tag-list"><li>GM管</li><li>国产</li><li>能量补偿</li><li>统计测量</li></ul>
+</header>
+<details class="toc-inline">
+<summary>本页目录 <span>14 节</span></summary>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">关于 FuZhou GEM Instrument &amp;Equipment Co.,Ltd</a></li><li class="toc-item toc-l2"><a href="#sec-2">关于 SMACH RG1000</a></li><li class="toc-item toc-l2"><a href="#sec-3">内容物</a></li><li class="toc-item toc-l2"><a href="#sec-4">尺寸</a></li><li class="toc-item toc-l2"><a href="#sec-5">画面显示</a></li><li class="toc-item toc-l3"><a href="#sec-6">背光/报警功能 开/关</a></li><li class="toc-item toc-l2"><a href="#sec-7">γ射线测量</a></li><li class="toc-item toc-l2"><a href="#sec-8">β射线测量</a></li><li class="toc-item toc-l2"><a href="#6">统计测量功能</a></li><li class="toc-item toc-l2"><a href="#sec-9">反应速度</a></li><li class="toc-item toc-l2"><a href="#sec-10">方向特性</a></li><li class="toc-item toc-l2"><a href="#sec-11">测量比较</a></li><li class="toc-item toc-l2"><a href="#sec-12">PC软件</a></li><li class="toc-item toc-l2"><a href="#sec-13">概括</a></li></ol>
+</details>
+
+
+<div class="prose" data-prose>
 <p>我很早就注意到这款中国盖革计数器了，所以我买了，总结一下使用感受。<br>
 	我见过有很多核相关从业者也选择了这款，感觉是个不错的测量仪器<br>
-	这篇文章在我的Bilibili也有同步<br>
-	参考：<a href="https://www.bilibili.com/video/BV1354y1A7nH?share_source=copy_web">Bilibili-SMACH RG1000评测 1000元内最精准的国产机型。</a></p>
+	这篇文章在我的Bilibili也有同步
+	参考：<a href="https://www.bilibili.com/video/BV1354y1A7nH?share_source=copy_web" class="external" rel="noopener noreferrer" target="_blank">Bilibili-SMACH RG1000评测 1000元内最精准的国产机型。</a></p>
 	
-	<h2 style="color: #03a3df">关于 FuZhou GEM Instrument &amp;Equipment Co.,Ltd</h2><hr />
+	<h2 id="sec-1">关于 FuZhou GEM Instrument &amp;Equipment Co.,Ltd</h2>
 	<p>不同于其他的廉价中国设备公司，这家公司专注于制作辐射探测器（不止电离辐射）<br>
 	此外，技术力也并不差，它们可以制造性能优秀的核仪器，并与政企合作</p>
 	
 	<p>与廉价设备最大的区别是，FuZhou GEM Instrument &amp;Equipment Co.,Ltd有专业的实验室以及用于校准的放射源</p>
 	
 	<p>此型号开放给公众购买，因此如果您正在考虑购买它，请从以下页面与它们联系。<br>
-	<a href="http://www.smach.cn/product/24.html">SMACH-寻找适合您的解决方案</a></p>
+	<a href="http://www.smach.cn/product/24.html" class="external" rel="noopener noreferrer" target="_blank">SMACH-寻找适合您的解决方案</a></p>
 	
-	<h2 style="color: #03a3df">关于 SMACH RG1000</h2><hr />
+	<h2 id="sec-2">关于 SMACH RG1000</h2>
 	<p>SMACH RG1000 是使用盖革米勒管的辐射测量仪（盖革计数器）。<br>
 	功能包括：</p>
 	
-	<dl>
-	    <dt>个人剂量计</dt><div class="divider"></div>
+	<dl class="spec-list">
+	    <dt>个人剂量计</dt>
 		<dd>该型号设计用于通过随身携带来测量外部照射剂量的用途。
             它具有声音报警功能。</dd>
-	<br>
-		<dt>剂量记录功能</dt><div class="divider"></div>
+	<dt>剂量记录功能</dt>
 		<dd>可以记录每次开机接收到的剂量率，并存储累计剂量。</dd>
-	<br>
-		<dt>带能量补偿</dt><div class="divider"></div>
+	<dt>带能量补偿</dt>
 		<dd>可以正确测量外照射，因为它可以测量 1cm 剂量当量 Hp(10)。</dd>
-	<br>
-		<dt>体积小，便携性强</dt><div class="divider"></div>
+	<dt>体积小，便携性强</dt>
 		<dd>使用 2 节 7号 电池<br>
 		体积大约只有手机的一半大，装进任何口袋，没有问题。</dd>
-	<br><br>
-		<dt>PC软件支持</dt><div class="divider"></div>
+	<dt>PC软件支持</dt>
 		<dd>可以从 PC 的图表上检查累积剂量（Hp（10））<br>
 		根据选择的职业或非职业人员，可以很直观的查看年剩余剂量。</dd>
-	<br>
-		<dt>快速响应</dt><div class="divider"></div>
+	<dt>快速响应</dt>
 		<dd>在感知到突发大剂量时会直接统计当前剂量而不是慢慢升上去。</dd>
 	
 	</dl>
 
 	
-	<br>
 	
-	<h2 style="color: #03a3df">内容物</h2><hr />
+	
+	<h2 id="sec-3">内容物</h2>
 	<p>它的盒子长这样。</p>
 	
 <p>
 	它装在一个带保护缓冲的小盒子里。<br>
 	还贴心的附赠了 2 节 7号 电池，图片里没有是因为我事先装进去了。<br>
-	<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG1.jpg"></td>
-			<td><img src="../img/SMACH RG1000/RG2.jpg"></td>
-		</tr>
-	</table>
-	<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG3.jpg"></td>
-			<td><img src="../img/SMACH RG1000/RG4.jpg"></td>
-		</tr>
-	</table>
-</p>
+	</p><div class="figure-grid" data-count="2"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG1.jpg" class="content-img" decoding="async"></figure><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG2.jpg" class="content-img" decoding="async"></figure></div>
+	<div class="figure-grid" data-count="2"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG3.jpg" class="content-img" decoding="async"></figure><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG4.jpg" class="content-img" loading="lazy" decoding="async"></figure></div>
+
 
 <p>
 	主体看起来是这样。
-	<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG5.jpg"></td>
-			<td><img src="../img/SMACH RG1000/RG6.jpg"></td>
-		</tr>
-	</table>
-</p>
+	</p><div class="figure-grid" data-count="2"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG5.jpg" class="content-img" loading="lazy" decoding="async"></figure><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG6.jpg" class="content-img" loading="lazy" decoding="async"></figure></div>
+
 
 <p>有简易小册子说明书。<br>
 部分功能使用方法写的不太直观，需要改进。</p>
-<img src="../img/SMACH RG1000/RG7.jpg">
-<br>
+<img src="../img/SMACH%20RG1000/RG7.jpg" class="content-img" loading="lazy" decoding="async">
 
-<h2 style="color: #03a3df">尺寸</h2><hr />
+
+<h2 id="sec-4">尺寸</h2>
 
 <p>
 	这是尺寸对比。<br>
 	比 DISC 小。
-	<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG8.jpg"></td>
-			<td><img src="../img/SMACH RG1000/RG9.jpg"></td>
-		</tr>
-	</table>
-<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG10.jpg"></td>
-		</tr>
-	</table>
-</p>
+	</p><div class="figure-grid" data-count="2"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG8.jpg" class="content-img" loading="lazy" decoding="async"></figure><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG9.jpg" class="content-img" loading="lazy" decoding="async"></figure></div>
+<div class="figure-grid" data-count="1"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG10.jpg" class="content-img" loading="lazy" decoding="async"></figure></div>
 
 
-<br>
 
 
-<h2 style="color: #03a3df">画面显示</h2><hr />
+
+
+<h2 id="sec-5">画面显示</h2>
 <p>画面显示如下。</p>
 
 <p>从左开始依次是“剂量率”、“累计剂量”、“统计测量”。</p>
-<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG11.jpg" width="180" height="120"></td>
-			<td><img src="../img/SMACH RG1000/RG12.jpg" width="180" height="120"></td>
-			<td><img src="../img/SMACH RG1000/RG13.jpg" width="180" height="120"></td>
-		</tr>
-	</table>
+<div class="figure-grid" data-count="3"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG11.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></figure><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG12.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></figure><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG13.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></figure></div>
 
 
-<h3 style="color: #03a3df">背光/报警功能 开/关</h3><div class="divider"></div>
+<h3 id="sec-6">背光/报警功能 开/关</h3>
 <p>
 开机时开启背光，若无任何操作10秒后会自动关闭背光。<br>
 设置里可以调剂量率和累计剂量的报警阈值。报警时只有“嘀嘀-嘀嘀-”的声音<br>
-此外，报警时主界面左上角会闪烁“R”字。<br>
-	<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/B1.jpg"></td>
-		</tr>
-	</table>
-</p>
+此外，报警时主界面左上角会闪烁“R”字。
+	</p><div class="figure-grid" data-count="1"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/B1.jpg" class="content-img" loading="lazy" decoding="async"></figure></div>
 
-<h2 style="color: #03a3df">γ射线测量</h2><hr />
+
+<h2 id="sec-7">γ射线测量</h2>
 <p><strong>数值变化</strong></p>
 <p>它的灵敏度优于90cpm/μSv/h，虽然没有写具体数值，但已经优于Gamma-Scout这款设备。<br>
 在一众国产个人剂量仪中已经算非常好的了<br>
 下图显示了大约 1 小时内每分钟读取剂量率时的波动程度。</p>
-<img src="../img/SMACH RG1000/RG14.jpg">
+<img src="../img/SMACH%20RG1000/RG14.jpg" class="content-img" loading="lazy" decoding="async">
 
-<h2 style="color: #03a3df">β射线测量</h2><hr />
+<h2 id="sec-8">β射线测量</h2>
 <p>RG1000 只能显示μSv/h一种单位，所以它无法测量β射线的正确值<br>
 但有一点需要注意，虽然说明书上没有写，但我测试发现β射线截至阈值只有2MeV左右。</p>
 
-<h2 style="color: #03a3df"><a name="6">统计测量功能</a></h2><hr />
+<h2 id="6">统计测量功能</h2>
 <p><strong>注意，如果需要测量物品最好使用统计测量功能，统计测量功能会计算平均剂量率。<br>
 由于这台设备不管怎么看都是定位在个人剂量仪Hp（10）上，但制造商却说可以测量物品，我猜统计测量功能就是为此设计的</strong></p>
 
-<dt>统计时间</dt><div class="divider"></div>
+<dt>统计时间</dt>
 <dd>进入设置选择统计时间，使用MODE键更改位数，ON键更改数值。<br>
 确认好统计时间后长按MODE键会询问是否保存。</dd>
 <br>
 
         <tr>
-			<td><img src="../img/SMACH RG1000/P1.jpg" width="180" height="120"></td>
-			<td><img src="../img/SMACH RG1000/P2.jpg" width="180" height="120"></td>
-			<td><img src="../img/SMACH RG1000/P3.jpg" width="180" height="120"></td>
+			<td><img src="../img/SMACH%20RG1000/P1.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></td>
+			<td><img src="../img/SMACH%20RG1000/P2.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></td>
+			<td><img src="../img/SMACH%20RG1000/P3.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></td>
 		</tr>
 <br>
 <br>
-<dt>统计对象</dt><div class="divider"></div>
+<dt>统计对象</dt>
 <dd>选择统计对象，会询问想统计本底还是辐射，我们先测量本底。</dd>
 <br>
 
         <tr>
-			<td><img src="../img/SMACH RG1000/P4.jpg" width="180" height="120"></td>
-			<td><img src="../img/SMACH RG1000/P5.jpg" width="180" height="120"></td>
+			<td><img src="../img/SMACH%20RG1000/P4.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></td>
+			<td><img src="../img/SMACH%20RG1000/P5.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async"></td>
 		</tr>
 <br>
 <br>
-<dt>开始统计</dt><div class="divider"></div>
+<dt>开始统计</dt>
 <dd>一切准备就绪后回到统计测量页，使用ON键开始统计，同时屏幕上会显示一个闪烁的沙漏。</dd>
-<br>
 
-<img src="../img/SMACH RG1000/P6.jpg" width="180" height="120">
 
-<br>
-<br>
+<img src="../img/SMACH%20RG1000/P6.jpg" width="180" height="120" class="content-img" loading="lazy" decoding="async">
+
+
+
 <p>本底统计完毕后同样执行一次步骤，选择统计辐射，随后与本底值进行对比以判断是否有异常。</p>
 
-<h2 style="color: #03a3df">反应速度</h2><hr />
+<h2 id="sec-9">反应速度</h2>
 <p>它在本底辐射的情况下反应速度大约1秒刷新0.7次，在报警的情况下每秒刷新速度超过2次<br>
-参考：<a href="https://www.bilibili.com/video/BV1354y1A7nH?share_source=copy_web">Bilibili-SMACH RG1000评测 1000元内最精准的国产机型。</a></p>
+参考：<a href="https://www.bilibili.com/video/BV1354y1A7nH?share_source=copy_web" class="external" rel="noopener noreferrer" target="_blank">Bilibili-SMACH RG1000评测 1000元内最精准的国产机型。</a></p>
 
 
-<h2 style="color: #03a3df">方向特性</h2><hr />
+<h2 id="sec-10">方向特性</h2>
 <p>由于 RG1000 说明里没有写，所以不清楚它的方向特性。<br>
 但是有一点需要注意，它的盖革管在机身的左侧，使用时请注意。</p>
 
 
 
 
-<h2 style="color: #03a3df">测量比较</h2><hr />
+<h2 id="sec-11">测量比较</h2>
 <p>我分别测量了Am-241光子源和U-238链源</p>
 
 <p>Am-241光子源<br>
@@ -224,56 +234,115 @@ RG1000:Avg:2.02 μSv/h
 
 <p>U-238链源<br>
 RG1000:Avg: 2.65 μSv/h <br>
-参考值：2.22 μSv/h<br>
+参考值：2.22 μSv/h
 由于β射线截至阈值只有2MeV左右，所以它会受影响。</p>
 
-<h2 style="color: #03a3df">PC软件</h2><hr />
+<h2 id="sec-12">PC软件</h2>
 <p>RG1000 可以使用PC软件</p>
 
 <p>通过说明书指引到官网进行下载</p>
 
-<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG15.jpg"></td>
-		</tr>
-	</table>
+<div class="figure-grid" data-count="1"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG15.jpg" class="content-img" loading="lazy" decoding="async"></figure></div>
 
 <p>安装软件</p>
 
 <p>安装软件后需要进行串口通讯、设置部门和同步数据等一系列操作。<br>
 导入数据后，您可以在图表中看到剂量的变化，如下所示。</p>
-<table>
-		<tr>
-			<td><img src="../img/SMACH RG1000/RG16.jpg" width="960" height="540"></td>
-		</tr>
-	</table>
+<div class="figure-grid" data-count="1"><figure class="gallery-item"><img src="../img/SMACH%20RG1000/RG16.jpg" width="960" height="540" class="content-img" loading="lazy" decoding="async"></figure></div>
 <p>软件主页看起来是这样<br>
 在年剩余剂量中会根据你选择的是“职业人员”或“非职业人员”而定。<br>
 职业人员为20mSv/y,非职业人员为1mSv/y。</p>
 
-<h2 style="color: #03a3df">概括</h2><hr />
+<h2 id="sec-13">概括</h2>
 <p>我买了它有一段时间并随身携带。<br>
 给人的印象是它是标准的 GM 管测量仪。</p>
 <p>由于使用GM管作为检测器，不具备灵敏度高等特点。<br>
 但它的刷新速度比很多云母窗机型都高，由这点给我的第一印象就不错。</p>
 <p>GM管型号的情况下，由于灵敏度低，因此数值在低剂量下波动，往往读数值为0.05-0.2 µSv/h。<br>
 它没有显示误差，所以我假定它在低剂量下是一个恒定的误差值。<br>
-虽然灵敏度低，但我认为它足以用于检测铯 137。说明书中写在基于Cs-137的情况下1mSv/h时误差小于5%<br>
+虽然灵敏度低，但我认为它足以用于检测铯 137。说明书中写在基于Cs-137的情况下1mSv/h时误差小于5%
 （根据国家剂量院的数据，基于Cs-137 Hp（10）的相对固有误差不超过2.3%）</p>
 <p>另一方面，即使有能量补偿，也会让高能量的β射线通过，我觉得这是一个缺点。</p>
 <p>从图片上看很难，但我认为它在测量仪器中很小。</p>
 <p>当我想以伽马射线为基准测量各种空气剂量时，我觉得它是一种很好的测量仪器，因为它是一种相对便宜且易于买到的型号。</p>
 
-<script>
-!function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"JyMjQAQ8UDRTj0a4",ck:"JyMjQAQ8UDRTj0a4"});
-</script>
 
-
- <body background="../img/bg1.gif">
-
-
+</div>
+<footer class="article-foot">
+<nav class="pager" aria-label="上下篇"><a class="pager-link pager-prev" href="../info2/KB_NEW_KB6011.html">
+<span>上一篇</span><strong>盖革计数器 空霸 NEW KB6011 评测</strong>
+</a><a class="pager-link pager-next" href="../info2/KB_KB6011.html">
+<span>下一篇</span><strong>盖革计数器 空霸 KB6011 评测</strong>
+</a></nav>
+<div class="article-back">
+<a href="../reviews.html">← 返回仪器评测</a>
+<a href="#main">回到顶部 ↑</a>
+</div>
+</footer>
+</article>
+<aside class="article-side">
+<nav class="toc" aria-label="本页目录" data-toc>
+<p class="side-title">本页目录</p>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">关于 FuZhou GEM Instrument &amp;Equipment Co.,Ltd</a></li><li class="toc-item toc-l2"><a href="#sec-2">关于 SMACH RG1000</a></li><li class="toc-item toc-l2"><a href="#sec-3">内容物</a></li><li class="toc-item toc-l2"><a href="#sec-4">尺寸</a></li><li class="toc-item toc-l2"><a href="#sec-5">画面显示</a></li><li class="toc-item toc-l3"><a href="#sec-6">背光/报警功能 开/关</a></li><li class="toc-item toc-l2"><a href="#sec-7">γ射线测量</a></li><li class="toc-item toc-l2"><a href="#sec-8">β射线测量</a></li><li class="toc-item toc-l2"><a href="#6">统计测量功能</a></li><li class="toc-item toc-l2"><a href="#sec-9">反应速度</a></li><li class="toc-item toc-l2"><a href="#sec-10">方向特性</a></li><li class="toc-item toc-l2"><a href="#sec-11">测量比较</a></li><li class="toc-item toc-l2"><a href="#sec-12">PC软件</a></li><li class="toc-item toc-l2"><a href="#sec-13">概括</a></li></ol>
+</nav>
+<div class="side-block">
+<p class="side-title">同主题阅读</p>
+<ul class="side-links"><li><a href="../info2/Polimaster_PM1405.html"><span>盖革计数器 Polimaster PM1405 评测</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="../info2/Polimaster_PM1621.html"><span>盖革计数器 Polimaster PM1621 评测</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="../info2/KB_NEW_KB6011.html"><span>盖革计数器 空霸 NEW KB6011 评测</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li></ul>
+</div>
+<a class="side-back" href="../reviews.html">← 返回仪器评测</a>
+</aside>
+</div>
+</div>
+</main><footer class="site-footer">
+<div class="shell">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<p>一个关于电离辐射、辐射探测与测量仪器的中文知识库。包含基础概念、剂量与单位、仪器类型、设备评测、能谱查看工具与参考文献。</p>
+<p class="footer-note">静态站点 · 无账号 · 无后端依赖</p>
+</div>
+<div class="footer-col"><h2>知识板块</h2><ul><li><a href="../base.html">基础知识</a></li><li><a href="../info/index.html">测量与仪器</a></li><li><a href="../reviews.html">仪器评测</a></li><li><a href="../article.html">文章与笔记</a></li></ul></div><div class="footer-col"><h2>索引与工具</h2><ul><li><a href="../tools.html">工具与数据</a></li><li><a href="../sitemap.html">全部页面</a></li><li><a href="../changelog.html">更新日志</a></li><li><a href="../search.html">搜索</a></li></ul></div><div class="footer-col"><h2>关于</h2><ul><li><a href="../about.html">关于本站</a></li><li><a href="../about.html#contact">联系方式</a></li><li><a href="http://blog.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">外部博客</a></li><li><a href="http://database.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">数据库</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>Retpaĝo @ 2022-2024.XiaoYi No One Knows the Future<br><span class="muted">Powered by XiaoYi &amp; Mikage</span></p>
+<p class="footer-meta">内容更新至 2024 年 6 月 · <a href="../sitemap.html">站点地图</a> · <a href="../changelog.html">更新日志</a></p>
+</div>
+</div>
+</footer>
+<dialog class="search-dialog" data-search-dialog aria-labelledby="search-dialog-title">
+<div class="search-dialog-inner">
+<div class="search-dialog-head">
+<p class="eyebrow">站点搜索</p>
+<h2 id="search-dialog-title">查找文章、仪器与概念</h2>
+<button class="icon-button" type="button" data-search-close aria-label="关闭搜索"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<form class="search-form" action="../search.html" method="get" role="search" data-search-form>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg>
+<input type="search" name="q" id="site-search-input" placeholder="例如：能量补偿、氡、Cs-137、PM1405" autocomplete="off" data-search-input aria-label="搜索关键词">
+<button type="submit" class="button button-solid">搜索</button>
+</form>
+<div class="search-filters" data-search-filters>
+<button type="button" class="chip is-active" data-section="">全部</button>
+<button type="button" class="chip" data-section="basics">基础知识</button>
+<button type="button" class="chip" data-section="measurement">测量与仪器</button>
+<button type="button" class="chip" data-section="reviews">仪器评测</button>
+<button type="button" class="chip" data-section="articles">文章</button>
+<button type="button" class="chip" data-section="tools">工具</button>
+<button type="button" class="chip" data-section="about">关于</button>
+</div>
+<div class="search-results" data-search-results aria-live="polite"></div>
+<p class="search-footnote">搜索在浏览器本地完成，不会上传查询内容。按 <kbd>Esc</kbd> 关闭，<kbd>↑</kbd> <kbd>↓</kbd> 选择，<kbd>Enter</kbd> 打开。</p>
+</div>
+</dialog>
+<div class="lightbox" data-lightbox hidden>
+<button type="button" class="lightbox-close" data-lightbox-close aria-label="关闭图片"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<figure><img alt="" data-lightbox-img><figcaption data-lightbox-caption></figcaption></figure>
+</div>
+<script src="../js/analytics.js" defer></script>
+<script src="../js/site.js" defer></script>
 
 </body>
 </html>
-
-

@@ -1,39 +1,267 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-base="../">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>测量与仪器 · 辐射备忘录</title>
+<meta name="description" content="剂量、计数率、能量补偿，以及不同类型探测器的工作方式。">
+<meta name="theme-color" content="#f5f4ef">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="辐射及辐射测量仪器备忘录">
+<meta property="og:title" content="测量与仪器 · 辐射备忘录">
+<meta property="og:description" content="剂量、计数率、能量补偿，以及不同类型探测器的工作方式。">
+<link rel="icon" href="../img/icon.png" sizes="512x512">
+<link rel="stylesheet" href="../css/site.css">
+<!-- Existing site analytics, kept from the original pages. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGG4B16Z2G"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YGG4B16Z2G');
+</script>
 
-<meta charset="UTF-8">
-<link rel="shortcut icon" href="../img/icon.png">
-<title>关于辐射及辐射测量仪器的说明</title>
-<style> 
-.php{text-decoration:underline} 
- </style> 
-</head> 
- <body> 
-	 <a href="../index.html" title=" *描述文本* " style="font-size:32px;">返回关于辐射及辐射测量仪器相关</a> <!-- ../表示上一级目录 --><hr />
-	 <p>关于辐射和辐射测量仪器的说明。</p>
-<p>我会根据我研究过的资料描述我可能会犯错误或有疑问的事情。<br>
-我搜集来自互联网的资料和参考其他网站的资料<br>
-	 我会一条条增加页面</p>
+</head>
+<body class="">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header" data-header>
+<div class="shell header-inner">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<nav class="primary-nav" aria-label="主导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html" aria-current="page">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<div class="header-tools">
+<a class="search-link" href="../search.html" data-search-open aria-label="搜索本站">
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg><span class="search-link-text">搜索</span><kbd class="key-hint">/</kbd>
+</a>
+<details class="nav-drawer" data-nav-drawer>
+<summary class="nav-toggle" aria-label="打开菜单"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>菜单</span></summary>
+<div class="nav-panel">
+<nav aria-label="移动端导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html" aria-current="page">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<a class="nav-panel-search" href="../search.html" data-search-open><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg> 搜索文章与仪器</a>
+<div class="nav-panel-meta">
+<a href="../sitemap.html">全部页面</a>
+<a href="../about.html">关于本站</a>
+</div>
+</div>
+</details>
+</div>
+</div>
+</header>
+<main id="main" class="page page-hub">
+<div class="shell">
+<nav class="breadcrumb" aria-label="面包屑"><a href="../index.html">首页</a><span class="crumb-sep" aria-hidden="true">/</span><span aria-current="page">测量与仪器</span></nav>
+<header class="hub-head">
+<p class="kicker">02 / 知识板块</p>
+<h1>测量与仪器</h1>
+<p class="hub-lede">剂量、计数率、能量补偿，以及不同类型探测器的工作方式。</p>
+<div class="hub-intro"><p>关于辐射和辐射测量仪器的说明。</p><p class="muted">我会根据我研究过的资料描述我可能会犯错误或有疑问的事情。我搜集来自互联网的资料和参考其他网站的资料，我会一条条增加页面。</p></div>
+<div class="hub-meta"><span>10 篇内容</span><span>5 个分组</span><a class="text-link" href="../detector.html">仪器类型 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+<nav class="chip-bar" aria-label="本页分组"><a class="chip" href="#usage">测量与使用 <span>3</span></a><a class="chip" href="#dose">剂量与单位 <span>4</span></a><a class="chip" href="#instruments">仪器类型与清单 <span>3</span></a></nav>
+</header>
+<section class="listing-group" id="usage">
+<div class="group-head">
+<h2>测量与使用</h2>
+<span class="group-count">3 篇</span>
+</div>
+<div class="card-grid"><article class="entry-card">
 
-	
-	<h2>目录</h2><hr />
-		<ul>
-		<li><a href="info008.html "  >正确的使用盖革计数器</a> </li>
-	    <li><a href="info001.html"  >有关能量补偿</a></li>
-			<li><a href="../PB_gamma.html"  >辐射衰减（γ射线）</a></li>
-			<li><a href="info017.html "  >每分钟计数</a></li>
-			<li><a href="info018.html "  >辐射权重因子</a></li>
-			 <li><a href="info019.html "  >有效剂量</a></li>
-			<li><a href="info022.html "  >用盖革计数器测量 β 射线时的不正确数值</a></li>
-			<li><a href="info023.html "  >白话辐射剂量单位Gy和Sv的异同</a></li>
-			<li><a href="../tool/error simulation.html" >辐射测量仪器（盖革计数器）的误差模拟</a></li>
-	<li><a href="../tool/jitter simulation.html" >辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟</a></li>
-	<li><a href="../tool/beta ray range calculation.html" >β射线射程计算工具</a></li>
-	<li><a href="../tool/info004.html" >辐射测量仪器的灵敏度</a></li>
-	</ul>
-		
-</body>
- <body background="../img/bg1.gif"> 
+<div class="entry-body">
+<p class="entry-kicker">测量与使用 <span class="badge badge-intro">入门</span></p>
+<h3><a href="../info/info008.html">正确的使用盖革计数器</a></h3>
+<p>使用盖革计数器测量空气剂量率的注意事项：仪器污染、β 射线、测量误差与异常读数。</p>
+<div class="entry-meta"><span class="read-time">阅读约 8 分钟</span></div>
+</div>
+</article><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">测量与使用 <span class="badge badge-mid">进阶</span></p>
+<h3><a href="../info/info001.html">关于能量补偿</a></h3>
+<p>能量补偿为什么重要：探测器能量响应、补偿方式，以及没有补偿时的读数偏差。</p>
+<div class="entry-meta"><span class="read-time">阅读约 4 分钟</span></div>
+</div>
+</article><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">测量与使用 <span class="badge badge-mid">进阶</span></p>
+<h3><a href="../info/info022.html">用盖革计数器测量 β 射线时的错误指示</a></h3>
+<p>为什么盖革计数器把 β 射线计入后会出现高估十倍的 Sv/h 读数，以及正确的测量方式。</p>
+<div class="entry-meta"><span class="read-time">阅读约 7 分钟</span></div>
+</div>
+</article></div>
+</section><section class="listing-group" id="dose">
+<div class="group-head">
+<h2>剂量与单位</h2>
+<span class="group-count">4 篇</span>
+</div>
+<div class="card-grid"><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">剂量与单位 <span class="badge badge-intro">入门</span></p>
+<h3><a href="../info/info017.html">每分钟计数（CPM）</a></h3>
+<p>CPM 与 CPS 的定义，以及计数率与剂量率之间为何不能直接换算。</p>
+<div class="entry-meta"><span class="read-time">阅读约 1 分钟</span></div>
+</div>
+</article><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">剂量与单位 <span class="badge badge-pro">专业</span></p>
+<h3><a href="../info/info018.html">等效剂量</a></h3>
+<p>等效剂量、辐射权重因子与计算方法，附 ICRP 权重因子表。</p>
+<div class="entry-meta"><span class="read-time">阅读约 1 分钟</span></div>
+</div>
+</article><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">剂量与单位 <span class="badge badge-pro">专业</span></p>
+<h3><a href="../info/info019.html">有效剂量</a></h3>
+<p>有效剂量、组织权重因子、内外照射路径与计算方式。</p>
+<div class="entry-meta"><span class="read-time">阅读约 3 分钟</span></div>
+</div>
+</article><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">剂量与单位 <span class="badge badge-intro">入门</span></p>
+<h3><a href="../info/info023.html">白话辐射剂量单位 Gy 和 Sv 的异同</a></h3>
+<p>用直白的方式解释 Gy 与 Sv 的共同点与差异，以及比释动能、吸收剂量、当量剂量和有效剂量。</p>
+<div class="entry-meta"><span class="read-time">阅读约 4 分钟</span></div>
+</div>
+</article></div>
+</section><section class="listing-group" id="instruments">
+<div class="group-head">
+<h2>仪器类型与清单</h2>
+<span class="group-count">3 篇</span>
+</div>
+<div class="card-grid"><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">仪器类型与清单 <span class="badge badge-mid">进阶</span></p>
+<h3><a href="../detector.html">辐射测量仪器的类型</a></h3>
+<p>GM 管、闪烁体、半导体与电离室的测量原理、灵敏度、能量分辨率与适用场景，附核素辐射类型表。</p>
+<div class="entry-meta"><span class="read-time">阅读约 11 分钟</span></div>
+</div>
+</article><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">仪器类型与清单 <span class="badge badge-mid">进阶</span></p>
+<h3><a href="../detector_list.html">辐射仪器列表</a></h3>
+<p>按使用目的、能量补偿、报警与价格整理的辐射仪器清单。</p>
+<div class="entry-meta"><span class="read-time">阅读约 10 分钟</span></div>
+</div>
+</article><article class="entry-card">
+
+<div class="entry-body">
+<p class="entry-kicker">仪器类型与清单 <span class="badge badge-mid">进阶</span></p>
+<h3><a href="../detector_list_2.html">辐射仪器推荐（闪烁体机型）</a></h3>
+<p>闪烁体机型的功能、量程、灵敏度与价格对照表。</p>
+<div class="entry-meta"><span class="read-time">阅读约 2 分钟</span></div>
+</div>
+</article></div>
+</section><section class="listing-group" id="related-basics">
+<div class="group-head"><h2>相关基础阅读</h2><span class="group-count">1 篇</span></div>
+<div class="card-grid"><article class="entry-card">
+<p class="entry-kicker">基础知识 · 屏蔽与衰减</p>
+<h3><a href="../PB_gamma.html">辐射衰减（γ射线）</a></h3>
+<p>点源、线源与平面源的距离衰减规律，以及屏蔽中「数量减少而非能量减少」的含义。</p>
+<p><a class="text-link" href="../PB_gamma.html">阅读 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p>
+</article></div>
+</section><section class="listing-group" id="related-tools">
+<div class="group-head"><h2>测量与计算工具</h2><span class="group-count">4 个工具</span></div>
+<div class="tool-grid"><article class="tool-card">
+<div class="tool-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg></div>
+<div class="tool-body">
+<p class="entry-kicker">模拟与计算</p>
+<h3><a href="../tool/error simulation.html">辐射测量仪器（盖革计数器）的误差模拟</a></h3>
+<p>用泊松统计模拟盖革计数器达到指定误差所需的时间，并绘制误差收敛曲线。</p>
+<span class="tool-open">打开工具 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+</div>
+</article><article class="tool-card">
+<div class="tool-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg></div>
+<div class="tool-body">
+<p class="entry-kicker">模拟与计算</p>
+<h3><a href="../tool/jitter simulation.html">辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟</a></h3>
+<p>模拟恒定剂量下测量值的统计抖动，以及误差阈值如何影响读数。</p>
+<span class="tool-open">打开工具 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+</div>
+</article><article class="tool-card">
+<div class="tool-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg></div>
+<div class="tool-body">
+<p class="entry-kicker">模拟与计算</p>
+<h3><a href="../tool/beta ray range calculation.html">β 射线射程计算工具</a></h3>
+<p>计算 β 粒子在铝、空气、水、混凝土中的最大射程，并支持自定义材料密度。</p>
+<span class="tool-open">打开工具 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+</div>
+</article><article class="tool-card">
+<div class="tool-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg></div>
+<div class="tool-body">
+<p class="entry-kicker">模拟与计算</p>
+<h3><a href="../tool/info004.html">辐射测量仪器的灵敏度</a></h3>
+<p>模拟灵敏度、刷新间隔与平均时间对读数稳定性和响应速度的影响。</p>
+<span class="tool-open">打开工具 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+</div>
+</article></div>
+</section>
+<div class="hub-foot">
+<a class="text-link" href="../sitemap.html">查看全部页面 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+</div>
+</div>
+</main><footer class="site-footer">
+<div class="shell">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<p>一个关于电离辐射、辐射探测与测量仪器的中文知识库。包含基础概念、剂量与单位、仪器类型、设备评测、能谱查看工具与参考文献。</p>
+<p class="footer-note">静态站点 · 无账号 · 无后端依赖</p>
+</div>
+<div class="footer-col"><h2>知识板块</h2><ul><li><a href="../base.html">基础知识</a></li><li><a href="../info/index.html">测量与仪器</a></li><li><a href="../reviews.html">仪器评测</a></li><li><a href="../article.html">文章与笔记</a></li></ul></div><div class="footer-col"><h2>索引与工具</h2><ul><li><a href="../tools.html">工具与数据</a></li><li><a href="../sitemap.html">全部页面</a></li><li><a href="../changelog.html">更新日志</a></li><li><a href="../search.html">搜索</a></li></ul></div><div class="footer-col"><h2>关于</h2><ul><li><a href="../about.html">关于本站</a></li><li><a href="../about.html#contact">联系方式</a></li><li><a href="http://blog.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">外部博客</a></li><li><a href="http://database.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">数据库</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>Retpaĝo @ 2022-2024.XiaoYi No One Knows the Future<br><span class="muted">Powered by XiaoYi &amp; Mikage</span></p>
+<p class="footer-meta">内容更新至 2024 年 6 月 · <a href="../sitemap.html">站点地图</a> · <a href="../changelog.html">更新日志</a></p>
+</div>
+</div>
+</footer>
+<dialog class="search-dialog" data-search-dialog aria-labelledby="search-dialog-title">
+<div class="search-dialog-inner">
+<div class="search-dialog-head">
+<p class="eyebrow">站点搜索</p>
+<h2 id="search-dialog-title">查找文章、仪器与概念</h2>
+<button class="icon-button" type="button" data-search-close aria-label="关闭搜索"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<form class="search-form" action="../search.html" method="get" role="search" data-search-form>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg>
+<input type="search" name="q" id="site-search-input" placeholder="例如：能量补偿、氡、Cs-137、PM1405" autocomplete="off" data-search-input aria-label="搜索关键词">
+<button type="submit" class="button button-solid">搜索</button>
+</form>
+<div class="search-filters" data-search-filters>
+<button type="button" class="chip is-active" data-section="">全部</button>
+<button type="button" class="chip" data-section="basics">基础知识</button>
+<button type="button" class="chip" data-section="measurement">测量与仪器</button>
+<button type="button" class="chip" data-section="reviews">仪器评测</button>
+<button type="button" class="chip" data-section="articles">文章</button>
+<button type="button" class="chip" data-section="tools">工具</button>
+<button type="button" class="chip" data-section="about">关于</button>
+</div>
+<div class="search-results" data-search-results aria-live="polite"></div>
+<p class="search-footnote">搜索在浏览器本地完成，不会上传查询内容。按 <kbd>Esc</kbd> 关闭，<kbd>↑</kbd> <kbd>↓</kbd> 选择，<kbd>Enter</kbd> 打开。</p>
+</div>
+</dialog>
+<div class="lightbox" data-lightbox hidden>
+<button type="button" class="lightbox-close" data-lightbox-close aria-label="关闭图片"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<figure><img alt="" data-lightbox-img><figcaption data-lightbox-caption></figcaption></figure>
+</div>
+<script src="../js/analytics.js" defer></script>
+<script src="../js/site.js" defer></script>
+
 </body>
 </html>
