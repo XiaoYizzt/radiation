@@ -17,6 +17,12 @@ $(document).ready(function() {
 
 var nuclear_data = [];
 var range_preset = [];
+var parse_error_message = "";
+var user_spectra = [];
+var user_spectrum_seq = 0;
+var user_active_id = null;
+var user_importing = false;
+var USER_MAX_FILE_BYTES = 10 * 1024 * 1024;
 
 var plot;
 var placeholder;
@@ -48,6 +54,7 @@ function spviewer_init() {
 	placeholder = $("#sp_graph");
 	
 	clear_html();
+	init_user_spectrum_import();
 	
 	load_nuclear_data();
 	
@@ -356,6 +363,444 @@ function init_list_multi(files) {
 }
 
 
+// ---------------------------------------------------------------------------
+// Local user spectrum import (File API only; no upload, no persistence)
+// ---------------------------------------------------------------------------
+
+function user_escape_html(text) {
+	return String(text == null ? "" : text)
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#39;");
+}
+
+function user_format_size(bytes) {
+	if(bytes < 1024) {
+		return bytes + " B";
+	}
+	if(bytes < 1024 * 1024) {
+		return (bytes / 1024).toFixed(1) + " KB";
+	}
+	return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
+function user_set_status(message, kind) {
+	var box = $("#user_import_status");
+	if(box.length === 0) {
+		return;
+	}
+	box.removeClass("is-empty is-busy is-success is-error is-warn");
+	if(kind) {
+		box.addClass("is-" + kind);
+	}
+	box.text(message || "");
+}
+
+function user_file_extension(name) {
+	var match = String(name || "").match(/\.([^.]+)$/);
+	return match ? match[1].toLowerCase() : "";
+}
+
+function user_file_signature(file) {
+	return file.name + "|" + file.size + "|" + (file.lastModified || 0);
+}
+
+function init_user_spectrum_import() {
+	if($("#user_spectrum_section").length > 0) {
+		return;
+	}
+	var anchor = $("#file_select");
+	if(anchor.length === 0) {
+		return;
+	}
+	if($("#website_spectrum_label").length === 0) {
+		$('<p id="website_spectrum_label" class="wes-section-label">网站能谱库</p>').insertBefore(anchor);
+	}
+	var html = ''
+		+ '<section id="user_spectrum_section" class="user-spectrum" aria-labelledby="user_spectrum_title">'
+		+ '  <h3 id="user_spectrum_title" class="user-spectrum-title">我的能谱 <span id="user_spectrum_count">0</span></h3>'
+		+ '  <div id="user_drop_zone" class="user-drop-zone">'
+		+ '    <input type="file" id="user_file_input" class="user-file-input" accept=".csv,.xml,.txt,text/csv,text/xml,application/xml,text/plain" multiple>'
+		+ '    <button type="button" id="user_file_button" class="user-import-button">导入能谱文件</button>'
+		+ '    <span class="user-drop-hint">或将 CSV / XML / TXT 文件拖放到这里</span>'
+		+ '  </div>'
+		+ '  <div id="user_import_status" class="user-import-status is-empty" role="status" aria-live="polite">尚未导入文件。</div>'
+		+ '  <div id="user_spectrum_list" class="user-spectrum-list"></div>'
+		+ '  <p class="user-privacy-note">文件只在当前浏览器中读取和解析，不会上传到服务器。刷新或关闭页面后清除。</p>'
+		+ '</section>';
+	$(html).insertBefore($("#website_spectrum_label"));
+
+	$("#user_file_button").bind('click', function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		var input = document.getElementById("user_file_input");
+		if(input) {
+			input.value = '';
+			input.click();
+		}
+	});
+	$("#user_file_input").bind('click', function(event) {
+		event.stopPropagation();
+	});
+	$("#user_file_input").bind('change', function() {
+		var files = [];
+		for(var i = 0; i < this.files.length; i++) {
+			files.push(this.files[i]);
+		}
+		this.value = '';
+		handle_user_files(files);
+	});
+	$("#user_drop_zone").bind('click', function(event) {
+		if($(event.target).closest("#user_file_button, #user_file_input").length > 0) {
+			return;
+		}
+		var input = document.getElementById("user_file_input");
+		if(input) {
+			input.value = '';
+			input.click();
+		}
+	});
+	$("#user_drop_zone").bind('dragenter dragover', function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		$(this).addClass("is-dragover");
+	});
+	$("#user_drop_zone").bind('dragleave', function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		$(this).removeClass("is-dragover");
+	});
+	$("#user_drop_zone").bind('drop', function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		$(this).removeClass("is-dragover");
+		var transfer = (event.originalEvent && event.originalEvent.dataTransfer) || event.dataTransfer;
+		var files = [];
+		if(transfer && transfer.files) {
+			for(var i = 0; i < transfer.files.length; i++) {
+				files.push(transfer.files[i]);
+			}
+		}
+		if(files.length === 0 && transfer && transfer.items) {
+			for(var j = 0; j < transfer.items.length; j++) {
+				if(transfer.items[j].kind === "file") {
+					var dropped_file = transfer.items[j].getAsFile();
+					if(dropped_file) {
+						files.push(dropped_file);
+					}
+				}
+			}
+		}
+		if(files.length === 0) {
+			user_set_status("没有检测到文件，请重新选择。", "error");
+			return;
+		}
+		handle_user_files(files);
+	});
+
+	$(document).on('change', '#file_select input[name="file"]', function() {
+		user_active_id = null;
+		render_user_spectra();
+	});
+	$(document).on('click', '#compare_list, #multi_list', function() {
+		user_active_id = null;
+		render_user_spectra();
+	});
+
+	render_user_spectra();
+}
+
+function render_user_spectra() {
+	var list = $("#user_spectrum_list");
+	if(list.length === 0) {
+		return;
+	}
+	$("#user_spectrum_count").text(user_spectra.length);
+	list.empty();
+	if(user_spectra.length === 0) {
+		$('<p class="user-empty">尚未导入文件。点击上方按钮或拖放 CSV / XML / TXT 文件。</p>').appendTo(list);
+		return;
+	}
+	for(var i = 0; i < user_spectra.length; i++) {
+		var item = user_spectra[i];
+		var row = $('<div class="user-spectrum-item" role="button" tabindex="0"></div>');
+		row.attr("data-user-id", item.id);
+		if(item.id === user_active_id) {
+			row.addClass("is-active");
+		}
+		$('<span class="user-item-name"></span>').text(item.name).appendTo(row);
+		$('<span class="user-item-meta"></span>').text(item.format + " · " + user_format_size(item.size)).appendTo(row);
+		$('<button type="button" class="user-item-remove" aria-label="删除该能谱"></button>')
+			.attr("data-user-remove", item.id)
+			.text("删除")
+			.appendTo(row);
+		list.append(row);
+	}
+	list.find(".user-spectrum-item").bind('click', function(event) {
+		if($(event.target).closest(".user-item-remove").length > 0) {
+			return;
+		}
+		select_user_spectrum(parseInt($(this).attr("data-user-id"), 10));
+	});
+	list.find(".user-spectrum-item").bind('keydown', function(event) {
+		if(event.keyCode === 13 || event.keyCode === 32) {
+			event.preventDefault();
+			select_user_spectrum(parseInt($(this).attr("data-user-id"), 10));
+		}
+	});
+	list.find(".user-item-remove").bind('click', function(event) {
+		event.stopPropagation();
+		remove_user_spectrum(parseInt($(this).attr("data-user-remove"), 10));
+	});
+}
+
+function select_user_spectrum(id, preserve_status) {
+	var item = null;
+	for(var i = 0; i < user_spectra.length; i++) {
+		if(user_spectra[i].id === id) {
+			item = user_spectra[i];
+			break;
+		}
+	}
+	if(!item) {
+		return;
+	}
+	user_active_id = id;
+	$("#file_select input[name='file']").prop('checked', false);
+	render_user_spectra();
+	try {
+		draw_graph(item.spectrum);
+		if(!preserve_status) {
+		user_set_status("正在显示：" + item.name, "success");
+	}
+	} catch(error) {
+		user_set_status("显示失败：" + item.name + "（" + error + "）", "error");
+	}
+}
+
+function remove_user_spectrum(id) {
+	var index = -1;
+	for(var i = 0; i < user_spectra.length; i++) {
+		if(user_spectra[i].id === id) {
+			index = i;
+			break;
+		}
+	}
+	if(index < 0) {
+		return;
+	}
+	var name = user_spectra[index].name;
+	var wasActive = (user_active_id === id);
+	user_spectra.splice(index, 1);
+	if(wasActive) {
+		user_active_id = null;
+		clear_html();
+	}
+	render_user_spectra();
+	user_set_status("已删除：" + name, "success");
+}
+
+function user_read_file(file, callback) {
+	var finished = false;
+	function finish(error, text) {
+		if(finished) {
+			return;
+		}
+		finished = true;
+		callback(error, text);
+	}
+	if(typeof FileReader === "undefined") {
+		if(file.text) {
+			file.text().then(function(text) {
+				finish(null, text);
+			}, function() {
+				finish("浏览器无法读取该文件。");
+			});
+		} else {
+			finish("当前浏览器不支持本地文件读取。");
+		}
+		return;
+	}
+	var reader = new FileReader();
+	reader.onload = function() {
+		finish(null, String(reader.result == null ? "" : reader.result));
+	};
+	reader.onerror = function() {
+		finish("读取文件失败。");
+	};
+	reader.onabort = function() {
+		finish("读取文件被取消。");
+	};
+	try {
+		reader.readAsText(file, "UTF-8");
+	} catch(error) {
+		finish("读取文件失败：" + error);
+	}
+}
+
+function user_mark_local_spectrum(spectrum) {
+	if(!spectrum) {
+		return;
+	}
+	if(!spectrum.sp_info || !spectrum.sp_info.push) {
+		spectrum.sp_info = [];
+	}
+	var has_source = false;
+	for(var i = 0; i < spectrum.sp_info.length; i++) {
+		if(spectrum.sp_info[i] && spectrum.sp_info[i][0] === "数据来源") {
+			has_source = true;
+			break;
+		}
+	}
+	if(!has_source) {
+		spectrum.sp_info.push(["数据来源", "本地导入（仅当前浏览器）"]);
+	}
+	spectrum.local_import = true;
+	if(spectrum.data && spectrum.data.length) {
+		for(var j = 0; j < spectrum.data.length; j++) {
+			user_mark_local_spectrum(spectrum.data[j]);
+		}
+	}
+}
+
+function handle_user_files(files) {
+	if(user_importing) {
+		user_set_status("正在处理上一批文件，请稍候再试。", "warn");
+		return;
+	}
+	if(!files || files.length === 0) {
+		return;
+	}
+	user_importing = true;
+	$("#user_file_button").prop('disabled', true);
+	var total = files.length;
+	var index = 0;
+	var successCount = 0;
+	var failCount = 0;
+	var duplicateCount = 0;
+	var firstSuccess = null;
+	var errors = [];
+	user_set_status("正在准备导入 " + total + " 个文件...", "busy");
+
+	function finish_batch() {
+		user_importing = false;
+		$("#user_file_button").prop('disabled', false);
+		render_user_spectra();
+		var message = "导入完成：成功 " + successCount + " 个";
+		if(duplicateCount > 0) {
+			message += "，跳过重复 " + duplicateCount + " 个";
+		}
+		if(failCount > 0) {
+			message += "，失败 " + failCount + " 个";
+		}
+		if(errors.length > 0) {
+			message += "。首个错误：" + errors[0];
+		}
+		var kind = failCount > 0 ? (successCount > 0 ? "warn" : "error") : (duplicateCount > 0 && successCount === 0 ? "warn" : "success");
+		user_set_status(message, kind);
+		if(firstSuccess && user_active_id === null) {
+			select_user_spectrum(firstSuccess.id, true);
+		}
+	}
+
+	function next_file() {
+		if(index >= total) {
+			finish_batch();
+			return;
+		}
+		var file = files[index];
+		index++;
+		var extension = user_file_extension(file.name);
+		if(extension !== "csv" && extension !== "xml" && extension !== "txt") {
+			failCount++;
+			errors.push(file.name + "：仅支持 .csv / .xml / .txt");
+			next_file();
+			return;
+		}
+		if(file.size === 0) {
+			failCount++;
+			errors.push(file.name + "：文件为空");
+			next_file();
+			return;
+		}
+		if(file.size > USER_MAX_FILE_BYTES) {
+			failCount++;
+			errors.push(file.name + "：文件超过 " + user_format_size(USER_MAX_FILE_BYTES) + " 限制");
+			next_file();
+			return;
+		}
+		var signature = user_file_signature(file);
+		var duplicate = false;
+		for(var i = 0; i < user_spectra.length; i++) {
+			if(user_spectra[i].signature === signature) {
+				duplicate = true;
+				break;
+			}
+		}
+		if(duplicate) {
+			duplicateCount++;
+			user_set_status("已存在，跳过：" + file.name, "warn");
+			next_file();
+			return;
+		}
+		user_set_status("正在读取 (" + index + "/" + total + ")：" + file.name, "busy");
+		user_read_file(file, function(error, text) {
+			if(error) {
+				failCount++;
+				errors.push(file.name + "：" + error);
+				next_file();
+				return;
+			}
+			if(!text || !text.replace(/\s/g, "")) {
+				failCount++;
+				errors.push(file.name + "：文件内容为空");
+				next_file();
+				return;
+			}
+			if(text.charCodeAt(0) === 0xFEFF) {
+				text = text.substring(1);
+			}
+			setTimeout(function() {
+				var spectrum = false;
+				try {
+					spectrum = parse_file(file.name, "本地导入", text);
+				} catch(parseError) {
+					spectrum = false;
+					parse_error_message = "解析时发生异常：" + parseError;
+				}
+				if(!spectrum) {
+					failCount++;
+					errors.push(file.name + "：" + (parse_error_message || "无法识别该能谱格式"));
+					next_file();
+					return;
+				}
+				user_mark_local_spectrum(spectrum);
+				spectrum.local_file_name = file.name;
+				var item = {
+					id: ++user_spectrum_seq,
+					name: file.name,
+					size: file.size,
+					lastModified: file.lastModified || 0,
+					signature: signature,
+					format: extension.toUpperCase(),
+					spectrum: spectrum
+				};
+				user_spectra.push(item);
+				successCount++;
+				if(!firstSuccess) {
+					firstSuccess = item;
+				}
+				render_user_spectra();
+				next_file();
+			}, 0);
+		});
+	}
+	next_file();
+}
+
+
 function draw_file(files, file) {
 	
 	// 如果它不在文件列表中，则不要发出 Ajax 请求
@@ -392,7 +837,7 @@ function draw_file(files, file) {
 			if(spectrum) {
 				draw_graph(spectrum);
 			} else {
-				alert("Unknown format.");
+				alert(parse_error_message || "Unknown format.");
 			}
 		}
 	});
@@ -437,7 +882,7 @@ function draw_file_compare(files, file) {
 			if(spectrum1) {
 				draw_file_compare2(files, file, load_file_comment[1], spectrum1);
 			} else {
-				alert("Unknown format.");
+				alert(parse_error_message || "Unknown format.");
 			}
 		}
 	});
@@ -459,7 +904,7 @@ function draw_file_compare2(files, file, load_file_comment, spectrum1) {
 			if(spectrum2) {
 				draw_graph_compare([spectrum1, spectrum2]);
 			} else {
-				alert("Unknown format.");
+				alert(parse_error_message || "Unknown format.");
 			}
 		}
 	});
@@ -512,13 +957,15 @@ function draw_file_multi2(files, file, load_file_comment, fileno, spectrum) {
 					draw_graph_multi(spectrum);
 				}
 			} else {
-				alert("Unknown format.");
+				alert(parse_error_message || "Unknown format.");
 			}
 		}
 	});
 }
 
 function parse_file(file, file_comment, data) {
+	
+	parse_error_message = "";
 	
 	var instruments = [
 		draw_graph_xml_spectrum,
@@ -540,7 +987,9 @@ function parse_file(file, file_comment, data) {
 		draw_graph_canberra_gc2020_spectrum,
 		draw_graph_a2700_spectrum,
 		draw_graph_csk2i_spectrum,
-		draw_graph_csk3ix_spectrum
+		draw_graph_csk3ix_spectrum,
+		draw_graph_csv_spectrum,
+		draw_graph_txt_spectrum
 	];
 	
 	for(var i in instruments) {
@@ -568,6 +1017,13 @@ function draw_graph(spectrum) {
 
 function draw_graph_compare(spectrums) {
 	
+	for(var c = 0; c < spectrums.length; c++) {
+		if(spectrums[c] && spectrums[c]['has_energy'] === false) {
+			alert("该文件没有能量刻度，不能进行双光谱比较；请使用单光谱模式打开。");
+			return;
+		}
+	}
+	
 	clear_html();
 	
 	$("#sp_cursor_info_compare").show();
@@ -581,6 +1037,13 @@ function draw_graph_compare(spectrums) {
 }
 
 function draw_graph_multi(spectrums) {
+	
+	for(var c = 0; c < spectrums.length; c++) {
+		if(spectrums[c] && spectrums[c]['has_energy'] === false) {
+			alert("该文件没有能量刻度，不能进行多光谱比较；请使用单光谱模式打开。");
+			return;
+		}
+	}
 	
 	clear_html();
 	
@@ -3946,6 +4409,631 @@ function draw_graph_csk3ix_spectrum(file, file_comment, data) {
 	}
 }
 
+/*
+ * CSV / TXT spectrum support.
+ *
+ * The functions below intentionally consume only the text content.  They do
+ * not look at the file extension: CSV/MCA files are recognised by their
+ * headers and by the numeric table structure.  Parsed values are converted to
+ * the same spectrum object used by every existing parser:
+ *
+ *   spectrum_data_ch: [[channel, counts_per_second], ...]
+ *   spectrum_data_ev: [[energy_keV, counts_per_second], ...]
+ *   time: live/measurement time in seconds
+ *
+ * If a file has no energy column, has_energy is false and the plotting code
+ * keeps the channel axis only; no synthetic energy calibration is created.
+ */
+
+function spviewer_strip_bom(text) {
+	if(text && text.charCodeAt(0) === 0xFEFF) {
+		return text.substring(1);
+	}
+	return text || "";
+}
+
+function spviewer_parse_number(value) {
+	if(value === undefined || value === null) {
+		return NaN;
+	}
+	var s = String(value).replace(/^\s+|\s+$/g, "").replace(/^"|"$/g, "");
+	if(s === "") {
+		return NaN;
+	}
+	if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(s)) {
+		return NaN;
+	}
+	var n = parseFloat(s);
+	return isFinite(n) ? n : NaN;
+}
+
+function spviewer_is_comment_line(line) {
+	return /^\s*(?:#|\/\/|--)/.test(line);
+}
+
+function spviewer_count_delimiter(line) {
+	var comma = 0;
+	var semicolon = 0;
+	var tab = 0;
+	var inQuotes = false;
+	for(var i = 0; i < line.length; i++) {
+		var ch = line.charAt(i);
+		if(ch === '"') {
+			if(inQuotes && line.charAt(i + 1) === '"') {
+				i++;
+			} else {
+				inQuotes = !inQuotes;
+			}
+		} else if(!inQuotes) {
+			if(ch === ",") comma++;
+			else if(ch === ";") semicolon++;
+			else if(ch === "\t") tab++;
+		}
+	}
+	return { comma: comma, semicolon: semicolon, tab: tab };
+}
+
+function spviewer_detect_delimiter(line) {
+	var counts = spviewer_count_delimiter(line);
+	if(counts.tab > 0 && counts.tab >= counts.comma && counts.tab >= counts.semicolon) {
+		return "\t";
+	}
+	if(counts.semicolon > 0 && counts.semicolon > counts.comma) {
+		return ";";
+	}
+	if(counts.comma > 0) {
+		return ",";
+	}
+	return "";
+}
+
+function spviewer_split_delimited(line, delimiter) {
+	var fields = [];
+	var current = "";
+	var inQuotes = false;
+	for(var i = 0; i < line.length; i++) {
+		var ch = line.charAt(i);
+		if(ch === '"') {
+			if(inQuotes && line.charAt(i + 1) === '"') {
+				current += '"';
+				i++;
+			} else {
+				inQuotes = !inQuotes;
+			}
+		} else if(ch === delimiter && !inQuotes) {
+			fields.push(current);
+			current = "";
+		} else {
+			current += ch;
+		}
+	}
+	fields.push(current);
+	return fields;
+}
+
+function spviewer_trim_fields(fields) {
+	var result = [];
+	for(var i = 0; i < fields.length; i++) {
+		result.push(String(fields[i]).replace(/^\s+|\s+$/g, ""));
+	}
+	return result;
+}
+
+function spviewer_find_column(fields, pattern) {
+	for(var i = 0; i < fields.length; i++) {
+		if(pattern.test(fields[i])) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+function spviewer_find_csv_header(lines) {
+	var limit = Math.min(lines.length, 80);
+	for(var i = 0; i < limit; i++) {
+		var line = lines[i];
+		if(!line || !line.replace(/\s/g, "")) {
+			continue;
+		}
+		if(spviewer_is_comment_line(line)) {
+			continue;
+		}
+		var delimiter = spviewer_detect_delimiter(line);
+		var fields = delimiter ? spviewer_trim_fields(spviewer_split_delimited(line, delimiter)) : [line.replace(/^\s+|\s+$/g, "")];
+		var joined = fields.join(" ").toLowerCase();
+		var hasCount = /(?:counts?|cps|rate|计数)/.test(joined);
+		var hasAxis = /(?:channel|chan|energy|kev|mev|通道|能量)/.test(joined);
+		var countsOnlyHeader = fields.length === 1 && /^counts?\s*(?:\(|$)/i.test(fields[0]);
+		if(hasCount && ((fields.length >= 2 && hasAxis) || countsOnlyHeader)) {
+			return { index: i, delimiter: delimiter, fields: fields };
+		}
+		var numeric = 0;
+		for(var n = 0; n < fields.length; n++) {
+			if(isFinite(spviewer_parse_number(fields[n]))) {
+				numeric++;
+			}
+		}
+		if(fields.length > 0 && numeric === fields.length) {
+			break;
+		}
+	}
+	return null;
+}
+
+function spviewer_extract_time(text) {
+	var m = text.match(/TotalTime\s*=\s*([0-9]*\.?[0-9]+)\s*s/i);
+	if(m) {
+		var t = parseFloat(m[1]);
+		if(isFinite(t) && t > 0) {
+			return { second: t, provided: true };
+		}
+	}
+	m = text.match(/(?:total|live|living|real|measurement|acquisition|elapsed)\s*time\s*[:=]\s*([0-9]*\.?[0-9]+)\s*(?:s|sec|seconds)?/i);
+	if(m) {
+		var t2 = parseFloat(m[1]);
+		if(isFinite(t2) && t2 > 0) {
+			return { second: t2, provided: true };
+		}
+	}
+	m = text.match(/测量时间\s*[:=：]\s*([0-9]*\.?[0-9]+)\s*(?:秒|s)?/);
+	if(m) {
+		var t3 = parseFloat(m[1]);
+		if(isFinite(t3) && t3 > 0) {
+			return { second: t3, provided: true };
+		}
+	}
+	return { second: 1, provided: false };
+}
+
+function spviewer_energy_factor(header) {
+	var s = String(header || "").toLowerCase();
+	if(/\bmev\b/.test(s)) {
+		return 1000;
+	}
+	if(/\bkev\b/.test(s)) {
+		return 1;
+	}
+	if(/\bev\b/.test(s)) {
+		return 0.001;
+	}
+	return 1;
+}
+
+function spviewer_is_channel_column(rows, index) {
+	if(rows.length === 0) {
+		return false;
+	}
+	var previous = null;
+	for(var i = 0; i < rows.length; i++) {
+		var v = rows[i][index];
+		if(!isFinite(v) || Math.floor(v) !== v) {
+			return false;
+		}
+		if(previous !== null && v - previous !== 1) {
+			return false;
+		}
+		previous = v;
+	}
+	return true;
+}
+
+function spviewer_is_increasing_column(rows, index) {
+	if(rows.length < 2) {
+		return false;
+	}
+	var previous = null;
+	var allInteger = true;
+	var stepOne = true;
+	for(var i = 0; i < rows.length; i++) {
+		var v = rows[i][index];
+		if(!isFinite(v)) {
+			return false;
+		}
+		if(Math.floor(v) !== v) {
+			allInteger = false;
+		}
+		if(previous !== null) {
+			if(v <= previous) {
+				return false;
+			}
+			if(v - previous !== 1) {
+				stepOne = false;
+			}
+		}
+		previous = v;
+	}
+	// A channel column is also increasing; do not call it energy when a
+	// separate channel column can be identified.
+	return !(allInteger && stepOne);
+}
+
+function spviewer_infer_columns(rows) {
+	var width = rows[0].length;
+	var mapping = { channel: -1, energy: -1, count: -1 };
+	if(width === 1) {
+		mapping.count = 0;
+		return mapping;
+	}
+	if(width === 2) {
+		if(spviewer_is_channel_column(rows, 0)) {
+			mapping.channel = 0;
+			mapping.count = 1;
+		} else {
+			mapping.energy = 0;
+			mapping.count = 1;
+		}
+		return mapping;
+	}
+	for(var i = 0; i < width; i++) {
+		if(spviewer_is_channel_column(rows, i)) {
+			mapping.channel = i;
+			break;
+		}
+	}
+	for(var j = 0; j < width; j++) {
+		if(j === mapping.channel || j === mapping.count) {
+			continue;
+		}
+		if(spviewer_is_increasing_column(rows, j)) {
+			mapping.energy = j;
+			break;
+		}
+	}
+	if(mapping.count < 0) {
+		for(var k = width - 1; k >= 0; k--) {
+			if(k !== mapping.channel && k !== mapping.energy) {
+				mapping.count = k;
+				break;
+			}
+		}
+	}
+	return mapping;
+}
+
+function spviewer_build_text_spectrum(file, file_comment, rows, options) {
+	if(!rows || rows.length < 2) {
+		parse_error_message = "光谱数据行不足，至少需要 2 行有效数据。";
+		return false;
+	}
+	var hasEnergy = options.has_energy !== false;
+	var countsAreRates = options.counts_are_rates === true;
+	var timeProvided = options.time_provided !== false;
+	var time = countsAreRates ? 1 : (isFinite(options.time) && options.time > 0 ? options.time : 1);
+	if(!countsAreRates && (!isFinite(options.time) || options.time <= 0)) {
+		timeProvided = false;
+		time = 1;
+	}
+	var spectrumDataCh = [];
+	var spectrumDataEv = [];
+	var totalCount = 0;
+	var previousChannel = null;
+	var previousEnergy = null;
+	var minEnergy = null;
+	var maxEnergy = null;
+	for(var i = 0; i < rows.length; i++) {
+		var row = rows[i];
+		var count = row.count;
+		var channel = row.channel;
+		var energy = row.energy;
+		if(!isFinite(count) || count < 0) {
+			parse_error_message = "第 " + (i + 1) + " 个数据行的计数值无效：" + row.source + "。";
+			return false;
+		}
+		if(channel === undefined || channel === null) {
+			channel = i;
+		}
+		if(!isFinite(channel)) {
+			parse_error_message = "第 " + (i + 1) + " 个数据行的通道值无效。";
+			return false;
+		}
+		if(previousChannel !== null && channel <= previousChannel) {
+			parse_error_message = "通道列必须严格递增（第 " + (i + 1) + " 行）。";
+			return false;
+		}
+		previousChannel = channel;
+		if(hasEnergy) {
+			if(!isFinite(energy)) {
+				parse_error_message = "第 " + (i + 1) + " 个数据行的能量值无效。";
+				return false;
+			}
+			if(previousEnergy !== null && energy <= previousEnergy) {
+				parse_error_message = "能量列必须严格递增（第 " + (i + 1) + " 行）。";
+				return false;
+			}
+			previousEnergy = energy;
+			if(minEnergy === null || energy < minEnergy) minEnergy = energy;
+			if(maxEnergy === null || energy > maxEnergy) maxEnergy = energy;
+			spectrumDataEv.push([energy, count]);
+		}
+		spectrumDataCh.push([channel, count]);
+		totalCount += count;
+	}
+	var minCount = find_min_count(spectrumDataCh);
+	var minCps = minCount / time;
+	if(!(minCps > 0)) {
+		minCps = 1 / time;
+	}
+	var spInfo = sp_info_gps(file_comment || "");
+	spInfo.push(["文件格式", options.format || "文本表格"]);
+	spInfo.push(["通道数", rows.length]);
+	spInfo.push(["能量刻度", hasEnergy ? "逐通道能量列" : "无（仅通道）"]);
+	if(hasEnergy) {
+		spInfo.push(["能量范围", minEnergy.toFixed(2) + " – " + maxEnergy.toFixed(2) + " keV"]);
+	}
+	if(countsAreRates) {
+		spInfo.push(["计数类型", "cps（文件为计数率）"]);
+	} else {
+		spInfo.push(["总计数", totalCount.toFixed(0)]);
+	}
+	if(timeProvided && !countsAreRates) {
+		spInfo.push(["计测时间", format_time(time)]);
+	} else if(!countsAreRates) {
+		spInfo.push(["计测时间", "未提供（按 1 秒显示）"]);
+	}
+	if(!hasEnergy) {
+		spInfo.push(["横轴", "通道 ch（文件未提供能量刻度）"]);
+	}
+	if(options.extra_info) {
+		for(var j = 0; j < options.extra_info.length; j++) {
+			spInfo.push(options.extra_info[j]);
+		}
+	}
+	if(file_comment) {
+		spInfo.push(["备注", file_comment]);
+	}
+	var additionalHtml = "";
+	if(!hasEnergy) {
+		additionalHtml = '<p class="spviewer-note">此文件没有能量刻度；横轴为通道，能量轴已隐藏。'
+			+ '如需能量显示，请提供能量列或能量校准信息。</p>';
+	}
+	var spectrum = {
+		file: file,
+		file_comment: file_comment,
+		sp_info: spInfo,
+		additional_sp_info_html: additionalHtml,
+		time: time,
+		min_cps: minCps,
+		has_energy: hasEnergy,
+		counts_are_rates: countsAreRates,
+		time_provided: timeProvided,
+		spectrum_data_ch: convert_count2cps(time, spectrumDataCh),
+		spectrum_data_ev: hasEnergy ? convert_count2cps(time, spectrumDataEv) : []
+	};
+	return spectrum;
+}
+
+function draw_graph_csv_spectrum(file, file_comment, data) {
+	var text = spviewer_strip_bom(data);
+	if(!text) {
+		return false;
+	}
+	var lines = split_line(text);
+	var header = spviewer_find_csv_header(lines);
+	var delimiter = "";
+	var headerFields = null;
+	if(header) {
+		delimiter = header.delimiter;
+		headerFields = header.fields;
+		if(headerFields.length < 2 && !/^counts?\s*(?:\(|$)/i.test(headerFields[0])) {
+			return false;
+		}
+	} else {
+		for(var h = 0; h < lines.length; h++) {
+			if(lines[h] && !spviewer_is_comment_line(lines[h])) {
+				delimiter = spviewer_detect_delimiter(lines[h]);
+				break;
+			}
+		}
+		if(!delimiter) {
+			// A headerless one-column counts file is still a valid spectrum.
+			var numericLines = 0;
+			for(var q = 0; q < lines.length && numericLines < 2; q++) {
+				var raw = lines[q];
+				if(!raw || !raw.replace(/\s/g, "") || spviewer_is_comment_line(raw)) {
+					continue;
+				}
+				if(isFinite(spviewer_parse_number(raw))) {
+					numericLines++;
+				} else {
+					break;
+				}
+			}
+			if(numericLines < 2) {
+				return false;
+			}
+		}
+	}
+	var timeInfo = spviewer_extract_time(text);
+	var start = header ? header.index + 1 : 0;
+	var countIndex = -1;
+	var channelIndex = -1;
+	var energyIndex = -1;
+	var countHeader = "";
+	if(headerFields) {
+		countIndex = spviewer_find_column(headerFields, /(?:counts?|cps|rate|计数)/i);
+		channelIndex = spviewer_find_column(headerFields, /(?:channel|chan|通道|^ch$)/i);
+		energyIndex = spviewer_find_column(headerFields, /(?:energy|能量|kev|mev|ev)/i);
+		if(countIndex < 0) {
+			parse_error_message = "CSV 光谱缺少计数列（Counts）。";
+			return false;
+		}
+		countHeader = headerFields[countIndex];
+		if(channelIndex === energyIndex) {
+			energyIndex = -1;
+		}
+	}
+	var rawRows = [];
+	var rawLines = [];
+	for(var i = start; i < lines.length; i++) {
+		var line = lines[i];
+		if(!line || !line.replace(/\s/g, "")) {
+			continue;
+		}
+		if(spviewer_is_comment_line(line)) {
+			continue;
+		}
+		var fields = delimiter ? spviewer_trim_fields(spviewer_split_delimited(line, delimiter)) : [line.replace(/^\s+|\s+$/g, "")];
+		while(fields.length > 1 && fields[fields.length - 1] === "") {
+			fields.pop();
+		}
+		var maxIndex = Math.max(countIndex, channelIndex, energyIndex);
+		if(fields.length === 1 && !headerFields && !delimiter) {
+			// counts-only text/CSV column
+		} else if(maxIndex >= 0 && fields.length <= maxIndex) {
+			parse_error_message = "CSV 第 " + (i + 1) + " 行列数不足，无法读取计数/能量列。";
+			return false;
+		}
+		var numbers = [];
+		for(var n = 0; n < fields.length; n++) {
+			var value = spviewer_parse_number(fields[n]);
+			if(!isFinite(value)) {
+				parse_error_message = "CSV 第 " + (i + 1) + " 行包含无法解析的数值：" + fields[n];
+				return false;
+			}
+			numbers.push(value);
+		}
+		if(numbers.length === 0) {
+			continue;
+		}
+		rawRows.push(numbers);
+		rawLines.push(line);
+	}
+	if(rawRows.length < 2) {
+		parse_error_message = "CSV 中没有足够的数值数据行（至少需要 2 行）。";
+		return false;
+	}
+	if(!headerFields) {
+		var inferred = spviewer_infer_columns(rawRows);
+		countIndex = inferred.count;
+		channelIndex = inferred.channel;
+		energyIndex = inferred.energy;
+		if(countIndex < 0) {
+			parse_error_message = "CSV 无法识别计数值所在的列。";
+			return false;
+		}
+		countHeader = "Counts";
+	}
+	var energyHeader = energyIndex >= 0 && headerFields ? headerFields[energyIndex] : "";
+	var factor = energyIndex >= 0 ? spviewer_energy_factor(energyHeader) : 1;
+	var rows = [];
+	var previousEnergy = null;
+	for(var r = 0; r < rawRows.length; r++) {
+		var rowValues = rawRows[r];
+		var count = rowValues[countIndex];
+		var channel = channelIndex >= 0 ? rowValues[channelIndex] : r;
+		var energy;
+		if(energyIndex >= 0) {
+			energy = rowValues[energyIndex] * factor;
+			if(previousEnergy !== null && energy <= previousEnergy) {
+				parse_error_message = "CSV 能量列必须严格递增（第 " + (r + 1) + " 个数据行）。";
+				return false;
+			}
+			previousEnergy = energy;
+		}
+		rows.push({ channel: channel, energy: energy, count: count, source: rawLines[r] });
+	}
+	var countsAreRates = /(?:cps|counts?\s*\/\s*s|rate)/i.test(countHeader);
+	return spviewer_build_text_spectrum(file, file_comment, rows, {
+		format: energyIndex >= 0 ? "CSV（通道 / 能量 / 计数）" : "CSV（通道 / 计数）",
+		time: timeInfo.second,
+		time_provided: timeInfo.provided,
+		has_energy: energyIndex >= 0,
+		counts_are_rates: countsAreRates,
+		extra_info: energyIndex >= 0 ? [["能量单位", "keV"]] : []
+	});
+}
+
+function draw_graph_txt_spectrum(file, file_comment, data) {
+	var text = spviewer_strip_bom(data);
+	if(!text) {
+		return false;
+	}
+	if(!/Theremino_MCA/i.test(text) &&
+	   !/Energy\s*(?:\([^)]*\))?\s+Counts/i.test(text)) {
+		return false;
+	}
+	var lines = split_line(text);
+	var headerIndex = -1;
+	var headerLine = "";
+	for(var i = 0; i < lines.length; i++) {
+		if(/Energy\s*(?:\([^)]*\))?\s+Counts/i.test(lines[i])) {
+			headerIndex = i;
+			headerLine = lines[i];
+			break;
+		}
+	}
+	if(headerIndex < 0) {
+		parse_error_message = "TXT 光谱缺少 Energy / Counts 表头。";
+		return false;
+	}
+	var extraInfo = [];
+	var totalPulses = null;
+	for(var m = 0; m < headerIndex; m++) {
+		var metaLine = lines[m];
+		if(!metaLine || !metaLine.replace(/\s/g, "") || /^-+$/.test(metaLine.replace(/\s/g, ""))) {
+			continue;
+		}
+		var meta = metaLine.match(/^\s*([^:]+):\s*(.*?)\s*$/);
+		if(!meta) {
+			continue;
+		}
+		var key = meta[1].replace(/^\s+|\s+$/g, "");
+		var value = meta[2].replace(/^\s+|\s+$/g, "");
+		if(/^Total time$/i.test(key)) {
+			continue;
+		}
+		if(/^Total pulses$/i.test(key)) {
+			totalPulses = spviewer_parse_number(value);
+		}
+		extraInfo.push([key, value]);
+	}
+	var timeInfo = spviewer_extract_time(text);
+	var factor = spviewer_energy_factor(headerLine);
+	var rows = [];
+	var started = false;
+	for(var r = headerIndex + 1; r < lines.length; r++) {
+		var line = lines[r];
+		if(!line || !line.replace(/\s/g, "")) {
+			continue;
+		}
+		var compact = line.replace(/\s/g, "");
+		if(/^-+$/.test(compact) || spviewer_is_comment_line(line)) {
+			continue;
+		}
+		var pair = line.match(/^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)\s*[,;\t ]+\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)\s*$/);
+		if(!pair) {
+			parse_error_message = "TXT 第 " + (r + 1) + " 行不是有效的「能量, 计数」数据。";
+			return false;
+		}
+		var energy = parseFloat(pair[1]) * factor;
+		var count = parseFloat(pair[2]);
+		rows.push({ channel: rows.length, energy: energy, count: count, source: line });
+		started = true;
+	}
+	if(!started || rows.length < 2) {
+		parse_error_message = "TXT 中没有足够的「能量, 计数」数据行。";
+		return false;
+	}
+	if(totalPulses !== null) {
+		var countsSum = 0;
+		for(var s = 0; s < rows.length; s++) {
+			countsSum += rows[s].count;
+		}
+		extraInfo.push(["总脉冲校验", "文件 " + totalPulses.toFixed(0) + " / 计数和 " + countsSum.toFixed(0)
+			+ (Math.abs(totalPulses - countsSum) < 0.5 ? "（一致）" : "（不一致）")]);
+	}
+	extraInfo.push(["能量单位", "keV"]);
+	var spectrum = spviewer_build_text_spectrum(file, file_comment, rows, {
+		format: "TXT（Theremino MCA 表格）",
+		time: timeInfo.second,
+		time_provided: timeInfo.provided,
+		has_energy: true,
+		counts_are_rates: false,
+		extra_info: extraInfo
+	});
+	return spectrum;
+}
+
 function find_ev2ch_in_spectrum(spectrum_data_ev, ev) {
 	var x;
 	$.each(spectrum_data_ev, function(i, val) {
@@ -3953,7 +5041,7 @@ function find_ev2ch_in_spectrum(spectrum_data_ev, ev) {
 			x = i;
 		}
 	});
-	if(x) {
+	if(x !== undefined) {
 		return x;
 	} else {
 		return undefined;
@@ -4067,16 +5155,23 @@ function draw_graph_common(spectrum) {
 	
 	var spectrum_data_ch = spectrum_filter(selected_spectrum['spectrum_data_ch']);
 	var spectrum_data_ev = spectrum_filter(selected_spectrum['spectrum_data_ev']);
+	var has_energy = selected_spectrum['has_energy'] !== false;
 	
+	if(!has_energy) {
+		$("#sp_cursor_nuclear").hide();
+	}
 	
 	var find_ev_x = function(ch) {
+		if(!has_energy) {
+			return undefined;
+		}
 		var x;
 		$.each(spectrum_data_ch, function(i, val) {
 			if(!x && val[0] >= ch) {
 				x = i;
 			}
 		});
-		if(x) {
+		if(x !== undefined) {
 			return spectrum_data_ev[x][0];
 		} else {
 			return undefined;
@@ -4090,7 +5185,7 @@ function draw_graph_common(spectrum) {
 				ch = i;
 			}
 		});
-		if(ch) {
+		if(ch !== undefined) {
 			return spectrum_data_ch[ch][0];
 		} else {
 			return undefined;
@@ -4111,7 +5206,7 @@ function draw_graph_common(spectrum) {
 				show: true
 			},
 			{
-				show: true
+				show: has_energy
 			}
 		],
 		series: {
@@ -4138,6 +5233,29 @@ function draw_graph_common(spectrum) {
 			y_range_max = spectrum_data_ch[i][1];
 	}
 	
+	var xaxes_options = [
+		{
+			show: true,
+			tickFormatter: format_ch,
+			min: x_range[0],
+			max: x_range[1]
+		}
+	];
+	if(has_energy) {
+		xaxes_options.push({
+			show: true,
+			tickFormatter: format_ev,
+			min: find_ev_x(x_range[0]),
+			max: find_ev_x(x_range[1])
+		});
+	}
+	if(window.innerWidth <= 600) {
+		xaxes_options[0].ticks = 5;
+		if(has_energy) {
+			xaxes_options[1].ticks = 4;
+		}
+	}
+	
 	plot_options = $.extend(true, {}, plot_options, {
 		yaxes: [
 			{
@@ -4146,20 +5264,7 @@ function draw_graph_common(spectrum) {
 				tickFormatter: format_cps
 			}
 		],
-		xaxes: [
-			{
-				show: true,
-				tickFormatter: format_ch,
-				min: x_range[0],
-				max: x_range[1]
-			},
-			{
-				show: true,
-				tickFormatter: format_ev,
-				min: find_ev_x(x_range[0]),
-				max: find_ev_x(x_range[1])
-			}
-		]
+		xaxes: xaxes_options
 	});
 	plot = $.plot(placeholder, plot_data, plot_options);
 	
@@ -4196,9 +5301,12 @@ function draw_graph_common(spectrum) {
 			if(j != undefined) {
 				var ch = series.data[j][0]
 				var cps = series.data[j][1];
+				var ev = has_energy ? find_ev_x(ch) : undefined;
 				
-				update_curosr_info(ch, find_ev_x(ch), cps, cpsDecimals, selected_spectrum['time'], find_ch_from_ev);
-				update_curosr_nuclear(find_ev_x(ch), cpsDecimals);
+				update_curosr_info(ch, ev, cps, cpsDecimals, selected_spectrum['time'], find_ch_from_ev);
+				if(has_energy) {
+					update_curosr_nuclear(ev, cpsDecimals);
+				}
 			}
 			
 		}
@@ -4216,18 +5324,19 @@ function draw_graph_common(spectrum) {
 	// 選択・ズーム処理
 	
 	$("#zoomout").unbind('click').bind('click', function(){
-		var new_options = {
-			xaxes: [
-				{
-					min: x_range[0],
-					max: x_range[1]
-				},
-				{
-					min: find_ev_x(x_range[0]),
-					max: find_ev_x(x_range[1])
-				}
-			]
-		};
+		var new_xaxes = [
+			{
+				min: x_range[0],
+				max: x_range[1]
+			}
+		];
+		if(has_energy) {
+			new_xaxes.push({
+				min: find_ev_x(x_range[0]),
+				max: find_ev_x(x_range[1])
+			});
+		}
+		var new_options = { xaxes: new_xaxes };
 		draw_graph_common_update(new_options);
 	});
 	
@@ -4236,18 +5345,19 @@ function draw_graph_common(spectrum) {
 		var selected_x_range = [ranges.xaxis.from, ranges.xaxis.to];
 		
 		var zoom_fun = function() {
-			var new_options = {
-				xaxes: [
-					{
-						min: selected_x_range[0],
-						max: selected_x_range[1]
-					},
-					{
-						min: find_ev_x(selected_x_range[0]),
-						max: find_ev_x(selected_x_range[1])
-					}
-				]
-			};
+			var new_xaxes = [
+				{
+					min: selected_x_range[0],
+					max: selected_x_range[1]
+				}
+			];
+			if(has_energy) {
+				new_xaxes.push({
+					min: find_ev_x(selected_x_range[0]),
+					max: find_ev_x(selected_x_range[1])
+				});
+			}
+			var new_options = { xaxes: new_xaxes };
 			
 			plot.clearSelection();
 			graph_clear_marking();
@@ -4260,25 +5370,29 @@ function draw_graph_common(spectrum) {
 	});
 	
 	// 範囲プリセット
-	var range_preset_html = '范围预设：';
-	for(var i in range_preset) {
-		range_preset_html += '<input type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
-	}
-	range_preset_html += '<br><br>';
-	$("#range_preset").html(range_preset_html);
-	for(var i in range_preset) {
-		(function(ii) {
-			$("#range_preset_" + i).bind('click', function() {
-				var ch_low = range_preset[ii][1] - range_preset[ii][1] * range_preset[ii][2] / 100;
-				var ch_high = range_preset[ii][1] + range_preset[ii][1] * range_preset[ii][3] / 100;
-				plot.setSelection({
-					xaxis: {
-						from: find_ev2ch_in_spectrum(spectrum_data_ev, ch_low),
-						to: find_ev2ch_in_spectrum(spectrum_data_ev, ch_high)
-					}
+	if(has_energy) {
+		var range_preset_html = '范围预设：';
+		for(var i in range_preset) {
+			range_preset_html += '<input type="button" id="range_preset_' + i + '" value="' + range_preset[i][0] + '">';
+		}
+		range_preset_html += '<br><br>';
+		$("#range_preset").html(range_preset_html);
+		for(var i in range_preset) {
+			(function(ii) {
+				$("#range_preset_" + i).bind('click', function() {
+					var ch_low = range_preset[ii][1] - range_preset[ii][1] * range_preset[ii][2] / 100;
+					var ch_high = range_preset[ii][1] + range_preset[ii][1] * range_preset[ii][3] / 100;
+					plot.setSelection({
+						xaxis: {
+							from: find_ev2ch_in_spectrum(spectrum_data_ev, ch_low),
+							to: find_ev2ch_in_spectrum(spectrum_data_ev, ch_high)
+						}
+					});
 				});
-			});
-		})(i)
+			})(i)
+		}
+	} else {
+		$("#range_preset").html('');
 	}
 	
 	// 選択範囲情報表示
@@ -4379,8 +5493,9 @@ function save_tsv(spectrum) {
 	});
 	
 	var text = '';
-	for(var i in spectrum['spectrum_data_ev']) {
-		text += spectrum['spectrum_data_ev'][i][0] + "\t" + spectrum['spectrum_data_ev'][i][1] + "\r\n";
+	var export_data = spectrum['has_energy'] === false ? spectrum['spectrum_data_ch'] : spectrum['spectrum_data_ev'];
+	for(var i in export_data) {
+		text += export_data[i][0] + "\t" + export_data[i][1] + "\r\n";
 	}
 	$("#tsv_data_text").val(text);
 	
@@ -5121,7 +6236,11 @@ function draw_graph_common_log_tick_generator(min_cps, axis) {
 function update_curosr_info(ch, ev, cps, cpsDecimals, time, find_ch_from_ev) {
 	$("#ch").text(ch);
 	$("#cps").text(cps.toFixed(cpsDecimals + 1));
-	$("#energy").text(ev.toFixed(2));
+	if(ev === undefined || ev === null || !isFinite(ev)) {
+		$("#energy").text("—");
+	} else {
+		$("#energy").text(ev.toFixed(2));
+	}
 	$("#count").text((cps * time).toFixed(0));
 	
 	// Ebs=Eγ-Eceで、Ece=2Eγ^2/(2Eγ+511)
@@ -5182,6 +6301,10 @@ function update_curosr_info_multi(x, y, cpsDecimals) {
 
 function update_curosr_nuclear(ev, cpsDecimals) {
 	
+	if(ev === undefined || ev === null || !isFinite(ev)) {
+		return;
+	}
+	
 	var DISP_COUNT = 5;
 	
 	var sorted_nuclear_data = nuclear_data.sort(function(a, b) {
@@ -5214,8 +6337,10 @@ function update_selection_info(spectrum, spectrum_data_ch, ranges, find_ev_x, cp
 	
 	$("#sel_s_ch").text(from);
 	$("#sel_e_ch").text(to);
-	$("#sel_s_ev").text(find_ev_x(from).toFixed(2));
-	$("#sel_e_ev").text(find_ev_x(to).toFixed(2));
+	var start_ev = find_ev_x(from);
+	var end_ev = find_ev_x(to);
+	$("#sel_s_ev").text((start_ev === undefined || start_ev === null) ? "—" : start_ev.toFixed(2));
+	$("#sel_e_ev").text((end_ev === undefined || end_ev === null) ? "—" : end_ev.toFixed(2));
 	
 	var gross = 0;
 	for(var i = from; i <= to; i++) {
@@ -5408,8 +6533,10 @@ function update_selection_info_without_bg(spectrum, spectrum_data_ch, ranges, fi
 	
 	$("#sel_s_ch").text(from);
 	$("#sel_e_ch").text(to);
-	$("#sel_s_ev").text(find_ev_x(from).toFixed(2));
-	$("#sel_e_ev").text(find_ev_x(to).toFixed(2));
+	var start_ev = find_ev_x(from);
+	var end_ev = find_ev_x(to);
+	$("#sel_s_ev").text((start_ev === undefined || start_ev === null) ? "—" : start_ev.toFixed(2));
+	$("#sel_e_ev").text((end_ev === undefined || end_ev === null) ? "—" : end_ev.toFixed(2));
 	
 	var gross = 0;
 	for(var i = from; i <= to; i++) {
@@ -5546,11 +6673,20 @@ function print_sp_info(spectrum) {
 	
 	var html = '';
 	
-	// URL情報
-	document.location.hash = "#__" + encodeURIComponent(spectrum['file']) + "//" + spectrum['no'];
-	var url = document.location.protocol + "//" + document.location.host + document.location.pathname + document.location.hash;
-	html += '<p>URL: ';
-	html += '<a href="../Am-241/' + url + '" target="_blank">' + url + '</a></p>';
+	// URL情報（本地导入不写入 hash，避免刷新时误从网站库加载）
+	if(spectrum['local_import']) {
+		if(window.history && window.history.replaceState) {
+			window.history.replaceState(null, "", document.location.pathname + document.location.search);
+		} else {
+			document.location.hash = "";
+		}
+		html += '<p>来源：本地导入（仅当前浏览器，刷新后清除）</p>';
+	} else {
+		document.location.hash = "#__" + encodeURIComponent(spectrum['file']) + "//" + spectrum['no'];
+		var url = document.location.protocol + "//" + document.location.host + document.location.pathname + document.location.hash;
+		html += '<p>URL: ';
+		html += '<a href="../Am-241/' + url + '" target="_blank">' + url + '</a></p>';
+	}
 	
 	html += '<table class="csv">';
 	for(var i in sp_info) {

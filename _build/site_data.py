@@ -595,7 +595,7 @@ WES_VIEWERS = {
     "tool/WESViewer/isotope/Th-232/Th-232_pendant/index.html": ("中国产“负离子”吊坠", "Th-232", ""),
     "tool/WESViewer/isotope/Th-232/Th-232_WT_electrode/index.html": ("钨钍电极", "Th-232", ""),
     "tool/WESViewer/rain/index.html": ("雨天样本光谱", "降雨沉降", ""),
-    "tool/WESViewer/wesviewer/index.html": ("各类核素的光谱图", "多核素", ""),
+    "tool/WESViewer/list/index.html": ("各类核素的光谱图", "多核素", ""),
 }
 
 # Navigation and footer link groups

@@ -330,7 +330,7 @@ def render_article(rel, meta, prev_link=None, next_link=None):
         "level": "" if meta.get("kind") == "gallery" else level_badge(meta.get("level")),
         "tags": T.tag_list(meta.get("tags", [])),
         "toc_inline": inline_toc, "notice": notice, "content": data["html"],
-        "tool_cta": ('<div class="tool-cta"><a class="button button-solid" href="wesviewer/index.html">打开光谱查看器</a><span>读取本地 XML 光谱数据，或浏览已有案例。</span></div>')
+        "tool_cta": ('<div class="tool-cta"><a class="button button-solid" href="list/index.html">打开光谱查看器</a><span>读取本地 XML/CSV/TXT 光谱数据，或浏览已有案例。</span></div>')
                     if rel == "tool/WESViewer/index.html" else "",
         "pager": pager, "aside": aside,
     }

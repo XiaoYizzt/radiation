@@ -2217,7 +2217,7 @@
    "textlen": 537,
    "title": "浙江省杭州市下雨天采集的样本光谱"
   },
-  "tool/WESViewer/wesviewer/index.html": {
+  "tool/WESViewer/list/index.html": {
    "sha": "82d96c775af4721a2a6c70b6e1ee2c9deafc56303e1d7b5395eac581d1c18ae8",
    "size": 8904,
    "links": [
@@ -2340,7 +2340,7 @@
   [
    "index.html",
    "tool/WESViewer/wesviewer/index.html#__Lu-176.xml//0",
-   "tool/WESViewer/wesviewer/index.html",
+   "tool/WESViewer/list/index.html",
    "__Lu-176.xml//0"
   ],
   [

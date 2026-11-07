@@ -13,7 +13,7 @@
 
 直接双击 `index.html` 即可阅读绝大部分页面。搜索、目录、模拟工具也能在 `file://` 下运行。
 
-WESViewer 光谱查看器通过浏览器读取本地 XML 光谱数据。浏览器会阻止 `file://` 页面读取本地文件，因此光谱图需要在 HTTP 环境下加载：
+WESViewer 光谱查看器通过浏览器读取本地 XML/CSV/TXT 光谱数据。浏览器会阻止 `file://` 页面读取本地文件，因此光谱图需要在 HTTP 环境下加载：
 
 ```powershell
 # 在站点根目录运行，然后访问 http://127.0.0.1:8000/
@@ -71,11 +71,15 @@ python _build/verify.py
 
 重建会覆盖现有页面；日常小改动建议直接编辑生成后的 HTML。
 
-WESViewer 的 CSV/TXT 解析器位于 `tool/WESViewer/wesviewer/spviewer.js`。离线回归测试（需要 Node.js，仅开发用）可以运行：
+WESViewer 的 CSV/TXT 解析器位于 `tool/WESViewer/list/spviewer.js`。离线回归测试（需要 Node.js，仅开发用）可以运行：
 
 ```powershell
 node _build/tests/test_parsers.js
 ```
+
+每个单独工作区（`isotope/...`、`rain/`）都有自己的 `spviewer.js`；当前已全部同步为同一解析器版本。以后修改解析器时，需要同时更新这些副本（Co-60 的下载/图片路径保留 `../Am-241/` 前缀），并确保各 `spviewer_list.txt` 中的文件名与实际文件完全一致，包括大小写和连字符。
+
+WESViewer 还支持访问者从自己的电脑导入 CSV/XML/TXT：页面使用浏览器 File API + FileReader 在当前浏览器内读取，随后复用现有 `parse_file()` 和绘图流程。导入文件不会写入 `spviewer_list.txt`，不会上传服务器，也不写入 localStorage/sessionStorage；刷新或关闭页面即清除。单个导入文件上限 10 MB，默认按 UTF-8 读取。代码位于各工作区的 `spviewer.js`，导入区样式位于 `css/viewer.css`。
 
 注意：`css/viewer.css` 中移动端的 `[style*="float"]:not(.tickLabel)` 选择器用于避开 Flot 的刻度测量元素；不要去掉 `:not(.tickLabel)`，否则手机会因轴标签换行导致图表绘图区高度变成负数。
 

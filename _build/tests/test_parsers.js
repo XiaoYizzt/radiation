@@ -3,7 +3,7 @@
 const fs = require("fs");
 const vm = require("vm");
 
-const js = fs.readFileSync("tool/WESViewer/wesviewer/spviewer.js", "utf8");
+const js = fs.readFileSync("tool/WESViewer/list/spviewer.js", "utf8");
 const start = js.indexOf("function spviewer_strip_bom");
 const end = js.indexOf("function find_ev2ch_in_spectrum");
 if (start < 0 || end < 0) throw new Error("parser block not found");
@@ -45,7 +45,7 @@ const files = [
   ["Am241.txt", "TXT", 4096, 1506411],
 ];
 for (const [file, kind, expected, expectedTotal] of files) {
-  const raw = fs.readFileSync("tool/WESViewer/wesviewer/" + file);
+  const raw = fs.readFileSync("tool/WESViewer/list/" + file);
   const text = raw.toString("utf8");
   const fn = kind === "CSV" ? context.draw_graph_csv_spectrum : context.draw_graph_txt_spectrum;
   const spectrum = fn(file, "test", text);

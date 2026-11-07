@@ -2,14 +2,14 @@
 
 > 最后更新：2026-11-03（Asia/Singapore）
 > 项目根目录：`C:\Users\XkXia\Desktop\radiation`
-> 当前状态：核心重构已完成，可部署；WESViewer 已新增 CSV/TXT 光谱支持并通过示例测试，手机端图表空白问题已修复；无阻塞性开发任务。
+> 当前状态：核心重构已完成，可部署；WESViewer 已支持 CSV/TXT 并同步到全部工作区，新增完全本地的用户文件导入，手机端图表空白问题已修复；无阻塞性开发任务。
 > 本文件是交接记录；详细操作说明见 [README.md](README.md)。
 
 ---
 
 ## 0. 一句话状态
 
-原有纯 HTML 辐射知识网站已完成整站前端重构：81 个 HTML 页面（75 个原有页面 + 6 个新增页面）和 1 个 PDF 已统一为现代静态知识门户，保留原 URL、文章正文、图片、链接、锚点、公式/表格与交互工具；自动完整性校验 13 项全部通过。WESViewer 已新增通用 CSV/TXT 光谱解析并通过两个示例、旧 XML 和计数-only 场景测试。下一步主要是人工验收、按需修复旧站遗留失效链接，以及真实设备测试。
+原有纯 HTML 辐射知识网站已完成整站前端重构：81 个 HTML 页面（75 个原有页面 + 6 个新增页面）和 1 个 PDF 已统一为现代静态知识门户，保留原 URL、文章正文、图片、链接、锚点、公式/表格与交互工具；自动完整性校验 13 项全部通过。WESViewer 已新增通用 CSV/TXT 光谱解析并同步到全部工作区，访问者可直接在浏览器内导入自己的 CSV/XML/TXT（不上传、不持久化）；示例文件、旧 XML、计数-only 和手机端场景均已测试。下一步主要是人工验收、按需修复旧站遗留失效链接，以及真实设备测试。
 
 ---
 
@@ -28,6 +28,7 @@
 | 字体/图标库 | 无外部字体、无图标库；使用系统字体 + 内联 SVG |
 | 搜索 | 浏览器本地静态索引；按需加载 [js/search-index.js](js/search-index.js) |
 | WESViewer 格式 | 原有 XML/SPE 等 + 新增 CSV / TXT 能谱（2026-11-03） |
+| WESViewer 本地导入 | File API + FileReader，完全浏览器内；不上传、不持久化 |
 | 图片引用 | 248 个原始图片引用 |
 | 外部 URL | 48 个（改版前集合全部保留） |
 | 更新日志 | 51 条（原首页 42 条 + 历史页 7 条 + 补充的背景色记录 2 条） |
@@ -122,7 +123,7 @@ node _build/tests/test_parsers.js
 
 - 75 个原有 HTML 页面全部重建；没有移动文件、没有改文件名。
 - 6 个新增页面：[reviews.html](reviews.html)、[tools.html](tools.html)、[about.html](about.html)、[search.html](search.html)、[sitemap.html](sitemap.html)、[changelog.html](changelog.html)。
-- 9 个 WESViewer 工作区页面保留原 `spviewer.js`、jQuery/Flot、元素 ID、XML 路径和光谱数据，只替换外层站点壳与样式。
+- 9 个 WESViewer 工作区页面保留原 jQuery/Flot、元素 ID、XML 路径和光谱数据，只替换外层站点壳与样式；2026-11-03 为支持 CSV/TXT 已统一升级各工作区的 `spviewer.js`。
 - 旧版 `info/info010[X].html`、`Ju.html`、`Untitled-1.html`、重复的 `cs137.html` / `xray.html` / `other/info004.html`、过时的文章索引页均保留，并加存档提示。
 
 ### 搜索
@@ -150,12 +151,12 @@ node _build/tests/test_parsers.js
 
 **两个示例文件的实际结构**
 
-- `tool/WESViewer/wesviewer/Ra-226.csv`
+- `tool/WESViewer/list/Ra-226.csv`
   - 65,151 字节；UTF-8 BOM；CRLF；2,501 行（1 行表头 + 2,500 个通道）。
   - 表头：`Channel,Energy,Counts (TotalTime=49662.2254374s)`。
   - 通道 0–2499；能量 -5.198966… 至 4358.694082… keV，逐通道给出。
   - 计数值总和 13,061,843；时间从表头 `TotalTime` 解析为 49,662.2254374 秒。
-- `tool/WESViewer/wesviewer/Am241.txt`
+- `tool/WESViewer/list/Am241.txt`
   - 80,665 字节；UTF-8 无 BOM；CRLF；4,109 行，其中 4,096 行数据。
   - Theremino MCA 文本格式：虚线分隔、`Started at`、`Total time: 39573 sec.`、`Total pulses: 1506411`、`Sampling`、`Minimum energy`、`Bin multiplier` 等元数据。
   - 数据正则为 `Energy(KeV), Counts`，能量 0.00–181.29 keV；计数总和 1,506,411，与 `Total pulses` 一致。
@@ -211,7 +212,7 @@ node _build/tests/test_parsers.js
 
 **本次修改文件**
 
-- [tool/WESViewer/wesviewer/spviewer.js](tool/WESViewer/wesviewer/spviewer.js)
+- [tool/WESViewer/list/spviewer.js](tool/WESViewer/list/spviewer.js)
 - [css/viewer.css](css/viewer.css)（无能量提示样式）
 - [PROGRESS.md](PROGRESS.md)、[README.md](README.md)
 - 开发测试/截图：`_build/tests/`、`_build/screenshots/`、`_build/spviewer.js.before-csv-txt`（不参与部署）。
@@ -262,6 +263,125 @@ node _build/tests/test_parsers.js
 - 移动端图表仍需至少约 300px 宽度；更窄的 280px 以下未做专项验收。
 - 只在 Chrome Headless 的 390px 视口验证，未在真实 iOS Safari / Android Chrome 上验收。
 - 若线上仍显示旧版，需要部署新的 `css/viewer.css` 并强制刷新浏览器缓存。
+
+### 单独 WESViewer 工作区 CSV/TXT 同步（2026-11-03）
+
+**问题**：
+
+- 每个单独工作区（`isotope/Am-241/Am-241`、`isotope/Cs-137/Cs-137`、`rain/` 等）都有自己的一份 `spviewer.js`；此前只有汇总页 `list/` 被升级，单独页面仍是旧解析器，因此列表里有 TXT/CSV 也会报 `Unknown format`。
+- Am-241 工作区的 `spviewer_list.txt` 把文件写成了 `Am-241.txt`，实际文件是 `Am241.txt`；`draw_file()` 会在 AJAX 之前检查列表，发现名称不匹配就直接弹出 `Can't load Am-241.txt.`。
+
+**处理**：
+
+- 以 `tool/WESViewer/list/spviewer.js` 为模板，把 CSV/TXT 解析、无能量刻度和错误提示同步到全部 9 个工作区：
+  `Am-241`、`Co-60`、`Cs-137`、`Lu-176`、`Ra-226`、`Th-232` pendant、`Th-232` WT、`rain`、`list`。
+- 同步时保留各页面原有路径差异：普通页面使用直接相对路径；`Co-60` 保留原有的 `../Am-241/` 下载/图片/URL 前缀。
+- 修正 `list/spviewer.js` 中残留的 `../wesviewer/` 前缀（该目录已不在，下载链接会 404），改为直接文件路径。
+- 修正 Am-241 列表项：`Am-241.txt` → `Am241.txt`。
+- 手机端为横轴刻度增加 `ticks` 限制（通道轴 5 个、能量轴 4 个），避免 4096 通道时标签挤在一起。
+
+**验证**：
+
+- Am-241 工作区 `#__Am241.txt//0`：成功加载 4096 通道、总计数 1,506,411、时间 39,573 秒，曲线与双轴正常；手机 390px 同样正常。
+- 临时在 Am-241 工作区放入 `Ra-226.csv` 并加入列表：成功显示 2,500 通道、总计数 13,061,843；测试后已删除临时文件和列表项。
+- Co-60 原有 XML 正常加载。
+- `list/` 汇总页的 `Ra-226.csv` 与 `Am241.txt` 仍正常。
+- 所有工作区列表逐项检查，文件名均存在；所有 `spviewer.js` 通过 Node 语法检查。
+- 截图：[wesviewer-am241-perpage-txt.png](_build/screenshots/wesviewer-am241-perpage-txt.png)、[wesviewer-am241-perpage-txt-mobile.png](_build/screenshots/wesviewer-am241-perpage-txt-mobile.png)。
+
+**修改文件**：
+
+- 8 个单独工作区 + `list/` 的 `spviewer.js`（共 9 份）
+- `tool/WESViewer/isotope/Am-241/Am-241/spviewer_list.txt`
+- [README.md](README.md)、[PROGRESS.md](PROGRESS.md)
+
+**使用边界**：
+
+- 网站能谱库仍由各自目录的 `spviewer_list.txt` 管理；若要增加网站预置文件，必须把文件放进对应目录并保证列表文件名完全一致。
+- 访问者自己的文件不需要写列表，直接使用“我的能谱”导入；目前各工作区只预置了 Am-241 TXT，CSV 可由访问者自行导入。
+- 以后修改解析器时，必须同步全部 9 份 `spviewer.js`，否则又会出现“汇总页能开、单独页面打不开”。
+
+### 用户本地导入自定义能谱（2026-11-03）
+
+**新增界面**：
+
+- 每个 WESViewer 工作区（`list/` 与 8 个单独页面）在“光谱选择”下增加“我的能谱”区域。
+- 支持“导入能谱文件”按钮、文件选择窗口和拖放；支持一次选择多个 `.csv` / `.xml` / `.txt`。
+- 列表显示原始文件名、格式和大小；点击条目使用原有 WESViewer 单光谱视图；每条有“删除”按钮。
+- 下方保留“网站能谱库”，原有 `spviewer_list.txt` 的展示和加载方式未改。
+
+**读取与解析流程**：
+
+1. `input[type=file]` / 拖放取得 `File` 对象；
+2. 先检查扩展名和 10 MB 大小上限；
+3. 用浏览器原生 `FileReader.readAsText(file, "UTF-8")` 读取，文件内容只进入当前页面内存；
+4. 去掉 UTF-8 BOM，调用**现有** `parse_file(file.name, "本地导入", text)`；
+5. 解析结果仍是原有 `spectrum_data_ch` / `spectrum_data_ev` / `time` / `min_cps` / `sp_info` 结构；
+6. 调用原有 `draw_graph()`，因此曲线、坐标轴、能量刻度、峰位/核素分析、缩放/选区、TSV 导出等现有功能继续适用。
+
+未新增独立绘图模块，也未复制一套新的解析器。
+
+**隐私与隔离**：
+
+- 没有新增 `fetch` / `XMLHttpRequest` / WebSocket 上传逻辑；文件内容不会发送到服务器或第三方。
+- 不使用云端解析、数据库、登录、localStorage、sessionStorage 或 IndexedDB。
+- 用户文件只存在于当前页面 JS 数组 `user_spectra` 中；刷新/关闭页面即清除。
+- 不写 `spviewer_list.txt`，不复制到站点静态目录，不修改服务器文件。
+- 本地导入的 `spectrum` 标记为 `local_import`；`print_sp_info()` 遇到本地文件时**不写 URL hash**，避免刷新时把本地文件名误当成网站库文件加载。
+- 网站能谱库和“我的能谱”使用独立列表；删除本地文件只清空当前运行环境中的数据。
+
+**失败与多文件处理**：
+
+- 扩展名不支持、空文件、超过 10 MB、读取失败、内容无法识别都会以状态消息显示，不抛出未捕获异常。
+- 多文件按顺序处理，成功/失败/重复分别计数；单个失败不会中断其他文件。
+- 重复文件使用 `name + size + lastModified` 签名跳过。
+- 删除当前正在显示的文件会清空当前图表，但不会影响网站能谱库。
+
+**点击入口修复**：
+
+- 首版把 `<input type="file">` 设为 `display:none`；部分浏览器/无头 Chrome 下按钮的 `trigger('click')` 不会真正打开文件选择器，而拖放仍可用。
+- 现改为视觉隐藏（绝对定位 + 1px + clip），按钮使用原生 `input.click()`；按钮和 input 的 click 都 `stopPropagation()`，避免事件冒泡到拖放区后再次触发 input。
+- 用 CDP `Page.fileChooserOpened` 实测：点击按钮会打开 `selectMultiple` 文件选择器；选择 `Am241.txt` 后成功导入并绘图。桌面 1440 和手机 390 均通过。
+
+**测试结果**（Chrome Headless，本地 HTTP，禁用缓存）：
+
+| 检查 | 结果 |
+|---|---|
+| 网站原有 CSV `Ra-226.csv` | PASS：2500 通道、13,061,843 计数 |
+| 网站原有 XML `Am-241.xml` | PASS |
+| 网站原有 TXT `Am241.txt` | PASS：4096 通道、1,506,411 计数 |
+| 导入 CSV/XML/TXT 三个文件 | PASS：列表 3 项，全部可切换显示 |
+| 导入 XML 的“数据来源”标记 | PASS |
+| 一次导入多个文件 | PASS |
+| 重复导入同一文件 | PASS：不增加列表，提示跳过 |
+| 删除当前用户文件 | PASS：列表减少、图表清空 |
+| 刷新页面 | PASS：用户列表归零，网站库不受影响 |
+| 空文件 | PASS：明确提示“文件为空” |
+| 损坏/非能谱 CSV | PASS：明确提示无法识别 |
+| 不支持的扩展名 | PASS：明确提示仅支持 csv/xml/txt |
+| 超过 10 MB | PASS：明确提示大小限制 |
+| 拖放导入 | PASS |
+| 点击“导入能谱文件”按钮 | PASS：桌面/手机均打开文件选择器，选择后成功导入 |
+| 手机 390px 选择/导入 | PASS：导入区可见，图表正常 |
+| 网站库在导入后继续加载 | PASS |
+| 网络请求 | 只记录到站点原有的 Google Analytics `page_view`；无文件上传、无文件内容/文件名进入请求；无 XHR/fetch 导入请求 |
+| 语法检查 / 站点校验 | 9 份 `spviewer.js` 通过 `node --check`；`FAILURES: 0` |
+
+截图：[wesviewer-import-desktop.png](_build/screenshots/wesviewer-import-desktop.png)、[wesviewer-import-mobile.png](_build/screenshots/wesviewer-import-mobile.png)、[wesviewer-import-click.png](_build/screenshots/wesviewer-import-click.png)、[wesviewer-import-click-mobile.png](_build/screenshots/wesviewer-import-click-mobile.png)、[wesviewer-import-list-desktop.png](_build/screenshots/wesviewer-import-list-desktop.png)、[wesviewer-import-xml.png](_build/screenshots/wesviewer-import-xml.png)、[wesviewer-import-counts-only.png](_build/screenshots/wesviewer-import-counts-only.png)。
+
+**修改文件**：
+
+- 9 个工作区 `spviewer.js`（`list/` + 8 个单独页面）：本地导入 UI、FileReader、解析封装、错误/多文件/删除处理、local hash 隔离。
+- [css/viewer.css](css/viewer.css)：导入区、拖放区、状态、列表、手机端布局。
+- [README.md](README.md)、[PROGRESS.md](PROGRESS.md)。
+
+**边界与限制**：
+
+- 单文件上限 10 MB；没有使用 Worker，解析仍在主线程，超大文件会被拒绝而不是长时间卡死。
+- 默认按 UTF-8 读取；非 UTF-8 的旧仪器文件可能乱码，需要先转码。
+- 不做持久化；刷新/关闭即清除，符合本次隐私要求。
+- 未在真实 iOS Safari / Android Chrome 上人工验收；手机端使用 Chrome Headless 390px 测试。
+- 用户导入 XML 的多光谱选择沿用现有 XML 行为；若出现既有 `undefined` 子项，不是导入面板新增的问题。
 
 ### 清理
 
@@ -331,9 +451,10 @@ node _build/tests/test_parsers.js
 ### 修改
 
 - 全部 75 个原有 HTML 页面重写为统一模板。
-- 9 个 WESViewer 工作区页面加入站点壳与 `viewer.css`，原有业务脚本保留。
-- [tool/WESViewer/wesviewer/spviewer.js](tool/WESViewer/wesviewer/spviewer.js)：新增 CSV/TXT 解析、无能量刻度分支、错误提示和零索引映射修正。
-- [css/viewer.css](css/viewer.css)：增加无能量刻度提示样式；修正手机端浮动重置规则误命中 Flot `.tickLabel` 导致图表空白的问题。
+- 9 个 WESViewer 工作区页面加入站点壳与 `viewer.css`，业务脚本升级为统一解析器版本。
+- [tool/WESViewer/list/spviewer.js](tool/WESViewer/list/spviewer.js) 及 8 个单独工作区 `spviewer.js`：新增 CSV/TXT 解析、无能量刻度分支、错误提示、零索引映射修正、手机端刻度数量限制，以及完全本地的用户文件导入（FileReader、拖放、多文件、删除、local hash 隔离）。
+- `tool/WESViewer/isotope/Am-241/Am-241/spviewer_list.txt`：把错误的 `Am-241.txt` 改为实际文件 `Am241.txt`。
+- [css/viewer.css](css/viewer.css)：增加无能量刻度提示样式、导入/拖放/列表/手机端样式；修正手机端浮动重置规则误命中 Flot `.tickLabel` 导致图表空白的问题。
 - [README.md](README.md)、[PROGRESS.md](PROGRESS.md) 文档更新。
 
 ### 删除
@@ -345,7 +466,7 @@ node _build/tests/test_parsers.js
 
 - 全部 `img/` 图片、MP4、PDF；
 - 原有 `css/t1.css`、`css/TX.css`、`css/img.css`、`css/WESViewerIMG.css`、`tool/style.css`、`tool/WESViewer/.../spviewer.css` 等旧样式文件；
-- 原有 jQuery/Flot、XML/TSV 数据文件、`nuclear_data.txt`、`range_preset.txt`、`spviewer_list.txt` 的内容与顺序（用户新增的两个 CSV/TXT 条目原样保留）。
+- 原有 jQuery/Flot、XML/TSV 数据文件、`nuclear_data.txt`、`range_preset.txt`；各工作区 `spviewer_list.txt` 除 Am-241 的文件名修正外均保留原条目。
 
 ---
 
@@ -417,13 +538,14 @@ WESViewer 解析器另有离线回归测试：`node _build/tests/test_parsers.js
 - 抖动模拟：点击提交后生成 Canvas 与误差表。
 - β 射程：结果表 19 行正常。
 - 灵敏度模拟：Canvas 正常。
-- WESViewer：原有 Am-241 XML 正常；Ra-226 CSV 与 Am241 TXT 正常绘图；计数-only CSV 的通道轴/无能量提示正常；390px 手机视口下 Cs-137、Am-241、CSV/TXT 图表修复后均能看到曲线和双轴；500px 无横向溢出。
+- WESViewer：原有 Am-241 XML 正常；Ra-226 CSV 与 Am241 TXT 正常绘图；计数-only CSV 的通道轴/无能量提示正常；390px 手机视口下 Cs-137、Am-241、CSV/TXT 图表修复后均能看到曲线和双轴；500px 无横向溢出；Am-241 单独工作区 TXT 和临时 CSV 均实测可打开。
+- WESViewer 本地导入：CSV/XML/TXT 三个文件一次导入、分别切换、拖放、重复跳过、删除、刷新清除、空文件/损坏文件/不支持扩展名/超 10 MB、计数-only、手机 390px 全部实测通过；导入期间无文件上传请求，只有站点原有 Google Analytics 的 page_view。
 
 ---
 
 ## 8. 尚未测试 / 存在限制
 
-1. **全部 9 个 WESViewer 工作区未逐一实测**：已实测 `wesviewer/index.html` 中的 Am-241 XML、Ra-226 CSV、Am241 TXT 和计数-only CSV；`isotope/`、`rain/` 等页面共用同一 `spviewer.js`，但未逐个加载所有光谱。
+1. **全部 9 个 WESViewer 工作区的所有光谱未逐一实测**：已实测 `list/` 的 Am-241/Ra-226 CSV/Am241 TXT、Am-241 工作区的 TXT、Co-60 的 XML，以及临时放入 Am-241 的 CSV；各工作区已同步同一解析器版本，但没有逐个加载每个 XML。
 2. **CSV/TXT 格式覆盖有边界**：CSV 支持 1–3 列常见布局并可从表头/数值推断；无表头且列角色不明确时建议补表头。TXT 当前覆盖两列 `Energy, Counts`（Theremino/通用文本表），3 列以上 TXT 未定义语义。无能量列的文件只支持单光谱通道显示，不能比较。
 3. **外部 URL 未做实时可用性验证**：48 个外链、Bilibili/YouTube 嵌入、Wikimedia 图片、Google Analytics、51.LA 未逐一联网验证；只确认 URL 被保留。
 4. **真实设备未测试**：使用 Chrome Headless 的 320/390/500/768/1440 视口，未在实体手机、Safari、Firefox 上人工验收。
@@ -482,8 +604,9 @@ WESViewer 解析器另有离线回归测试：`node _build/tests/test_parsers.js
 5. **可选：压缩图片/视频**：若部署空间或带宽有限，可生成 WebP/压缩 MP4；这会改变资源文件，需逐页确认图片引用。
 6. **可选：无障碍审计**：用 Lighthouse/axe 检查对比度、表单标签、键盘顺序。
 7. **后续新增文章**：复制同类文章页模板，更新正文、栏目索引和 `js/search-index.js`；或修改 `_build/site_data.py` 后运行 `build.py`。
-8. **WESViewer 格式扩展（可选）**：如需支持更多仪器格式，优先在 `spviewer.js` 新增独立解析器并追加到 `instruments` 数组末尾；保持现有解析器顺序和 `spectrum_data_ch/ev` 结构。当前 CSV/TXT 边界见第 3.1 节。
-9. **版本管理**：当前不是 git 仓库；如需要，建议在根目录初始化 git，并忽略 `_build/` 或至少不提交其中的临时产物。
+8. **WESViewer 格式扩展（可选）**：如需支持更多仪器格式，优先在 `spviewer.js` 新增独立解析器并追加到 `instruments` 数组末尾；保持现有解析器顺序和 `spectrum_data_ch/ev` 结构。修改后必须同步全部 9 份工作区副本（`list/` 与 8 个单独页面），并检查各 `spviewer_list.txt` 文件名。当前 CSV/TXT 边界见第 3.1 节。
+9. **本地导入增强（可选）**：如确实需要支持 10 MB 以上或非 UTF-8 文件，可另设 Worker/编码探测方案；任何本地持久化都必须单独设计并明确告知用户，不能改变当前“刷新即清除、不上传”的默认行为。
+10. **版本管理**：当前不是 git 仓库；如需要，建议在根目录初始化 git，并忽略 `_build/` 或至少不提交其中的临时产物。
 
 ---
 
@@ -541,6 +664,6 @@ python -m http.server 8000
 
 - 网站已经是可部署的正式版本，**不是** `_build/orig`。
 - 内容完整性、链接目标、锚点、图片引用和页面结构自动校验均通过。
-- WESViewer 已支持 CSV/TXT 并完成示例文件、旧 XML 和计数-only 场景的实际浏览器测试；手机端 390px 图表空白问题已修复并复测。
+- WESViewer 已支持 CSV/TXT 并同步到全部单独工作区；示例文件、旧 XML、计数-only、Am-241 单独工作区和完全本地的用户文件导入均已实际测试；手机端 390px 图表空白问题已修复并复测。
 - 没有阻塞性 Bug。
 - 需要你决策的是：旧站遗留失效链接是否修复、是否扩大搜索范围、是否压缩媒体资源、是否继续扩展其他仪器格式，以及真实设备验收。
