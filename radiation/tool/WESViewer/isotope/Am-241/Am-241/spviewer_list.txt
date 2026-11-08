@@ -1,2 +1,0 @@
-Am-241.xml,Am-241_Ion smoke alarm
-Am241.txt,Am-241 0-60keV SIPIN
