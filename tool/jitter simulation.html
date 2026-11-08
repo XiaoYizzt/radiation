@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟 · 辐射备忘录</title>
+<meta name="description" content="模拟恒定剂量下测量值的统计抖动，以及误差阈值如何影响读数。">
+<meta name="theme-color" content="#f5f4ef">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="辐射及辐射测量仪器备忘录">
+<meta property="og:title" content="辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟 · 辐射备忘录">
+<meta property="og:description" content="模拟恒定剂量下测量值的统计抖动，以及误差阈值如何影响读数。">
+<link rel="icon" href="../img/icon.png" sizes="512x512">
+<link rel="stylesheet" href="../css/site.css">
+<!-- Existing site analytics, kept from the original pages. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGG4B16Z2G"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YGG4B16Z2G');
+</script>
+
+</head>
+<body class="page-tool">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header" data-header>
+<div class="shell header-inner">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<nav class="primary-nav" aria-label="主导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html" aria-current="page">工具</a><a href="../about.html">关于</a>
+</nav>
+<div class="header-tools">
+<a class="search-link" href="../search.html" data-search-open aria-label="搜索本站">
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg><span class="search-link-text">搜索</span><kbd class="key-hint">/</kbd>
+</a>
+<details class="nav-drawer" data-nav-drawer>
+<summary class="nav-toggle" aria-label="打开菜单"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>菜单</span></summary>
+<div class="nav-panel">
+<nav aria-label="移动端导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html" aria-current="page">工具</a><a href="../about.html">关于</a>
+</nav>
+<a class="nav-panel-search" href="../search.html" data-search-open><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg> 搜索文章与仪器</a>
+<div class="nav-panel-meta">
+<a href="../sitemap.html">全部页面</a>
+<a href="../about.html">关于本站</a>
+</div>
+</div>
+</details>
+</div>
+</div>
+</header>
+<main id="main" class="page page-article page-tool">
+<div class="shell">
+<nav class="breadcrumb" aria-label="面包屑"><a href="../index.html">首页</a><span class="crumb-sep" aria-hidden="true">/</span><a href="../tools.html">工具与数据</a><span class="crumb-sep" aria-hidden="true">/</span><span aria-current="page">辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟</span></nav>
+<div class="article-grid article-grid--wide">
+<article class="article">
+<header class="article-head">
+<p class="kicker"><a href="../tools.html">工具与数据</a><span class="kicker-sep">/</span><span>模拟与计算</span></p>
+<h1>辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟</h1>
+
+<div class="article-meta">
+<span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> 阅读约 1 分钟</span>
+
+<span class="badge badge-mid">进阶</span>
+</div>
+<ul class="tag-list"><li>统计抖动</li><li>误差阈值</li><li>灵敏度</li></ul>
+</header>
+<details class="toc-inline">
+<summary>本页目录 <span>4 节</span></summary>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">模拟辐射测量装置（盖革计数器）存在一定误差的测量值</a></li><li class="toc-item toc-l2"><a href="#sec-2">结果图</a></li><li class="toc-item toc-l2"><a href="#sec-3">测量误差</a></li><li class="toc-item toc-l2"><a href="#sec-4">其他</a></li></ol>
+</details>
+
+
+<div class="prose" data-prose>
+<p>辐射测量仪器（盖革计数器）存在误差。<br>
+由于计算了随机飞来的辐射，因此显示的数值也会波动。<br>
+	这有多大的随机性？本页模拟了这个程序。</p>
+
+	<p>大多数型号不显示误差，但Polimaster系列、GammaRAE/NeutronRAE和其他型号会在屏幕上显示。<br>
+	Polimaster PM1610说明书上说，误差显示在15%或以下后，应读取数值。<br>
+	如果您想要更精确的数字，您可能希望读取 10% 或 5%。
+	但是，例如，如果您以 10% 读取，则实际数字似乎在显示值的 ±10% 以内。</p>
+	<p>在这个页面上，你可以设置辐射测量仪器的灵敏度和空气中的剂量，并迭代计算和模拟当仪器显示的误差达到一定值时，如15%、10%等，如何显示剂量。</p>
+	<p>由于每次进行模拟时结果都会发生变化，因此您可以通过多次进行模拟来了解数值如何因误差而波动。</p>
+	<p>相关工具：<a href="http://database.xkxiaoyi.ink/" class="external" rel="noopener noreferrer" target="_blank">数据库</a><br>
+	相关工具：<a href="error%20simulation.html">辐射测量仪器（盖革计数器）的误差模拟。</a><br>
+	相关工具：<a href="beta%20ray%20range%20calculation.html">β射线射程计算工具</a></p>
+<br>
+	<h2 id="sec-1">模拟辐射测量装置（盖革计数器）存在一定误差的测量值</h2>
+	<form action="#" onsubmit="graph_update(); return false;">
+	<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2" data-wide="true"><table class="csv">
+		<tr>
+			<th>
+				辐射剂量设定
+		  </th>
+			<td>
+				<input type="text" id="sv_h" value="0.1" size="7">μSv/h<br>
+				*如果设置较大的值，模拟将花费时间。
+		  </td>
+		</tr>
+		<tr>
+			<th>
+				灵敏度
+		  </th>
+			<td>
+				<input type="text" id="cpm" value="100" size="7">cpm/μSv/h<br>
+				*如果设置较大的值，模拟将花费时间。
+		  </td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="　开始模拟和更新图　">
+			</td>
+		</tr>
+	</table></div>
+	
+	</form>
+	
+	<span>* 在IE8或更早版本中，运行缓慢，会提示“Are you sure you want to stop executing the script?” 在这种情况下，请多次按“否”。如果您更新到 IE9 或 使用Google Chrome或 Firefox，模拟结果将立即出现。</span>
+	
+
+
+<p id="result_url">
+	此次模拟的URL：<a class="update_link" id="link_url" href="#"></a><br>
+</p>
+
+<h2 id="sec-2">结果图</h2>
+
+<div id="placeholder"></div>
+<div id="legend"></div>
+<form>
+	表示ON/OFF：
+	<span id="series_checkbox"></span>
+	</form>
+
+
+<h2 id="sec-3">测量误差</h2>
+
+<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="0"><table class="csv" id="error_table">
+	</table></div>
+
+
+<h2 id="sec-4">其他</h2>
+<img src="../img/Normal_distribution.png" alt="丢失或加载失败的图像：置信区间" class="content-img" decoding="async">
+
+
+
+</div>
+<footer class="article-foot">
+<nav class="pager" aria-label="上下篇"><a class="pager-link pager-prev" href="../tool/error simulation.html">
+<span>上一篇</span><strong>辐射测量仪器（盖革计数器）的误差模拟</strong>
+</a><a class="pager-link pager-next" href="../tool/beta ray range calculation.html">
+<span>下一篇</span><strong>β 射线射程计算工具</strong>
+</a></nav>
+<div class="article-back">
+<a href="../tools.html">← 返回工具与数据</a>
+<a href="#main">回到顶部 ↑</a>
+</div>
+</footer>
+</article>
+<aside class="article-side">
+<nav class="toc" aria-label="本页目录" data-toc>
+<p class="side-title">本页目录</p>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">模拟辐射测量装置（盖革计数器）存在一定误差的测量值</a></li><li class="toc-item toc-l2"><a href="#sec-2">结果图</a></li><li class="toc-item toc-l2"><a href="#sec-3">测量误差</a></li><li class="toc-item toc-l2"><a href="#sec-4">其他</a></li></ol>
+</nav>
+<div class="side-block">
+<p class="side-title">同主题阅读</p>
+<ul class="side-links"><li><a href="../tool/error simulation.html"><span>辐射测量仪器（盖革计数器）的误差模拟</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="../tool/beta ray range calculation.html"><span>β 射线射程计算工具</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="../tool/info004.html"><span>辐射测量仪器的灵敏度</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li></ul>
+</div>
+<a class="side-back" href="../tools.html">← 返回工具与数据</a>
+</aside>
+</div>
+</div>
+</main><footer class="site-footer">
+<div class="shell">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<p>一个关于电离辐射、辐射探测与测量仪器的中文知识库。包含基础概念、剂量与单位、仪器类型、设备评测、能谱查看工具与参考文献。</p>
+<p class="footer-note">静态站点 · 无账号 · 无后端依赖</p>
+</div>
+<div class="footer-col"><h2>知识板块</h2><ul><li><a href="../base.html">基础知识</a></li><li><a href="../info/index.html">测量与仪器</a></li><li><a href="../reviews.html">仪器评测</a></li><li><a href="../article.html">文章与笔记</a></li></ul></div><div class="footer-col"><h2>索引与工具</h2><ul><li><a href="../tools.html">工具与数据</a></li><li><a href="../sitemap.html">全部页面</a></li><li><a href="../changelog.html">更新日志</a></li><li><a href="../search.html">搜索</a></li></ul></div><div class="footer-col"><h2>关于</h2><ul><li><a href="../about.html">关于本站</a></li><li><a href="../about.html#contact">联系方式</a></li><li><a href="http://blog.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">外部博客</a></li><li><a href="http://database.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">数据库</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>Retpaĝo @ 2022-2024.XiaoYi No One Knows the Future<br><span class="muted">Powered by XiaoYi &amp; Mikage</span></p>
+<p class="footer-meta">内容更新至 2024 年 6 月 · <a href="../sitemap.html">站点地图</a> · <a href="../changelog.html">更新日志</a></p>
+</div>
+</div>
+</footer>
+<dialog class="search-dialog" data-search-dialog aria-labelledby="search-dialog-title">
+<div class="search-dialog-inner">
+<div class="search-dialog-head">
+<p class="eyebrow">站点搜索</p>
+<h2 id="search-dialog-title">查找文章、仪器与概念</h2>
+<button class="icon-button" type="button" data-search-close aria-label="关闭搜索"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<form class="search-form" action="../search.html" method="get" role="search" data-search-form>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg>
+<input type="search" name="q" id="site-search-input" placeholder="例如：能量补偿、氡、Cs-137、PM1405" autocomplete="off" data-search-input aria-label="搜索关键词">
+<button type="submit" class="button button-solid">搜索</button>
+</form>
+<div class="search-filters" data-search-filters>
+<button type="button" class="chip is-active" data-section="">全部</button>
+<button type="button" class="chip" data-section="basics">基础知识</button>
+<button type="button" class="chip" data-section="measurement">测量与仪器</button>
+<button type="button" class="chip" data-section="reviews">仪器评测</button>
+<button type="button" class="chip" data-section="articles">文章</button>
+<button type="button" class="chip" data-section="tools">工具</button>
+<button type="button" class="chip" data-section="about">关于</button>
+</div>
+<div class="search-results" data-search-results aria-live="polite"></div>
+<p class="search-footnote">搜索在浏览器本地完成，不会上传查询内容。按 <kbd>Esc</kbd> 关闭，<kbd>↑</kbd> <kbd>↓</kbd> 选择，<kbd>Enter</kbd> 打开。</p>
+</div>
+</dialog>
+<div class="lightbox" data-lightbox hidden>
+<button type="button" class="lightbox-close" data-lightbox-close aria-label="关闭图片"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<figure><img alt="" data-lightbox-img><figcaption data-lightbox-caption></figcaption></figure>
+</div>
+<script src="../js/analytics.js" defer></script>
+<script src="../js/site.js" defer></script>
+<script src="jquery-1.5.2.min.js"></script>
+<script src="flot/jquery.flot.min.js"></script>
+<script>
+var saved_data;
+var error_threshold = [15, 10, 5, 3, 1];
+var error_color     = ["#edc240", "#afd8f8", "#cb4b4b", "#4da74d", "#9440ed"];
+var max_simulation = 100;
+
+
+$(document).ready(function() {
+	$(".update_link").click(function() {
+		setTimeout(function() {
+			restore_hash();
+			graph_update();
+			scroll_result();
+		}, 1);
+	});
+	restore_hash();
+});
+function restore_hash() {
+	if(location.hash != "") {
+		if(location.hash.match(/^#([0-9\.]+)_([0-9\.]+)$/)) {
+			var sv_h = RegExp.$1;
+			var cpm = RegExp.$2;
+			$("#sv_h").val(sv_h);
+			$("#cpm").val(cpm);
+		}
+		graph_update();
+		scroll_result();
+	}
+}
+function scroll_result() {
+	var targetOffset = $('#result_url').offset().top;
+	$('html,body').animate({scrollTop: targetOffset}, 500);
+}
+
+function graph_update() {
+	var sv_h = parseFloat($("#sv_h").val());
+	var cpm = parseFloat($("#cpm").val());
+	
+	var cps = cpm / 60;
+	var radiation_cps = sv_h * cps;
+	
+	var radiation_data = [];
+	var second_table = [];
+	for(var e = 0; e < error_threshold.length; e++) {
+		radiation_data.push([]);
+		
+		var sec = 1;
+		while(radiation_cps * sec < (10/error_threshold[e])) {
+			sec *= 1.2;
+		}
+		second_table.push(sec);
+	}
+	
+	for(var s = 0; s < max_simulation; s++) {
+		
+		var total_count = 0;
+		var error_idx = 0;
+		var old_second = 0;
+		var second = second_table[error_idx];
+		while(1) {
+			var val = poisson(radiation_cps * (second - old_second));
+			old_second = second;
+			
+			total_count += val;
+			
+			var disp_sv_h = (total_count/second) / cps;
+			var error = (1 / Math.sqrt(total_count)) * 100;
+			
+			while(error_idx < error_threshold.length) {
+				if(error <= error_threshold[error_idx]) {
+					radiation_data[error_idx][s] = [second, disp_sv_h];
+					
+					error_idx++;
+				} else {
+					break;
+				}
+			}
+			if(error_idx >= error_threshold.length) {
+				break;
+			}
+			second += second_table[error_idx];
+		}
+	}
+	
+	var series_html = '';
+	for(var e = 0; e < error_threshold.length; e++) {
+		series_html += '<input type="checkbox" name="series" value="' + e + '" checked>' + error_threshold[e] + '% ';
+	}
+	$("#series_checkbox").html(series_html);
+	$("input[name='series']").bind("change", graph_draw);
+	
+	saved_data = radiation_data;
+	graph_draw();
+	
+	var error_table_html = '<tr><th>误差</th><th>平均结束时间</th><th>估计剂量读数（95% 置信区间）</th><th>剂量读数估计误差</th><th>测量值的实验标准偏差</th></tr>';
+	for(var e = 0; e < error_threshold.length; e++) {
+		
+		var total_time = 0;
+		var total_svh = 0;
+		var count = 0;
+		for(var i in radiation_data[e]) {
+			total_time += radiation_data[e][i][0];
+			total_svh += radiation_data[e][i][1];
+			count++;
+		}
+		var avg = total_svh / count;
+		var sum2 = 0;
+		for(var i in radiation_data[e]) {
+			sum2 += Math.pow(radiation_data[e][i][1] - avg, 2);
+		}
+		var stddev = Math.sqrt(sum2 / (count - 1));
+		
+		error_table_html += '<tr>';
+		error_table_html += '<td style="text-align: right;">' + error_threshold[e] + '%</td>';
+		error_table_html += '<td style="text-align: right;">' + format_time(Math.floor(total_time / count)) + '</td>';
+		error_table_html += '<td style="text-align: right;">' + avg.toFixed(3) + 'μSv/h ± ' + (stddev * 1.96).toFixed(3) + 'μSv/h</td>';
+		error_table_html += '<td style="text-align: right;">' + ((stddev * 1.96)/avg*100).toFixed(1) + '%</td>';
+		error_table_html += '<td style="text-align: right;">' + stddev.toFixed(3) + 'μSv/h</td>';
+		error_table_html += '</tr>';
+	}
+	
+	
+	var href = location.href.replace(/#.*$/, "");
+	var hash = $("#sv_h").val() + "_"
+		+ $("#cpm").val();
+	$("#link_url").attr("href", href + "#" + hash);
+	$("#link_url").text(href + "#" + hash);
+	
+	$("#error_table").html(error_table_html);
+	
+}
+
+function graph_draw() {
+	var sv_h = parseFloat($("#sv_h").val());
+	
+	var radiation_graph = [];
+	radiation_graph.push({
+		data: [[1, sv_h], [max_simulation, sv_h]],
+		label: "辐射剂量",
+		points: { show: false },
+		lines: { show: true },
+		color: '#0000ff'
+	});
+	for(var e = error_threshold.length - 1; e >= 0; e--) {
+		if(!$("input[name='series'][value='" + e + "']:checked").val()) {
+			continue;
+		}
+		
+		var graph_data = [];
+		for(var i in saved_data[e]) {
+			graph_data.push([parseInt(i)+1, saved_data[e][i][1]]);
+		}
+		radiation_graph.push({
+			data: graph_data,
+			label: error_threshold[e] + "%",
+			points: { show: true },
+			lines: { show: false },
+			color: error_color[e]
+		});
+	}
+	
+	$.plot($("#placeholder"), radiation_graph, {
+		legend: {
+			container: "#legend"
+		},
+		yaxes: [
+			{ min: 0, tickFormatter: svhFormatter }
+		]
+	});
+}
+
+function poisson(lambda) {
+	var mag = 1;
+	if(lambda > 100) {
+		mag = Math.ceil(lambda / 100);
+		lambda /= mag;
+	}
+	var sum_k = 0;
+	for(var m = 0; m < mag; m++) {
+		var l = Math.exp(lambda) * Math.random();
+		var k;
+		for(k = 0; l > 1.0; k++) {
+			l *= Math.random();
+		}
+		sum_k += k;
+	}
+	return sum_k;
+}
+
+function format_time(second) {
+	var min = Math.floor(second / 60);
+	var sec = second % 60;
+	
+	return min + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function cpsFormatter(val, axis) {
+	return val.toFixed(axis.tickDecimals) + "cps";
+}
+function svhFormatter(val, axis) {
+	return val.toFixed(axis.tickDecimals) + "μSv/h";
+}
+function percentFormatter(val, axis) {
+	return val.toFixed(axis.tickDecimals) + "%";
+}
+function timeFormatter(val, axis) {
+	return format_time(val);
+}
+
+
+
+</script>
+</body>
+</html>
