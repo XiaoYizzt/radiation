@@ -1,0 +1,2695 @@
+{
+ "pages": {
+  "article.html": {
+   "sha": "5ef6cdb5a8916b1d63352e5efa809c5c190aac72d435b313838bc17800291fdc",
+   "size": 819,
+   "links": [
+    "index.html",
+    "article/info001.html",
+    "article/info002.html",
+    "article/info003.html",
+    "article/info004.html",
+    "article/info005.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 196,
+   "title": "关于辐射和辐射探测器的文章"
+  },
+  "background_radiation.html": {
+   "sha": "e12dc722eede0f7c159b16f6aae24b5b2dbf487de5b833b0b7f693695ade059e",
+   "size": 3951,
+   "links": [
+    "index.html "
+   ],
+   "imgs": [
+    "img/2019-03-08_1615.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1318,
+   "title": "background radiation"
+  },
+  "base.html": {
+   "sha": "a6e7e8e963a0cc29e9e64ac43c1f04d1dd2582db5c73106fd091e796ba53b998",
+   "size": 802,
+   "links": [
+    "index.html",
+    " Sv.html ",
+    " radioactivity in life.html ",
+    " pb.html ",
+    "background_radiation.html",
+    "braking_radiation.html",
+    "rn.html "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 101,
+   "title": "基础知识"
+  },
+  "braking_radiation.html": {
+   "sha": "54cbca97368ebe4da254f1fa30fcbeb957b7d46ab7c526de9982d6dd5b048117",
+   "size": 1564,
+   "links": [
+    "index.html ",
+    "info/info011.html",
+    "pb.html"
+   ],
+   "imgs": [
+    "img/220px-Bremsstrahlung.svg.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 801,
+   "title": "韧致辐射"
+  },
+  "cs137.html": {
+   "sha": "4b2e3472803a35db1e5c7262178d91fba14fe45c33304ce42798b323a1fcb804",
+   "size": 868,
+   "links": [
+    " index.html "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 595,
+   "title": "Cs-137"
+  },
+  "detector.html": {
+   "sha": "04a7c1c179fcb50ec9051895b40239239e79b620fdfe0e6c58745f4757c3fe90",
+   "size": 13714,
+   "links": [
+    "index.html",
+    "#1",
+    "#5",
+    "#6",
+    "#7",
+    "https://zh.m.wikipedia.org/zh/%E7%9B%96%E9%9D%A9%E8%AE%A1%E6%95%B0%E5%99%A8",
+    "https://www.radiation-dosimetry.org/what-is-high-purity-germanium-detector-hpge-definition/",
+    "info/info001.html",
+    "tool/error simulation.html",
+    "info/info022.html",
+    "tool/error simulation.html",
+    "tool/jitter simulation.html",
+    "info/info001.html",
+    "tool/error simulation.html",
+    "tool/jitter simulation.html"
+   ],
+   "imgs": [
+    "img/inspector alert kuwetka.jpg"
+   ],
+   "ids": [],
+   "anchors": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+   ],
+   "textlen": 5225,
+   "title": "辐射测量仪器的类型和列表"
+  },
+  "detector_list.html": {
+   "sha": "8c88673a28f3aad1c1fe4a4b2d20f67f6d097c9a3ce006f59d9509e42999767c",
+   "size": 18501,
+   "links": [
+    " index.html ",
+    "detector.html",
+    "info/info001.html",
+    " https://medcom.com/product/imi-inspector-alert-surface-contamination-meter/ ",
+    " https://medcom.com/product/radalert-100x-radiation-detection-instrument/ ",
+    " https://www.fishersci.com/shop/products/radeye-b20-b20-er-multi-purpose-survey-meters/p-4531281 ",
+    " https://ludlums.com/products/health-physics/category/pocket-size-meters-hp ",
+    " https://ecotestgroup.com/products/terra-with-bluetooth-channel/ ",
+    " https://www.gamma-scout.com/de/ ",
+    " https://item.jd.com/100019254098.html ",
+    " https://www.bertin-technologies.com/contact/?gammesID=8325&productID=332&form=2 ",
+    " https://www.mazurinstruments.com/buy-a-geiger-counter/ ",
+    " https://www.mazurinstruments.com/buy-a-geiger-counter/ ",
+    " https://www.mazurinstruments.com/buy-a-geiger-counter/ ",
+    " https://seintl.com/contact-us ",
+    " https://seintl.com/contact-us ",
+    "https://polimaster.com/eu/product/x-ray-and-gamma-radiation-dosimeters/personal-dosimeters/personal-dosimeter-pm1610/#desc",
+    "https://quartarad.com/product/radex-rd1706/",
+    "https://detail.tmall.com/item.htm?abbucket=8&id=685661735190&ns=1&spm=a230r.1.14.1.792365fe917Vkp",
+    "https://item.taobao.com/item.htm?spm=a21wu.12321156.go-detail.1.1bd4a3aaLMEC2N&id=607283950609",
+    "http://www.smach.cn/product/24.html",
+    "https://www.edarley.com/brands/flir/",
+    "https://emin.com.mm/polimasterrm1401k-3p-polimaster-rm1401k-3p-multipurpose-hand-held-radiation-monitor-identifier-0-1-msv-h-100-msv-h-138104/pr.html",
+    "https://emin.asia/zh_TW/polimasterrm1703ma-ii-bt-polimaster-rm1703ma-ii-bt-bian-xi-shi-fu-she-tan-ce-qi-0-1-usv-h-300-usv-h-tia-x-gamma-138141/pr.html"
+   ],
+   "imgs": [
+    "img/vn.png"
+   ],
+   "ids": [],
+   "anchors": [
+    "2"
+   ],
+   "textlen": 5699,
+   "title": "辐射仪器列表"
+  },
+  "detector_list_2.html": {
+   "sha": "2df451b1cf3adaa60c0b2e88f8cb1e6883ae9d280b5dc34c58517862e08458c3",
+   "size": 4736,
+   "links": [
+    " index.html ",
+    "info/info001.html",
+    " https://seintl.com/contact-us ",
+    " https://polimaster.com/eu/product/personal-radiation-detectors/ ",
+    " https://www.rex-rental.jp/large/050/middle/050/product/20363 ",
+    "https://www.sii.co.jp/jp/segg/products/radiation-measurement-protection-products/survey-meters/1072/"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [
+    "2"
+   ],
+   "textlen": 1105,
+   "title": "辐射仪器推荐"
+  },
+  "history.html": {
+   "sha": "f92122cee4f39e0605285816d48f7583a58b74a7203b9bce5b05d1cbc2e9fc0e",
+   "size": 1848,
+   "links": [
+    "index.html",
+    "tool/jitter simulation.html",
+    "info2/FNIRSI_GC-01.html",
+    " geiger counter.html ",
+    " info/info008.html "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 285,
+   "title": "辐射及辐射测量仪器备忘录"
+  },
+  "index.html": {
+   "sha": "4df0787c5df5fa327856c7f6d49098d001b357fa4738896bf7da6636aa8c7778",
+   "size": 10342,
+   "links": [
+    "base.html",
+    "Sv.html",
+    "pb.html",
+    "background_radiation.html",
+    "braking_radiation.html",
+    "rn.html",
+    "info/index.html",
+    " info/info008.html ",
+    "info/info001.html",
+    "PB_gamma.html",
+    " info/info017.html ",
+    " info/info018.html ",
+    " info/info019.html ",
+    " info/info022.html ",
+    " info/info023.html ",
+    "tool/error simulation.html",
+    "tool/jitter simulation.html",
+    "tool/beta ray range calculation.html",
+    "tool/info004.html",
+    "tool/WESViewer/index.html",
+    "detector.html",
+    "detector.html#1",
+    "detector.html#5",
+    "detector.html#6",
+    "detector.html#7",
+    "detector_list.html",
+    "detector_list.html#1",
+    "detector_list.html#2",
+    "article.html",
+    "article/info001.html",
+    "article/info002.html",
+    "article/info003.html",
+    "article/info004.html",
+    "article/info005.html",
+    "修正关于KB6011型辐射计能量响应的方案.pdf",
+    "other/index.html",
+    "other/info005.html",
+    "other/info001.html",
+    " http://database.xkxiaoyi.ink/ ",
+    "other/info002.html",
+    "other/info003.html",
+    " info/info011.html ",
+    " info/info012.html ",
+    " info/info013.html ",
+    "info2/Thermo_EPD MK2.html",
+    "info2/RJ_RJ31-6503.html",
+    "info2/Imdetek_RAM-01.html",
+    "info2/Polimaster_PM1405.html",
+    "info2/Polimaster_PM1621.html",
+    "info2/RADIACODE_RADIACODE102.html",
+    "info2/KB_NEW_KB6011.html",
+    "info2/SMACH_RG1000.html",
+    "https://blog.xkxiaoyi.ink/content/blog7.html",
+    "info2/KB_KB6011.html",
+    "info2/FNIRSI_GC-01.html",
+    "article/info005.html",
+    "tool/WESViewer/index.html",
+    "tool/WESViewer/isotope/Am-241/index.html",
+    "tool/WESViewer/isotope/Cs-137/index.html",
+    "tool/WESViewer/index.html",
+    "info2/RJ_RJ31-6503.html",
+    "tool/WESViewer/wesviewer/index.html#__Lu-176.xml//0",
+    "info2/Thermo_EPD MK2.html",
+    "info2/RJ_RJ31-6503.html",
+    "info2/Imdetek_RAM-01.html",
+    "info2/Polimaster_PM1405.html",
+    "other/info005.html",
+    "info2/Polimaster_PM1621.html",
+    "pb.html",
+    "article/info004.html",
+    "detector.html",
+    "info2/RADIACODE_RADIACODE102.html",
+    "article/info003.html",
+    "detector_list.html",
+    "detector_list.html",
+    "info2/FNIRSI_GC-01.html",
+    "article/info002.html",
+    "info2/SMACH_RG1000.html",
+    "tool/info004.html",
+    "info2/KB_NEW_KB6011.html",
+    "info2/FNIRSI_GC-01.html",
+    "tool/WESViewer/index.html",
+    "#",
+    " info/info022.html ",
+    "detector.html",
+    "info/info001.html",
+    "pb.html",
+    "PB_gamma.html",
+    "PB_gamma.html",
+    "info2/SMACH_RG1000.html",
+    "info/info008.html",
+    "detector_list.html",
+    "detector.html",
+    "history.html"
+   ],
+   "imgs": [
+    "img/exclamation.gif",
+    "img/book.png",
+    "img/pdf.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 2578,
+   "title": "辐射及辐射测量仪器备忘录"
+  },
+  "Ju.html": {
+   "sha": "14225d4a54f788427d8f9e0586bf440a1f55456db7d5899c1b03dac8cde24c58",
+   "size": 327,
+   "links": [
+    " Untitled-1.html "
+   ],
+   "imgs": [
+    "img/ju.jfif"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 27,
+   "title": "超大蜜柑（"
+  },
+  "net.html": {
+   "sha": "9a811b8ba371806497aa6777eea272e25384b988d157bf6267f405ec2731d723",
+   "size": 475,
+   "links": [
+    " index.html "
+   ],
+   "imgs": [
+    "img/fs1.png",
+    "img/zd.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 81,
+   "title": "辐射噪点"
+  },
+  "pb.html": {
+   "sha": "2d7f31fdc9f25137baf6c6c48b19b6b2fef203aa96dc4a13bfffb3d7cbaf7e5e",
+   "size": 4151,
+   "links": [
+    " index.html "
+   ],
+   "imgs": [
+    "img/radiation_ch_6.png",
+    "img/radiation_ch_7.png",
+    "img/radiation_ch_8.png",
+    "img/radiation_ch_9.jpg",
+    "img/12.jpg"
+   ],
+   "ids": [],
+   "anchors": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "textlen": 1833,
+   "title": "辐射屏蔽"
+  },
+  "PB_gamma.html": {
+   "sha": "d55dc5e456c1f6a7d1784d3cefae1ea3999e4bcdb4feaaed2a70153737bada9f",
+   "size": 4415,
+   "links": [
+    "index.html"
+   ],
+   "imgs": [
+    "img/PB_gamma/PB1.png",
+    "img/PB_gamma/PB2.png",
+    "img/PB_gamma/PB3.png",
+    "img/PB_gamma/PB4.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1565,
+   "title": "辐射衰减（γ射线）"
+  },
+  "radioactivity in life.html": {
+   "sha": "75858e1f82a60cf0cfd1342d61ad457d4080ac769fd5c9ef6a6812db15bf40a0",
+   "size": 4387,
+   "links": [
+    " index.html ",
+    " https://www.mohw.gov.tw/fp-16-37600-1.html "
+   ],
+   "imgs": [
+    "img/lhj.jpg",
+    "img/a0.1.jpg",
+    "img/a1.jpg",
+    "img/a2.jpg",
+    "img/a3.jpg",
+    "img/b1.jpg",
+    "img/c1.jpg",
+    "img/d1.jpg",
+    "img/a1.png",
+    "img/th1.jpg",
+    "img/th2.jpg",
+    "img/u.jpg",
+    "img/u2.jpg",
+    "img/u3.jpg",
+    "img/u4.jpg",
+    "img/water.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1957,
+   "title": "生活中常见的放射性来源"
+  },
+  "rn.html": {
+   "sha": "0e05a065366c76a8962f68fa693829fefbac0e7c627efdadb1752c610fcee002",
+   "size": 4871,
+   "links": [
+    " index.html "
+   ],
+   "imgs": [
+    "img/2887ee907dc9427192e502723b6a1b4a.png",
+    "img/2023-01-09 181350.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 2686,
+   "title": "氡"
+  },
+  "Sv.html": {
+   "sha": "48b49dab6220cbddeb30b8f1c5c36caad7ec3f3c172736776389aa788fb2947f",
+   "size": 3360,
+   "links": [
+    " index.html ",
+    "info/info018.html",
+    "info/info019.html"
+   ],
+   "imgs": [
+    "img/yanshi.png",
+    "img/yanshi2.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1529,
+   "title": "在此之前你需要知道的"
+  },
+  "Untitled-1.html": {
+   "sha": "cf861f0c041d3535e7f2c388e59897dcba2523038c1c0069810274e633044c6f",
+   "size": 5380,
+   "links": [
+    "../../index.html",
+    " https://b23.tv/wqfnpiJ",
+    "base.html",
+    " Sv.html ",
+    " radioactivity in life.html ",
+    " pb.html ",
+    "background_radiation.html",
+    "braking_radiation.html",
+    "rn.html ",
+    "info/index.html",
+    " info/info008.html ",
+    "info/info001.html",
+    " info/info017.html ",
+    " info/info018.html ",
+    " info/info019.html ",
+    " info/info022.html ",
+    " info/info023.html ",
+    "tool/error simulation.html",
+    "tool/jitter simulation.html",
+    "tool/beta ray range calculation.html",
+    "detector.html",
+    "detector.html#1",
+    "detector.html#5",
+    "detector.html#6",
+    "detector.html#7",
+    "detector_list.html",
+    "detector_list.html#1",
+    "detector_list.html#2",
+    "article.html",
+    "article/info001.html",
+    "article/info002.html",
+    "other/index.html",
+    "other/info001.html",
+    " http://database.xkxiaoyi.ink/ ",
+    " net.html ",
+    "other/info002.html",
+    "other/info003.html",
+    " http://blog.xkxiaoyi.ink/ ",
+    "https://blog.xkxiaoyi.ink/content/blog8.html",
+    "https://blog.xkxiaoyi.ink/content/blog7.html",
+    "https://blog.xkxiaoyi.ink/content/blog2.html",
+    " info/info011.html ",
+    " info/info012.html ",
+    " info/info013.html ",
+    "info2/FNIRSI_GC-01.html",
+    "info2/KB_KB6011.html",
+    "https://blog.xkxiaoyi.ink/content/blog7.html",
+    "detector.html",
+    "tool/jitter simulation.html",
+    "info2/FNIRSI_GC-01.html",
+    " geiger counter.html ",
+    " info/info008.html "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 965,
+   "title": "辐射及辐射测量仪器的资料、评测"
+  },
+  "xray.html": {
+   "sha": "056632045faea679a111c68f8518ee392847d929330fa9fc42e37eca23fddcce",
+   "size": 549,
+   "links": [
+    "index.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 291,
+   "title": "X-Ray"
+  },
+  "关于辐射和辐射探测器的文章.html": {
+   "sha": "09b3a2a5e9c22b2f7b931263e79d824f59875d78d8e6e4a060c877df0b435182",
+   "size": 517,
+   "links": [
+    "index.html",
+    "article/info001.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 93,
+   "title": "关于辐射和辐射探测器的文章"
+  },
+  "article/info001.html": {
+   "sha": "ce8c01bf3988ba33559c1cd50329272d4771b789dea25b61dac3ccca0e75b714",
+   "size": 2207,
+   "links": [
+    "../index.html ",
+    "../info/info022.html",
+    "https://www.bilibili.com/video/BV1hv4y1y7Tx?share_source=copy_web"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 401,
+   "title": "盖革计数器中的β射线的异常值 (01/11/2022)"
+  },
+  "article/info002.html": {
+   "sha": "1b0f98c2c11b78539f3659ca7c5a4dd973bebbb63736ac948624e116d024ad66",
+   "size": 2061,
+   "links": [
+    "../index.html ",
+    "info001.html"
+   ],
+   "imgs": [
+    "../img/article/LV1.jpg",
+    "../img/article/LV2.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 325,
+   "title": "采购铝块 (2023/5/31)"
+  },
+  "article/info003.html": {
+   "sha": "2155ac85d3931ae7d72bf99ed44c323d8bbdde2301ea7edc7687fc0ba866d267",
+   "size": 2565,
+   "links": [
+    "../index.html "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 535,
+   "title": "MKS-05简单操作使用说明书"
+  },
+  "article/info004.html": {
+   "sha": "dc7445bd4df48d1dd9f18d607359cd963e37482e07420b363ba1fa1d77fb31d8",
+   "size": 1987,
+   "links": [
+    "../index.html "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 471,
+   "title": "仪表的灵敏度越高越好吗？"
+  },
+  "article/info005.html": {
+   "sha": "2ffea8f29caa0cf8d81bf8cae0bd16c29a28ad7ecf1aee599d23c298b5316676",
+   "size": 3259,
+   "links": [
+    "../index.html ",
+    "../img/T100/A1.jpg",
+    "../img/T100/A2.jpg",
+    "../img/T100/B1.jpg",
+    "../img/T100/B2.jpg",
+    "../img/T100/B3.jpg",
+    "../img/T100/B4.jpg",
+    "../img/T100/B5.jpg",
+    "../img/T100/B6.jpg",
+    "../img/T100/B7.jpg"
+   ],
+   "imgs": [
+    "../img/T100/A1.jpg",
+    "../img/T100/A2.jpg",
+    "../img/T100/B1.jpg",
+    "../img/T100/B2.jpg",
+    "../img/T100/B3.jpg",
+    "../img/T100/B4.jpg",
+    "../img/T100/B5.jpg",
+    "../img/T100/B6.jpg",
+    "../img/T100/B7.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 687,
+   "title": "野狼V1019 T100手表"
+  },
+  "info/index.html": {
+   "sha": "ea2105ab446ad1a8f4759de58d3770d158d5843ac81d3f7c085b86ea9a49a6c7",
+   "size": 1275,
+   "links": [
+    "../index.html",
+    "info008.html ",
+    "info001.html",
+    "../PB_gamma.html",
+    "info017.html ",
+    "info018.html ",
+    "info019.html ",
+    "info022.html ",
+    "info023.html ",
+    "../tool/error simulation.html",
+    "../tool/jitter simulation.html",
+    "../tool/beta ray range calculation.html",
+    "../tool/info004.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 242,
+   "title": "关于辐射及辐射测量仪器的说明"
+  },
+  "info/info001.html": {
+   "sha": "9aee5fbd3b86daf8d8fec1fa98776bb94beb756078f280feb74c1d23c0f79196",
+   "size": 6770,
+   "links": [
+    "../index.html "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1768,
+   "title": "关于能量补偿功能"
+  },
+  "info/info008.html": {
+   "sha": "a45877007bdcd64b06618648e24da53e5b5c63c41c18d7e86acd808682aa1cb9",
+   "size": 7160,
+   "links": [
+    "../index.html",
+    "../tool/beta ray range calculation.html",
+    "info022.html",
+    "../energy compensation.html",
+    "../tool/error simulation.html",
+    "../tool/jitter simulation.html",
+    "https://ameblo.jp/iloveshuto/entry-11249572383.html",
+    "https://youtu.be/lRI_KaPfysE"
+   ],
+   "imgs": [
+    "../img/measured_value_comparison_radiation_error.png"
+   ],
+   "ids": [],
+   "anchors": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "textlen": 3414,
+   "title": "正确的使用盖革计数器"
+  },
+  "info/info010[X].html": {
+   "sha": "34c47eb66f97e6e8db218890baf2b43b9ef0e0241f57b4f44da168c6d0f94352",
+   "size": 1708,
+   "links": [
+    "../index.html",
+    " ../database/NE/out/cgi-bin/fissionyield.html",
+    " ../database/PGAA/out/pgaa/egaf.html",
+    " ../database/N/NGATLAS2/index.html"
+   ],
+   "imgs": [],
+   "ids": [
+    "show"
+   ],
+   "anchors": [],
+   "textlen": 82,
+   "title": "Data"
+  },
+  "info/info011.html": {
+   "sha": "e7b627509cb64b7db8d03fcb9a354656bd9fa649a6a235d562015f1325ff7482",
+   "size": 2807,
+   "links": [
+    "../index.html",
+    "http://ncrponline.org/publications/reports/ncrp-report-160-2/"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1071,
+   "title": "X-Ray"
+  },
+  "info/info012.html": {
+   "sha": "54ae7883f388c13aaeab9b498b2606fc8dd814e38b1d75a0fa6fc97b359d93ba",
+   "size": 2412,
+   "links": [
+    "../index.html",
+    "http://ncrponline.org/publications/reports/ncrp-report-160-2/",
+    "../Sv.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 833,
+   "title": "CT/CAT"
+  },
+  "info/info013.html": {
+   "sha": "d05d61e737bc864efd02fb47d4fcbe3772fe49cb45b3fc2119ebfd2d88bd9067",
+   "size": 2284,
+   "links": [
+    "../index.html",
+    "http://ncrponline.org/publications/reports/ncrp-report-160-2/",
+    "../Sv.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 673,
+   "title": "介入性透视手术"
+  },
+  "info/info017.html": {
+   "sha": "7fa9c1696fbfb1cfb4d9603a45ff07f96d0bac6f91bef10de58b914ff4216b39",
+   "size": 1691,
+   "links": [
+    "../index.html",
+    "../Sv.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 384,
+   "title": "每分钟计数"
+  },
+  "info/info018.html": {
+   "sha": "86af2c24ec3a8a4e9592eecfad8dfe7c0128ca0850889ae41927d96ac9471760",
+   "size": 2725,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [
+    "../img/eec2bc202d241703c87b917e953bca0b52fdd13a.svg",
+    "../img/2023-01-08 231556.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 499,
+   "title": "等效剂量"
+  },
+  "info/info019.html": {
+   "sha": "1f8f3bda3d861749ccee4f7038bb8ff0a0107c415028d77fabf47e2eec348459",
+   "size": 2981,
+   "links": [
+    "../index.html",
+    "info018.html"
+   ],
+   "imgs": [
+    "../img/d62a6059252dd42ad61e7fcb0a3b5bb5c9eab8bf.png",
+    "../img/13acf1ec21404ab699020f51e8c45400.png",
+    "../img/2023-01-08 234344.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1250,
+   "title": "有效剂量"
+  },
+  "info/info022.html": {
+   "sha": "912c6781e86f209897d8bc3036f1c7f1b606fbc5ecfbba1b2dffa73728576ad4",
+   "size": 8678,
+   "links": [
+    "../index.html",
+    "../article/info001.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 3053,
+   "title": "用盖革计数器测量β射线时的错误指示"
+  },
+  "info/info023.html": {
+   "sha": "0d9e465f61954d4a679ce7da6b91bac86fe56ada6009d1540dd27cc6fb3e43c1",
+   "size": 4356,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1704,
+   "title": "白话辐射剂量单位Gy和Sv的异同"
+  },
+  "info2/FNIRSI_GC-01.html": {
+   "sha": "00d1c150d02f6e0f128f56508dae1c47f86f17adb78172d328761164d7f7ddf7",
+   "size": 4655,
+   "links": [
+    "../index.html",
+    "https://blog.xkxiaoyi.ink/content/blog4.html",
+    "https://www.bilibili.com/video/BV1EA411f7P8?share_source=copy_web",
+    "../info/info008.html",
+    "https://www.bilibili.com/video/BV1zM411F79J?share_source=copy_web"
+   ],
+   "imgs": [
+    "../img/FNIRSI1.jpg",
+    "../img/FNIRSI2.jpg",
+    "../img/FNIRSI3.jpg",
+    "../img/FNIRSI6.jpg",
+    "../img/FNIRSI4.jpg",
+    "../img/FNIRSI5.jpg",
+    "../img/FNIRSI7.jpg",
+    "../img/FNIRSI8.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1423,
+   "title": "盖革计数器 FNIRSI GC-01 评测"
+  },
+  "info2/Imdetek_RAM-01.html": {
+   "sha": "c4b8bd38c64cbe6c01fd6ee62cc0284bd44fde6f38450fe06e4f12d5dfc3745c",
+   "size": 4920,
+   "links": [
+    "../index.html "
+   ],
+   "imgs": [
+    "../img/imdetek RAM-01/A1.jpg",
+    "../img/imdetek RAM-01/A2.jpg",
+    "../img/imdetek RAM-01/B1.jpg",
+    "../img/imdetek RAM-01/B2.jpg",
+    "../img/imdetek RAM-01/C1.jpg",
+    "../img/imdetek RAM-01/C2.jpg",
+    "../img/imdetek RAM-01/D1.jpg",
+    "../img/imdetek RAM-01/E1.jpg",
+    "../img/imdetek RAM-01/E2.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1202,
+   "title": "半导体计数器 imdetek RAM-01 评测"
+  },
+  "info2/KB_KB6011.html": {
+   "sha": "c2a5654335143a24ea3702a25ede731cd9492ce8f9fcc44f605b6c049c266949",
+   "size": 5664,
+   "links": [
+    "../index.html ",
+    "https://www.bilibili.com/video/BV1T3411Z78X?share_source=copy_web"
+   ],
+   "imgs": [
+    "../img/KB60111.jpg",
+    "../img/KB60112.jpg",
+    "../img/KB60115.jpg",
+    "../img/KB60116.jpg",
+    "../img/KB60113.jpg",
+    "../img/KB60114.jpg",
+    "../img/KB60117.jpg",
+    "../img/KB60118.jpg",
+    "../img/KB60119.jpg",
+    "../img/KB601110.jpg",
+    "../img/KB601111.jpg",
+    "../img/KB601113.jpg",
+    "../img/KB601114.jpg",
+    "../img/KB601112.jpg",
+    "../img/KB601115.jpg",
+    "../img/2023-01-14 155201.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1791,
+   "title": "盖革计数器 空霸 KB6011 评测"
+  },
+  "info2/KB_NEW_KB6011.html": {
+   "sha": "c3dde1ae5d96acf02f412b2c0ff2296359a262f22eb7d00b94b33fd52572828e",
+   "size": 6714,
+   "links": [
+    "../index.html ",
+    "KB_KB6011.html",
+    "https://weesky.taobao.com/index.htm?spm=a1z10.5-c-s.w5002-14477720513.2.5ea0b4faFniePo",
+    "https://www.bilibili.com/video/BV1rL41187G1?share_source=copy_web",
+    "https://item.taobao.com/item.htm?spm=a1z10.1-c-s.w4004-24109075653.7.31e82505LXwGgn&id=703808615547",
+    "KB_KB6011.html"
+   ],
+   "imgs": [
+    "../img/NEW KB6011/KB1.jpg",
+    "../img/NEW KB6011/KB2.jpg",
+    "../img/NEW KB6011/KB3.jpg",
+    "../img/NEW KB6011/KB4.jpg",
+    "../img/NEW KB6011/KB5.jpg",
+    "../img/NEW KB6011/KB6.jpg",
+    "../img/NEW KB6011/KB7.jpg",
+    "../img/NEW KB6011/KB8.jpg",
+    "../img/NEW KB6011/A1.jpg",
+    "../img/NEW KB6011/A2.jpg",
+    "../img/NEW KB6011/B1.jpg",
+    "../img/NEW KB6011/B2.jpg",
+    "../img/NEW KB6011/B3.jpg",
+    "../img/NEW KB6011/A11.jpg",
+    "../img/KB601113.jpg",
+    "../img/KB601114.jpg",
+    "../img/KB601112.jpg",
+    "../img/KB601115.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1992,
+   "title": "盖革计数器 空霸 NEW KB6011 评测"
+  },
+  "info2/Polimaster_PM1405.html": {
+   "sha": "0109d04756bcfa9203118807e18ebb06fa726bd176f9af3d2cecf207bb070789",
+   "size": 12021,
+   "links": [
+    "../index.html ",
+    "../img/Polimaster PM1405/F1.jpg",
+    "../img/Polimaster PM1405/F2.jpg",
+    "../img/Polimaster PM1405/F3.jpg",
+    "../img/Polimaster PM1405/F4.jpg",
+    "../img/Polimaster PM1405/F5.jpg",
+    "../img/Polimaster PM1405/F6.jpg",
+    "../img/Polimaster PM1405/F7.jpg"
+   ],
+   "imgs": [
+    "../img/Polimaster PM1405/A1.jpg",
+    "../img/Polimaster PM1405/A2.jpg",
+    "../img/Polimaster PM1405/B1.jpg",
+    "../img/Polimaster PM1405/B2.jpg",
+    "../img/Polimaster PM1405/C1.jpg",
+    "../img/Polimaster PM1405/C2.jpg",
+    "../img/Polimaster PM1405/D1.jpg",
+    "../img/Polimaster PM1405/D2.jpg",
+    "../img/Polimaster PM1405/pm1405_51.png",
+    "../img/Polimaster PM1405/E1.jpg",
+    "../img/Polimaster PM1405/E2.jpg",
+    "../img/Polimaster PM1405/E3.jpg",
+    "../img/Polimaster PM1405/E4.jpg",
+    "../img/Polimaster PM1405/E5.jpg",
+    "../img/Polimaster PM1405/E6.jpg",
+    "../img/Polimaster PM1405/E7.jpg",
+    "../img/Polimaster PM1405/E8.jpg",
+    "../img/Polimaster PM1405/pm1405_software1.png",
+    "../img/Polimaster PM1405/pm1405_software2.png",
+    "../img/Polimaster PM1405/pm1405_software3.png",
+    "../img/Polimaster PM1405/F1s.jpg",
+    "../img/Polimaster PM1405/F2s.jpg",
+    "../img/Polimaster PM1405/F3s.jpg",
+    "../img/Polimaster PM1405/F4s.jpg",
+    "../img/Polimaster PM1405/F5s.jpg",
+    "../img/Polimaster PM1405/F6s.jpg",
+    "../img/Polimaster PM1405/F7s.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 4312,
+   "title": "盖革计数器 Polimaster PM1405"
+  },
+  "info2/Polimaster_PM1621.html": {
+   "sha": "b8dbea561b19cdd9e198e83552fcddd954cc3166c68081cdb8c9360e5c76cfc3",
+   "size": 7701,
+   "links": [
+    "../index.html ",
+    "https://zh.wikipedia.org/zh-cn/%E5%9B%BD%E9%99%85%E9%98%B2%E6%8A%A4%E7%AD%89%E7%BA%A7%E8%AE%A4%E8%AF%81#IPX%E4%BB%A3%E7%A0%81"
+   ],
+   "imgs": [
+    "../img/Polimaster PM1621/A1.jpg",
+    "../img/Polimaster PM1621/A2.jpg",
+    "../img/Polimaster PM1621/A3.jpg",
+    "../img/Polimaster PM1621/A4.jpg",
+    "../img/Polimaster PM1621/A5.jpg",
+    "../img/Polimaster PM1621/A6.jpg",
+    "../img/Polimaster PM1621/pm1621_61.png",
+    "../img/Polimaster PM1621/B1.jpg",
+    "../img/Polimaster PM1621/B2.jpg",
+    "../img/Polimaster PM1621/B3.jpg",
+    "../img/Polimaster PM1621/pm1621m_21.jpg",
+    "../img/Polimaster PM1621/pm1621m_22.jpg",
+    "../img/Polimaster PM1621/pm1621m_23.jpg",
+    "../img/Polimaster PM1621/pm1621_51.jpg",
+    "../img/Polimaster PM1621/pm1621_52.jpg",
+    "../img/Polimaster PM1621/pm1621_53.jpg",
+    "../img/Polimaster PM1621/pm1621_54.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 2153,
+   "title": "盖革计数器 Polimaster PM1621 评测"
+  },
+  "info2/RADIACODE_RADIACODE102.html": {
+   "sha": "53b5ab58d490e05a2fb450595306d4bbf4d471a28c8c3b4e96c7f45f0221cceb",
+   "size": 6211,
+   "links": [
+    "../index.html ",
+    "https://www.radiacode.com/",
+    "https://www.bilibili.com/video/BV12w411w7MY/",
+    "https://www.bilibili.com/video/BV12w411w7MY/"
+   ],
+   "imgs": [
+    "../img/RADIACODE102/A1.jpg",
+    "../img/RADIACODE102/A2.jpg",
+    "../img/RADIACODE102/A3.jpg",
+    "../img/RADIACODE102/A4.jpg",
+    "../img/RADIACODE102/B1.jpg",
+    "../img/RADIACODE102/B2.jpg",
+    "../img/RADIACODE102/B3.jpg",
+    "../img/RADIACODE102/B4.jpg",
+    "../img/RADIACODE102/C1.jpg",
+    "../img/RADIACODE102/C2.jpg",
+    "../img/RADIACODE102/C3.jpg",
+    "../img/RADIACODE102/C4.jpg",
+    "../img/RADIACODE102/D1.jpg",
+    "../img/RADIACODE102/D3.jpg",
+    "../img/RADIACODE102/E1.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1792,
+   "title": "闪烁体计数器 RADIACODE 102 评测"
+  },
+  "info2/RJ_RJ31-6503.html": {
+   "sha": "ccd4f8bfa99cf780b43b4ef501b759e9c5bbba5a490c90ec2ede0571c71c8562",
+   "size": 5023,
+   "links": [
+    "../index.html "
+   ],
+   "imgs": [
+    "../img/RJ RJ31-6503/A1.jpg",
+    "../img/RJ RJ31-6503/A2.jpg",
+    "../img/RJ RJ31-6503/A3.jpg",
+    "../img/RJ RJ31-6503/A4.jpg",
+    "../img/RJ RJ31-6503/B1.jpg",
+    "../img/RJ RJ31-6503/C1.jpg",
+    "../img/RJ RJ31-6503/C2.jpg",
+    "../img/RJ RJ31-6503/C3.jpg",
+    "../img/RJ RJ31-6503/C4.jpg",
+    "../img/RJ RJ31-6503/C5.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1491,
+   "title": "闪烁体计数器 RJ RJ31-6503 评测"
+  },
+  "info2/SMACH_RG1000.html": {
+   "sha": "11e746db24dbfb189f41add9c3771b086a7c239d6811cd1677dbd5946770a5f1",
+   "size": 7666,
+   "links": [
+    "../index.html ",
+    "https://www.bilibili.com/video/BV1354y1A7nH?share_source=copy_web",
+    "http://www.smach.cn/product/24.html",
+    "https://www.bilibili.com/video/BV1354y1A7nH?share_source=copy_web"
+   ],
+   "imgs": [
+    "../img/SMACH RG1000/RG1.jpg",
+    "../img/SMACH RG1000/RG2.jpg",
+    "../img/SMACH RG1000/RG3.jpg",
+    "../img/SMACH RG1000/RG4.jpg",
+    "../img/SMACH RG1000/RG5.jpg",
+    "../img/SMACH RG1000/RG6.jpg",
+    "../img/SMACH RG1000/RG7.jpg",
+    "../img/SMACH RG1000/RG8.jpg",
+    "../img/SMACH RG1000/RG9.jpg",
+    "../img/SMACH RG1000/RG10.jpg",
+    "../img/SMACH RG1000/RG11.jpg",
+    "../img/SMACH RG1000/RG12.jpg",
+    "../img/SMACH RG1000/RG13.jpg",
+    "../img/SMACH RG1000/B1.jpg",
+    "../img/SMACH RG1000/RG14.jpg",
+    "../img/SMACH RG1000/P1.jpg",
+    "../img/SMACH RG1000/P2.jpg",
+    "../img/SMACH RG1000/P3.jpg",
+    "../img/SMACH RG1000/P4.jpg",
+    "../img/SMACH RG1000/P5.jpg",
+    "../img/SMACH RG1000/P6.jpg",
+    "../img/SMACH RG1000/RG15.jpg",
+    "../img/SMACH RG1000/RG16.jpg"
+   ],
+   "ids": [],
+   "anchors": [
+    "6"
+   ],
+   "textlen": 2248,
+   "title": "盖革计数器 SMACH RG1000 评测"
+  },
+  "info2/Thermo_EPD MK2.html": {
+   "sha": "834e3a8faee86d215dc8f8a05a8cf97b0457bbc0d84eae255d84eb238bd5862c",
+   "size": 4821,
+   "links": [
+    "../index.html "
+   ],
+   "imgs": [
+    "../img/Thermo_EPD MK2/A1.jpg",
+    "../img/Thermo_EPD MK2/A2.jpg",
+    "../img/Thermo_EPD MK2/A3.jpg",
+    "../img/Thermo_EPD MK2/B1.jpg",
+    "../img/Thermo_EPD MK2/B2.jpg",
+    "../img/Thermo_EPD MK2/C1.jpg",
+    "../img/Thermo_EPD MK2/C2.jpg",
+    "../img/Thermo_EPD MK2/C3.jpg",
+    "../img/Thermo_EPD MK2/D1.jpg",
+    "../img/Thermo_EPD MK2/D2.jpg",
+    "../img/Thermo_EPD MK2/D3.jpg",
+    "../img/Thermo_EPD MK2/D4.jpg",
+    "../img/Thermo_EPD MK2/D5.jpg",
+    "../img/Thermo_EPD MK2/Wearing.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1139,
+   "title": "电子个人剂量计 Thermo Fisher Scientific EPD MK2+ 评测"
+  },
+  "other/index.html": {
+   "sha": "1b5833f3b76c73689742a471bbcadbac752dd6321466adf9108b5637dfca0acf",
+   "size": 835,
+   "links": [
+    "../index.html",
+    "info005.html",
+    "info001.html ",
+    " http://database.xkxiaoyi.ink/ ",
+    "../net.html ",
+    "info002.html",
+    "info003.html",
+    " http://blog.xkxiaoyi.ink/ "
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 107,
+   "title": "辐射及辐射测量仪器"
+  },
+  "other/info001.html": {
+   "sha": "d44bf0cbb0a94fdcf5b74524ae844fdc66cb24c2c204e445b565e7b4dc4c91ff",
+   "size": 3121,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1053,
+   "title": "neutron temperature"
+  },
+  "other/info002.html": {
+   "sha": "3ec8d08615c2322dffdac6a7e695e1cbc5acbaaa88f8368a7e06e32826062eee",
+   "size": 2198,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 781,
+   "title": "花岗岩"
+  },
+  "other/info003.html": {
+   "sha": "8d59c771cf2e0cb84f20e006315e6729832c1fe400edd02286599d481248c945",
+   "size": 2450,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [
+    "https://upload.wikimedia.org/wikipedia/commons/c/c1/Fusor_running.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 911,
+   "title": "Fusor"
+  },
+  "other/info004.html": {
+   "sha": "9a811b8ba371806497aa6777eea272e25384b988d157bf6267f405ec2731d723",
+   "size": 475,
+   "links": [
+    " index.html "
+   ],
+   "imgs": [
+    "img/fs1.png",
+    "img/zd.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 81,
+   "title": "辐射噪点"
+  },
+  "other/info005.html": {
+   "sha": "aab41a644c45148561c8e31942ab9bbb525206d870fbd37ad55a6419a51356a3",
+   "size": 4737,
+   "links": [
+    "../index.html ",
+    "../info/info008.html",
+    "../info2/FNIRSI_GC-01.html",
+    "../info2/KB_KB6011.html"
+   ],
+   "imgs": [
+    "../img/other/info005/A1.jpg",
+    "../img/other/info005/A2.jpg",
+    "../img/other/info005/A3.jpg",
+    "../img/other/info005/A4.jpg",
+    "../img/other/info005/B1.jpg",
+    "../img/other/info005/C1.jpg",
+    "../img/other/info005/D1.jpg",
+    "../img/other/info005/D2.jpg",
+    "../img/other/info005/D3.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1188,
+   "title": "网站一周年！"
+  },
+  "tips/cs137.html": {
+   "sha": "ebaf500fabbc9bc2519040cd29c601e8fae9c0780488d806bfad95baed1c81ae",
+   "size": 1697,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 595,
+   "title": "Cs-137"
+  },
+  "tips/xray.html": {
+   "sha": "d60c8e6dbff170f5a0e494cdba49d47fa2efe28f1ed41e7f7e997d7594b183ce",
+   "size": 1368,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [],
+   "ids": [],
+   "anchors": [],
+   "textlen": 291,
+   "title": "X-Ray"
+  },
+  "tool/beta ray range calculation.html": {
+   "sha": "713883a9ddc5e67b0d3de8101110a59c0b94bf79daf11062445c338f4771ba1f",
+   "size": 11882,
+   "links": [
+    "../index.html"
+   ],
+   "imgs": [],
+   "ids": [
+    "cs134_1",
+    "cs134_1_1",
+    "cs134_1_2",
+    "cs134_1_3",
+    "cs134_1_4",
+    "cs134_1_5",
+    "cs134_2",
+    "cs134_2_1",
+    "cs134_2_2",
+    "cs134_2_3",
+    "cs134_2_4",
+    "cs134_2_5",
+    "cs134_3",
+    "cs134_3_1",
+    "cs134_3_2",
+    "cs134_3_3",
+    "cs134_3_4",
+    "cs134_3_5",
+    "cs137_1",
+    "cs137_1_1",
+    "cs137_1_2",
+    "cs137_1_3",
+    "cs137_1_4",
+    "cs137_1_5",
+    "cs137_2",
+    "cs137_2_1",
+    "cs137_2_2",
+    "cs137_2_3",
+    "cs137_2_4",
+    "cs137_2_5",
+    "density_1",
+    "density_2",
+    "density_3",
+    "density_4",
+    "density_5",
+    "ev_1",
+    "ev_1_1",
+    "ev_1_2",
+    "ev_1_3",
+    "ev_1_4",
+    "ev_1_5",
+    "ev_2",
+    "ev_2_1",
+    "ev_2_2",
+    "ev_2_3",
+    "ev_2_4",
+    "ev_2_5",
+    "ev_3",
+    "ev_3_1",
+    "ev_3_2",
+    "ev_3_3",
+    "ev_3_4",
+    "ev_3_5",
+    "ev_4",
+    "ev_4_1",
+    "ev_4_2",
+    "ev_4_3",
+    "ev_4_4",
+    "ev_4_5",
+    "ev_5",
+    "ev_5_1",
+    "ev_5_2",
+    "ev_5_3",
+    "ev_5_4",
+    "ev_5_5",
+    "ev_6",
+    "ev_6_1",
+    "ev_6_2",
+    "ev_6_3",
+    "ev_6_4",
+    "ev_6_5",
+    "i131_1",
+    "i131_1_1",
+    "i131_1_2",
+    "i131_1_3",
+    "i131_1_4",
+    "i131_1_5",
+    "i131_2",
+    "i131_2_1",
+    "i131_2_2",
+    "i131_2_3",
+    "i131_2_4",
+    "i131_2_5",
+    "i131_3",
+    "i131_3_1",
+    "i131_3_2",
+    "i131_3_3",
+    "i131_3_4",
+    "i131_3_5",
+    "result_table",
+    "sr90_1",
+    "sr90_1_1",
+    "sr90_1_2",
+    "sr90_1_3",
+    "sr90_1_4",
+    "sr90_1_5",
+    "y90_1",
+    "y90_1_1",
+    "y90_1_2",
+    "y90_1_3",
+    "y90_1_4",
+    "y90_1_5"
+   ],
+   "anchors": [],
+   "textlen": 687,
+   "title": "β射线射程计算工具"
+  },
+  "tool/error simulation.html": {
+   "sha": "61c060bf55919573911d038035b6a4173ebc214e10928c417b11f9690ff0a671",
+   "size": 9287,
+   "links": [
+    "../index.html",
+    "http://database.xkxiaoyi.ink/",
+    "beta ray range calculation.html",
+    "jitter simulation.html",
+    "#",
+    "https://zh.wikipedia.org/zh-cn/%E5%8D%9C%E7%93%A6%E6%9D%BE%E5%88%86%E5%B8%83"
+   ],
+   "imgs": [],
+   "ids": [
+    "cpm",
+    "legend",
+    "link_url",
+    "placeholder",
+    "result_url",
+    "second_1",
+    "second_3",
+    "second_30",
+    "second_6",
+    "sv_h",
+    "time_table"
+   ],
+   "anchors": [],
+   "textlen": 630,
+   "title": "辐射测量仪器（盖革计数器）的误差模拟"
+  },
+  "tool/info004.html": {
+   "sha": "f924633338ffb157ac96fcf05f794433a5154b5a989d400fabc7478fd8002238",
+   "size": 12918,
+   "links": [
+    "../index.html",
+    "error simulation.html",
+    "jitter simulation.html",
+    "#",
+    "#0.1_0.1_100_10_10",
+    "#0.1_0.1_100_10_30",
+    "#0.1_0.1_100_10_60",
+    "#0.1_0.1_100_10_300",
+    "#0.1_0.5_100_10_10",
+    "#0.1_0.5_100_10_30",
+    "#0.1_0.5_100_10_60",
+    "#0.1_0.5_100_10_300",
+    "#1_1_100_10_10",
+    "#10_10_100_10_10",
+    "#100_100_100_10_10",
+    "#1_1_1000_10_10",
+    "#1_1_10000_10_10",
+    "#0.1_0.11_100_10_60",
+    "#0.1_0.11_1000_10_60",
+    "#0.1_0.11_10000_10_60",
+    "#0.1_0.11_100_60_300",
+    "#0.1_0.11_1000_60_300",
+    "#0.1_0.11_10000_60_300",
+    "#0.01_0.02_100_10_60",
+    "#0.01_0.02_1000_10_60",
+    "#0.01_0.02_10000_10_60"
+   ],
+   "imgs": [],
+   "ids": [
+    "avg",
+    "cpm",
+    "legend",
+    "link_url",
+    "max_sv_h",
+    "min_sv_h",
+    "placeholder",
+    "result_url",
+    "second",
+    "sv_h_1",
+    "sv_h_2",
+    "total_avg",
+    "width_sv_h"
+   ],
+   "anchors": [],
+   "textlen": 2670,
+   "title": "辐射测量仪器的灵敏度"
+  },
+  "tool/jitter simulation.html": {
+   "sha": "40c83288f3749da92b5e0849357a6abc5e6401275f9564c453596de5e7d2acba",
+   "size": 9526,
+   "links": [
+    "../index.html",
+    "http://database.xkxiaoyi.ink/",
+    "error simulation.html",
+    "beta ray range calculation.html",
+    "#"
+   ],
+   "imgs": [
+    "../img/Normal_distribution.png"
+   ],
+   "ids": [
+    "cpm",
+    "error_table",
+    "legend",
+    "link_url",
+    "placeholder",
+    "result_url",
+    "series_checkbox",
+    "sv_h"
+   ],
+   "anchors": [],
+   "textlen": 679,
+   "title": "辐射测量装置（盖革计数器）误差恒定的测量值抖动模拟"
+  },
+  "tool/WESViewer/index.html": {
+   "sha": "075a08afcad0da1b52e285a1db9dc8d1d3030ae94bd8eb29ec01929f90bc06a1",
+   "size": 4425,
+   "links": [
+    "../../index.html",
+    "https://zh.wikipedia.org/zh-cn/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89",
+    "wesviewer/index.html",
+    "rain/index.html",
+    "isotope/Ra-226/index.html",
+    "isotope/Th-232/index.html",
+    "isotope/Lu-176/index.html",
+    "isotope/Cs-137/index.html",
+    "isotope/Am-241/index.html",
+    "isotope/Co-60/index.html"
+   ],
+   "imgs": [
+    "icon.png",
+    "IMG/2023-02-08 170230.jpg",
+    "IMG/2023-02-08 170453.jpg",
+    "IMG/2023-02-08 170714.jpg"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 1300,
+   "title": "辐射光谱显示工具 WESViewer /说明页"
+  },
+  "tool/WESViewer/isotope/Am-241/index.html": {
+   "sha": "c3de0af123545f74a82e06345b6353eaeadf714530c62853607ddc9ebe0081f5",
+   "size": 1854,
+   "links": [
+    "../../index.html",
+    "Am-241/index.html"
+   ],
+   "imgs": [
+    "../../icon.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 181,
+   "title": "辐射光谱显示工具 WESViewer /说明页"
+  },
+  "tool/WESViewer/isotope/Am-241/Am-241/index.html": {
+   "sha": "a49c98c7b898bbd49ea86e5363f15891453264f062d5cd0e5e6bf0e579115c66",
+   "size": 9480,
+   "links": [
+    "../../../index.html",
+    "../../../IMG/isotope/Am-241/nis-07.jpg",
+    "../../../IMG/isotope/Am-241/Am-241.jpg",
+    "../../../IMG/isotope/Am-241/Am-241_2.jpg",
+    "../../../index.html"
+   ],
+   "imgs": [
+    "../../../IMG/isotope/Am-241/nis-07.jpg",
+    "../../../IMG/isotope/Am-241/Am-241.jpg",
+    "../../../IMG/isotope/Am-241/Am-241_2.jpg"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 539,
+   "title": "离子烟感报警器"
+  },
+  "tool/WESViewer/isotope/Co-60/index.html": {
+   "sha": "1b71d2f877f45c2cc02b442d097b5a093ee3c4987d626963a245d5014d836bed",
+   "size": 1839,
+   "links": [
+    "../../index.html",
+    "Co-60/index.html"
+   ],
+   "imgs": [
+    "../../icon.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 167,
+   "title": "辐射光谱显示工具 WESViewer /说明页"
+  },
+  "tool/WESViewer/isotope/Co-60/Co-60/index.html": {
+   "sha": "ba0f16ed53ecb933bfe4d0311a0398ef622c64978cd6a857774a40248e53fa5e",
+   "size": 9333,
+   "links": [
+    "../../../index.html",
+    "../../../IMG/isotope/Co-60/Co-60.jpg",
+    "../../../IMG/isotope/Co-60/Co-60_2.jpg",
+    "../../../index.html"
+   ],
+   "imgs": [
+    "../../../IMG/isotope/Co-60/Co-60.jpg",
+    "../../../IMG/isotope/Co-60/Co-60_2.jpg"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 533,
+   "title": "钴磁盘源"
+  },
+  "tool/WESViewer/isotope/Cs-137/index.html": {
+   "sha": "f0962e87268dfc49308ec4df22b3f8640d174cb3deb177aefe5b2c5fd15241de",
+   "size": 1848,
+   "links": [
+    "../../index.html",
+    "Cs-137/index.html"
+   ],
+   "imgs": [
+    "../../icon.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 175,
+   "title": "辐射光谱显示工具 WESViewer /说明页"
+  },
+  "tool/WESViewer/isotope/Cs-137/Cs-137/index.html": {
+   "sha": "140505b8f54a04621c6191f4f82df1c948a4d8007fc9fc8884bbb456b2bffa63",
+   "size": 9345,
+   "links": [
+    "../../../index.html",
+    "../../../IMG/isotope/Cs-137/Cs-137.jpg",
+    "../../../IMG/isotope/Cs-137/Cs-137_2.jpg",
+    "../../../index.html"
+   ],
+   "imgs": [
+    "../../../IMG/isotope/Cs-137/Cs-137.jpg",
+    "../../../IMG/isotope/Cs-137/Cs-137_2.jpg"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 537,
+   "title": "Cs-137"
+  },
+  "tool/WESViewer/isotope/Lu-176/index.html": {
+   "sha": "7da404a8c18dbf8c397dd22eb8d361648837c9e3b99be6dd0c0597599d5fa88a",
+   "size": 1861,
+   "links": [
+    "../../index.html",
+    "Lu-176_Lutetium oxide/index.html"
+   ],
+   "imgs": [
+    "../../icon.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 172,
+   "title": "辐射光谱显示工具 WESViewer /说明页"
+  },
+  "tool/WESViewer/isotope/Lu-176/Lu-176_Lutetium oxide/index.html": {
+   "sha": "306f2ded0641cf3f22feef0abe8ebca6d120631f919d951f3d9b5285802bc016",
+   "size": 9577,
+   "links": [
+    "../../../index.html",
+    "../../../IMG/isotope/Lu-176/icon.jpg",
+    "../../../IMG/isotope/Lu-176/A1.jpg",
+    "../../../IMG/isotope/Lu-176/A2.jpg",
+    "../../../IMG/isotope/Lu-176/A3.png",
+    "../../../index.html"
+   ],
+   "imgs": [
+    "../../../IMG/isotope/Lu-176/icon.jpg",
+    "../../../IMG/isotope/Lu-176/A1.jpg",
+    "../../../IMG/isotope/Lu-176/A2.jpg",
+    "../../../IMG/isotope/Lu-176/A3.png"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 533,
+   "title": "氧化镥"
+  },
+  "tool/WESViewer/isotope/Ra-226/index.html": {
+   "sha": "82d5220c049d6e2a89db2865405e9fa7d7906f997b435ac1e75b7ba591122d98",
+   "size": 1848,
+   "links": [
+    "../../index.html",
+    "Ra-226_switch/index.html"
+   ],
+   "imgs": [
+    "../../icon.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 168,
+   "title": "辐射光谱显示工具 WESViewer /说明页"
+  },
+  "tool/WESViewer/isotope/Ra-226/Ra-226_switch/index.html": {
+   "sha": "9a7b6318f3eb731aa3ce111a5ac3e75f9ce26a3a191a49187f73a5e5ec190050",
+   "size": 9472,
+   "links": [
+    "../../../index.html",
+    "../../../IMG/isotope/Ra-226/switch.png",
+    "../../../IMG/isotope/Ra-226/Ra-226.jpg",
+    "../../../IMG/isotope/Ra-226/Ra-226_2.jpg",
+    "../../../index.html"
+   ],
+   "imgs": [
+    "../../../IMG/isotope/Ra-226/switch.png",
+    "../../../IMG/isotope/Ra-226/Ra-226.jpg",
+    "../../../IMG/isotope/Ra-226/Ra-226_2.jpg"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 531,
+   "title": "镭开关"
+  },
+  "tool/WESViewer/isotope/Th-232/index.html": {
+   "sha": "49c140a6b0fc8107f9afa534e90be87bb41a2ecc7db207644cf5655d9f6c362f",
+   "size": 1936,
+   "links": [
+    "../../index.html",
+    "Th-232_pendant/index.html",
+    "Th-232_WT_electrode/index.html"
+   ],
+   "imgs": [
+    "../../icon.png"
+   ],
+   "ids": [],
+   "anchors": [],
+   "textlen": 198,
+   "title": "辐射光谱显示工具 WESViewer /说明页"
+  },
+  "tool/WESViewer/isotope/Th-232/Th-232_pendant/index.html": {
+   "sha": "30d88354f68abc6c7e2fbe26632659b9373c4c66900abcf8219b8a2eaca52faa",
+   "size": 9558,
+   "links": [
+    "../../../index.html",
+    "../../../IMG/isotope/A4.jpg",
+    "../../../IMG/isotope/A1.jpg",
+    "../../../IMG/isotope/A2.jpg",
+    "../../../IMG/isotope/A3.png",
+    "../../../index.html"
+   ],
+   "imgs": [
+    "../../../IMG/isotope/A4.jpg",
+    "../../../IMG/isotope/A1.jpg",
+    "../../../IMG/isotope/A2.jpg",
+    "../../../IMG/isotope/A3.png"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 547,
+   "title": "中国产\"负离子\"吊坠"
+  },
+  "tool/WESViewer/isotope/Th-232/Th-232_WT_electrode/index.html": {
+   "sha": "b69ddf46af0e52421229768781dc0d019ff6166c84ed2dccb0b761e9d60459b7",
+   "size": 9519,
+   "links": [
+    "../../../index.html",
+    "../../../IMG/isotope/B1.jpg",
+    "../../../IMG/isotope/B2.png",
+    "../../../IMG/isotope/B3.png",
+    "../../../IMG/isotope/B4.png",
+    "../../../index.html"
+   ],
+   "imgs": [
+    "../../../IMG/isotope/B1.jpg",
+    "../../../IMG/isotope/B2.png",
+    "../../../IMG/isotope/B3.png",
+    "../../../IMG/isotope/B4.png"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 535,
+   "title": "钨钍电极"
+  },
+  "tool/WESViewer/rain/index.html": {
+   "sha": "ce24a2151f52c33507753bc4668a11bb5b6f37f34f8ac264897fc255fb5aff22",
+   "size": 9011,
+   "links": [
+    "../index.html",
+    "../IMG/rain/A1.jpg",
+    "../index.html"
+   ],
+   "imgs": [
+    "../IMG/rain/A1.jpg"
+   ],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 537,
+   "title": "浙江省杭州市下雨天采集的样本光谱"
+  },
+  "tool/WESViewer/wesviewer/index.html": {
+   "sha": "82d96c775af4721a2a6c70b6e1ee2c9deafc56303e1d7b5395eac581d1c18ae8",
+   "size": 8904,
+   "links": [
+    "../index.html",
+    "../index.html"
+   ],
+   "imgs": [],
+   "ids": [
+    "bg_range_left",
+    "bg_range_right",
+    "bg_range_selector",
+    "bg_range_selector_manual",
+    "bgrange",
+    "ch",
+    "cmp_cpsA",
+    "cmp_cpsB",
+    "cmp_cps_diff",
+    "cmp_energy",
+    "cmp_sel_cpsA",
+    "cmp_sel_cpsB",
+    "cmp_sel_cps_diff",
+    "cmp_sel_e_ev",
+    "cmp_sel_s_ev",
+    "count",
+    "cps",
+    "energy",
+    "file_select",
+    "filter",
+    "filter_type",
+    "log",
+    "max_range",
+    "multi_cps1",
+    "multi_cps2",
+    "multi_cps3",
+    "multi_cps4",
+    "multi_cps5",
+    "multi_energy",
+    "multi_sel_cps1",
+    "multi_sel_cps2",
+    "multi_sel_cps3",
+    "multi_sel_cps4",
+    "multi_sel_cps5",
+    "multi_sel_e_ev",
+    "multi_sel_s_ev",
+    "range_preset",
+    "result",
+    "save_tsv",
+    "sel_e_ch",
+    "sel_e_ev",
+    "sel_gross",
+    "sel_gross_count",
+    "sel_net",
+    "sel_net_count",
+    "sel_s_ch",
+    "sel_s_ev",
+    "sp_cursor_info",
+    "sp_cursor_info_compare",
+    "sp_cursor_info_multi",
+    "sp_cursor_nuclear",
+    "sp_cursor_nuclear_table",
+    "sp_cursor_selection",
+    "sp_cursor_selection_compare",
+    "sp_cursor_selection_multi",
+    "sp_graph",
+    "sp_info",
+    "sp_sel",
+    "tsv_data",
+    "zoom",
+    "zoomout"
+   ],
+   "anchors": [],
+   "textlen": 541,
+   "title": "辐射光谱显示工具 WESViewer"
+  }
+ },
+ "broken": [
+  [
+   "history.html",
+   " geiger counter.html ",
+   "geiger counter.html"
+  ],
+  [
+   "Untitled-1.html",
+   "../../index.html",
+   "../../index.html"
+  ],
+  [
+   "Untitled-1.html",
+   " geiger counter.html ",
+   "geiger counter.html"
+  ],
+  [
+   "info/info008.html",
+   "../energy compensation.html",
+   "energy compensation.html"
+  ],
+  [
+   "info/info010[X].html",
+   " ../database/NE/out/cgi-bin/fissionyield.html",
+   "database/NE/out/cgi-bin/fissionyield.html"
+  ],
+  [
+   "info/info010[X].html",
+   " ../database/PGAA/out/pgaa/egaf.html",
+   "database/PGAA/out/pgaa/egaf.html"
+  ],
+  [
+   "info/info010[X].html",
+   " ../database/N/NGATLAS2/index.html",
+   "database/N/NGATLAS2/index.html"
+  ]
+ ],
+ "anchors_bad": [
+  [
+   "index.html",
+   "detector_list.html#1",
+   "detector_list.html",
+   "1"
+  ],
+  [
+   "index.html",
+   "tool/WESViewer/wesviewer/index.html#__Lu-176.xml//0",
+   "tool/WESViewer/wesviewer/index.html",
+   "__Lu-176.xml//0"
+  ],
+  [
+   "Untitled-1.html",
+   "detector_list.html#1",
+   "detector_list.html",
+   "1"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.1_100_10_10",
+   "tool/info004.html",
+   "0.1_0.1_100_10_10"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.1_100_10_30",
+   "tool/info004.html",
+   "0.1_0.1_100_10_30"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.1_100_10_60",
+   "tool/info004.html",
+   "0.1_0.1_100_10_60"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.1_100_10_300",
+   "tool/info004.html",
+   "0.1_0.1_100_10_300"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.5_100_10_10",
+   "tool/info004.html",
+   "0.1_0.5_100_10_10"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.5_100_10_30",
+   "tool/info004.html",
+   "0.1_0.5_100_10_30"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.5_100_10_60",
+   "tool/info004.html",
+   "0.1_0.5_100_10_60"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.5_100_10_300",
+   "tool/info004.html",
+   "0.1_0.5_100_10_300"
+  ],
+  [
+   "tool/info004.html",
+   "#1_1_100_10_10",
+   "tool/info004.html",
+   "1_1_100_10_10"
+  ],
+  [
+   "tool/info004.html",
+   "#10_10_100_10_10",
+   "tool/info004.html",
+   "10_10_100_10_10"
+  ],
+  [
+   "tool/info004.html",
+   "#100_100_100_10_10",
+   "tool/info004.html",
+   "100_100_100_10_10"
+  ],
+  [
+   "tool/info004.html",
+   "#1_1_1000_10_10",
+   "tool/info004.html",
+   "1_1_1000_10_10"
+  ],
+  [
+   "tool/info004.html",
+   "#1_1_10000_10_10",
+   "tool/info004.html",
+   "1_1_10000_10_10"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.11_100_10_60",
+   "tool/info004.html",
+   "0.1_0.11_100_10_60"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.11_1000_10_60",
+   "tool/info004.html",
+   "0.1_0.11_1000_10_60"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.11_10000_10_60",
+   "tool/info004.html",
+   "0.1_0.11_10000_10_60"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.11_100_60_300",
+   "tool/info004.html",
+   "0.1_0.11_100_60_300"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.11_1000_60_300",
+   "tool/info004.html",
+   "0.1_0.11_1000_60_300"
+  ],
+  [
+   "tool/info004.html",
+   "#0.1_0.11_10000_60_300",
+   "tool/info004.html",
+   "0.1_0.11_10000_60_300"
+  ],
+  [
+   "tool/info004.html",
+   "#0.01_0.02_100_10_60",
+   "tool/info004.html",
+   "0.01_0.02_100_10_60"
+  ],
+  [
+   "tool/info004.html",
+   "#0.01_0.02_1000_10_60",
+   "tool/info004.html",
+   "0.01_0.02_1000_10_60"
+  ],
+  [
+   "tool/info004.html",
+   "#0.01_0.02_10000_10_60",
+   "tool/info004.html",
+   "0.01_0.02_10000_10_60"
+  ]
+ ],
+ "img_missing": [
+  [
+   "Ju.html",
+   "img/ju.jfif",
+   "img/ju.jfif"
+  ],
+  [
+   "other/info004.html",
+   "img/fs1.png",
+   "other/img/fs1.png"
+  ],
+  [
+   "other/info004.html",
+   "img/zd.jpg",
+   "other/img/zd.jpg"
+  ]
+ ],
+ "externals": {
+  "https://zh.m.wikipedia.org/zh/%E7%9B%96%E9%9D%A9%E8%AE%A1%E6%95%B0%E5%99%A8": [
+   "detector.html"
+  ],
+  "https://www.radiation-dosimetry.org/what-is-high-purity-germanium-detector-hpge-definition/": [
+   "detector.html"
+  ],
+  "https://medcom.com/product/imi-inspector-alert-surface-contamination-meter/": [
+   "detector_list.html"
+  ],
+  "https://medcom.com/product/radalert-100x-radiation-detection-instrument/": [
+   "detector_list.html"
+  ],
+  "https://www.fishersci.com/shop/products/radeye-b20-b20-er-multi-purpose-survey-meters/p-4531281": [
+   "detector_list.html"
+  ],
+  "https://ludlums.com/products/health-physics/category/pocket-size-meters-hp": [
+   "detector_list.html"
+  ],
+  "https://ecotestgroup.com/products/terra-with-bluetooth-channel/": [
+   "detector_list.html"
+  ],
+  "https://www.gamma-scout.com/de/": [
+   "detector_list.html"
+  ],
+  "https://item.jd.com/100019254098.html": [
+   "detector_list.html"
+  ],
+  "https://www.bertin-technologies.com/contact/?gammesID=8325&productID=332&form=2": [
+   "detector_list.html"
+  ],
+  "https://www.mazurinstruments.com/buy-a-geiger-counter/": [
+   "detector_list.html",
+   "detector_list.html",
+   "detector_list.html"
+  ],
+  "https://seintl.com/contact-us": [
+   "detector_list.html",
+   "detector_list.html",
+   "detector_list_2.html"
+  ],
+  "https://polimaster.com/eu/product/x-ray-and-gamma-radiation-dosimeters/personal-dosimeters/personal-dosimeter-pm1610/#desc": [
+   "detector_list.html"
+  ],
+  "https://quartarad.com/product/radex-rd1706/": [
+   "detector_list.html"
+  ],
+  "https://detail.tmall.com/item.htm?abbucket=8&id=685661735190&ns=1&spm=a230r.1.14.1.792365fe917Vkp": [
+   "detector_list.html"
+  ],
+  "https://item.taobao.com/item.htm?spm=a21wu.12321156.go-detail.1.1bd4a3aaLMEC2N&id=607283950609": [
+   "detector_list.html"
+  ],
+  "http://www.smach.cn/product/24.html": [
+   "detector_list.html",
+   "info2/SMACH_RG1000.html"
+  ],
+  "https://www.edarley.com/brands/flir/": [
+   "detector_list.html"
+  ],
+  "https://emin.com.mm/polimasterrm1401k-3p-polimaster-rm1401k-3p-multipurpose-hand-held-radiation-monitor-identifier-0-1-msv-h-100-msv-h-138104/pr.html": [
+   "detector_list.html"
+  ],
+  "https://emin.asia/zh_TW/polimasterrm1703ma-ii-bt-polimaster-rm1703ma-ii-bt-bian-xi-shi-fu-she-tan-ce-qi-0-1-usv-h-300-usv-h-tia-x-gamma-138141/pr.html": [
+   "detector_list.html"
+  ],
+  "https://polimaster.com/eu/product/personal-radiation-detectors/": [
+   "detector_list_2.html"
+  ],
+  "https://www.rex-rental.jp/large/050/middle/050/product/20363": [
+   "detector_list_2.html"
+  ],
+  "https://www.sii.co.jp/jp/segg/products/radiation-measurement-protection-products/survey-meters/1072/": [
+   "detector_list_2.html"
+  ],
+  "http://database.xkxiaoyi.ink/": [
+   "index.html",
+   "Untitled-1.html",
+   "other/index.html",
+   "tool/error simulation.html",
+   "tool/jitter simulation.html"
+  ],
+  "https://blog.xkxiaoyi.ink/content/blog7.html": [
+   "index.html",
+   "Untitled-1.html",
+   "Untitled-1.html"
+  ],
+  "https://www.mohw.gov.tw/fp-16-37600-1.html": [
+   "radioactivity in life.html"
+  ],
+  "https://b23.tv/wqfnpiJ": [
+   "Untitled-1.html"
+  ],
+  "http://blog.xkxiaoyi.ink/": [
+   "Untitled-1.html",
+   "other/index.html"
+  ],
+  "https://blog.xkxiaoyi.ink/content/blog8.html": [
+   "Untitled-1.html"
+  ],
+  "https://blog.xkxiaoyi.ink/content/blog2.html": [
+   "Untitled-1.html"
+  ],
+  "https://www.bilibili.com/video/BV1hv4y1y7Tx?share_source=copy_web": [
+   "article/info001.html"
+  ],
+  "https://ameblo.jp/iloveshuto/entry-11249572383.html": [
+   "info/info008.html"
+  ],
+  "https://youtu.be/lRI_KaPfysE": [
+   "info/info008.html"
+  ],
+  "http://ncrponline.org/publications/reports/ncrp-report-160-2/": [
+   "info/info011.html",
+   "info/info012.html",
+   "info/info013.html"
+  ],
+  "https://blog.xkxiaoyi.ink/content/blog4.html": [
+   "info2/FNIRSI_GC-01.html"
+  ],
+  "https://www.bilibili.com/video/BV1EA411f7P8?share_source=copy_web": [
+   "info2/FNIRSI_GC-01.html"
+  ],
+  "https://www.bilibili.com/video/BV1zM411F79J?share_source=copy_web": [
+   "info2/FNIRSI_GC-01.html"
+  ],
+  "https://www.bilibili.com/video/BV1T3411Z78X?share_source=copy_web": [
+   "info2/KB_KB6011.html"
+  ],
+  "https://weesky.taobao.com/index.htm?spm=a1z10.5-c-s.w5002-14477720513.2.5ea0b4faFniePo": [
+   "info2/KB_NEW_KB6011.html"
+  ],
+  "https://www.bilibili.com/video/BV1rL41187G1?share_source=copy_web": [
+   "info2/KB_NEW_KB6011.html"
+  ],
+  "https://item.taobao.com/item.htm?spm=a1z10.1-c-s.w4004-24109075653.7.31e82505LXwGgn&id=703808615547": [
+   "info2/KB_NEW_KB6011.html"
+  ],
+  "https://zh.wikipedia.org/zh-cn/%E5%9B%BD%E9%99%85%E9%98%B2%E6%8A%A4%E7%AD%89%E7%BA%A7%E8%AE%A4%E8%AF%81#IPX%E4%BB%A3%E7%A0%81": [
+   "info2/Polimaster_PM1621.html"
+  ],
+  "https://www.radiacode.com/": [
+   "info2/RADIACODE_RADIACODE102.html"
+  ],
+  "https://www.bilibili.com/video/BV12w411w7MY/": [
+   "info2/RADIACODE_RADIACODE102.html",
+   "info2/RADIACODE_RADIACODE102.html"
+  ],
+  "https://www.bilibili.com/video/BV1354y1A7nH?share_source=copy_web": [
+   "info2/SMACH_RG1000.html",
+   "info2/SMACH_RG1000.html"
+  ],
+  "https://zh.wikipedia.org/zh-cn/%E5%8D%9C%E7%93%A6%E6%9D%BE%E5%88%86%E5%B8%83": [
+   "tool/error simulation.html"
+  ],
+  "https://zh.wikipedia.org/zh-cn/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89": [
+   "tool/WESViewer/index.html"
+  ]
+ },
+ "orphans": [
+  "Ju.html",
+  "cs137.html",
+  "detector_list_2.html",
+  "info/info010[X].html",
+  "other/info004.html",
+  "tips/cs137.html",
+  "tips/xray.html",
+  "xray.html",
+  "关于辐射和辐射探测器的文章.html"
+ ],
+ "unused_assets": [
+  "img/11.jpg",
+  "img/NEW KB6011/A11.png",
+  "img/Normal_distribution_50%_CI_illustration.svg",
+  "img/Polimaster PM1405/A1.mp4",
+  "img/Polimaster PM1405/F1.jpg",
+  "img/Polimaster PM1405/F2.jpg",
+  "img/Polimaster PM1405/F3.jpg",
+  "img/Polimaster PM1405/F4.jpg",
+  "img/Polimaster PM1405/F5.jpg",
+  "img/Polimaster PM1405/F6.jpg",
+  "img/Polimaster PM1405/F7.jpg",
+  "img/Polimaster PM1621/P1.mp4",
+  "img/RADIACODE102/D2.jpg",
+  "img/bg.gif",
+  "img/bg1.gif",
+  "img/fs.png",
+  "img/icon.png",
+  "img/imdetek RAM-01/video.mp4",
+  "img/radiationbackground.png",
+  "tool/WESViewer/IMG/isotope/Lu-176/20230711_211608.jpg",
+  "tool/WESViewer/IMG/isotope/Lu-176/icon1.png"
+ ]
+}

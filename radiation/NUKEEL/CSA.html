@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>电荷灵敏放大器 · 辐射备忘录</title>
+<meta name="description" content="Fusor 惯性静电约束聚变装置的结构、原理与常见误解。">
+<meta name="theme-color" content="#f5f4ef">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="辐射及辐射测量仪器备忘录">
+<meta property="og:title" content="Fusor · 辐射备忘录">
+<meta property="og:description" content="Fusor 惯性静电约束聚变装置的结构、原理与常见误解。">
+<link rel="icon" href="../img/icon.png" sizes="512x512">
+<link rel="stylesheet" href="../css/site.css">
+<!-- Existing site analytics, kept from the original pages. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGG4B16Z2G"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YGG4B16Z2G');
+</script>
+<style>
+      /* 可以稍微调整一下 MathML 的字体大小，让它和中文更协调 */
+        math {
+            font-size: 1.1em; 
+            margin: 0 2px; /* 左右稍微留点空隙 */
+        }
+    </style>
+</head>
+<body class="">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header" data-header>
+<div class="shell header-inner">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<nav class="primary-nav" aria-label="主导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html" aria-current="page">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<div class="header-tools">
+<a class="search-link" href="../search.html" data-search-open aria-label="搜索本站">
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg><span class="search-link-text">搜索</span><kbd class="key-hint">/</kbd>
+</a>
+<details class="nav-drawer" data-nav-drawer>
+<summary class="nav-toggle" aria-label="打开菜单"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>菜单</span></summary>
+<div class="nav-panel">
+<nav aria-label="移动端导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html" aria-current="page">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<a class="nav-panel-search" href="../search.html" data-search-open><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg> 搜索文章与仪器</a>
+<div class="nav-panel-meta">
+<a href="../sitemap.html">全部页面</a>
+<a href="../about.html">关于本站</a>
+</div>
+</div>
+</details>
+</div>
+</div>
+</header>
+<main id="main" class="page page-article">
+<div class="shell">
+<nav class="breadcrumb" aria-label="面包屑"><a href="../index.html">首页</a><span class="crumb-sep" aria-hidden="true">/</span><a href="../article.html">文章与笔记</a><span class="crumb-sep" aria-hidden="true">/</span><span aria-current="page">电荷灵敏放大器的FET设计</span></nav>
+<div class="article-grid">
+<article class="article">
+<header class="article-head">
+<p class="kicker"><a href="../article.html">文章与笔记</a><span class="kicker-sep">/</span><span>核电子学笔记</span></p>
+<h1>电荷灵敏放大器的FET设计</h1>
+
+<div class="article-meta">
+<span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> 阅读约 5 分钟</span>
+
+<span class="badge badge-mid">进阶</span>
+</div>
+<ul class="tag-list"><li>CSA</li><li>电荷灵敏放大器</li><li>FET</li><li>核电子学</li></ul>
+</header>
+<details class="toc-inline">
+<summary>本页目录 <span>2 节</span></summary>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">机制</a></li><li class="toc-item toc-l2"><a href="#sec-2">误解与谣言</a></li></ol>
+</details>
+
+
+<div class="prose" data-prose>
+<p id="sec-1"><strong>电荷灵敏放大器</strong>【以下简称CSA】是连接辐射探测器与后续信号处理电路的核心前端。理想情况下它可以将探测器输出的、携带能量与时间信息的微弱电荷脉冲，无失真地转换为一个幅度与总电荷量成正比的电压阶跃信号，同时尽可能不引入额外噪声。</p>
+<p>CSA 的核心是一个带有电容负反馈的低噪声电压放大器。其工作原理基于“虚地”概念，实现了电荷到电压的线性转换。<br>其基本结构为一个高开环增益的放大器，其输出端与输入端之间跨接一个反馈电容
+	<math>
+            <msub>
+                <mi>C</mi>
+                <mi>f</mi>
+            </msub>
+        </math><br>当探测器产生的电荷
+	<math>
+            <msub>
+                <mi>Q</mi>
+                <mi>in</mi>
+            </msub>
+        </math>
+	注入CSA输入端时，由于放大器增益极高，输入端近似为“虚地”。这迫使几乎全部电荷都转移到反馈电容 
+<math>
+            <msub>
+                <mi>C</mi>
+                <mi>f</mi>
+            </msub>
+        </math>
+	上，使其充电。<br>
+	根据电荷守恒，输出电压的变化量
+	<math>
+    <msub>
+        <mrow>
+            <mi>&#x0394;</mi>
+            <mi>V</mi>
+        </mrow>
+        <mi>out</mi>
+    </msub>
+</math>
+近似为：
+</p>
+
+	<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>&#x0394;<!-- Δ --></mi>
+  <msub>
+    <mi>V</mi>
+    <mrow>
+      <mi>o</mi><mi>u</mi><mi>t</mi>
+    </mrow>
+  </msub>
+  <mo>&#x2248;<!-- ≈ --></mo>
+  <mo>&#x2212;<!-- - --></mo>
+  <mfrac>
+    <mrow>
+      <msub>
+        <mi>Q</mi>
+        <mrow>
+          <mi>i</mi><mi>n</mi>
+        </mrow>
+      </msub>
+    </mrow>
+    <mrow>
+      <msub>
+        <mi>C</mi>
+        <mi>f</mi>
+      </msub>
+    </mrow>
+  </mfrac>
+</math>
+<p>这个公式揭示了CSA最核心的特性：输出电压幅度仅由输入电荷量和反馈电容决定，而与探测器电容<math>
+            <msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	和输入端的杂散电容基本无关。这种对探测器电容变化的“免疫力”，是CSA被广泛采用的根本原因。<br>
+	ENC（等效噪声电荷）是衡量CSA噪声性能的核心指标，其本质是将电路内部所有噪声源的影响，折算到输入端，等效为多少数量的电子电荷。ENC并非单一噪声，而是一个由串联噪声、并联噪声和1/f噪声三大基本成分构成的合成值。
+	<br>
+	CSA的设计充满了精密的权衡，
+	<math>
+            <msub>
+                <mi>C</mi>
+                <mi>f</mi>
+            </msub>
+        </math>
+	越小，增益越高。但高增益会限制动态范围。增大
+	<math>
+            <msub>
+                <mi>C</mi>
+                <mi>f</mi>
+            </msub>
+        </math>
+	可扩大动态范围，但会降低转换增益，并可能恶化ENC。<br>
+输入级通常采用低噪声结型场效应晶体管（JFET），因为它具有高输入阻抗和优异的噪声性能。在高计数率或特殊环境（如高温）下，也会采用双极型晶体管或碳化硅JFET</p>
+
+<p>在我消失的这些时间里我一直在围绕CSA做各种研究。 </p>
+
+<h2 id="sec-2">JFET设计</h2>
+<p>CSA的噪声性能并不是简单的输入电容越小越好，而是一个需要权衡的优化问题。对于JFET，ENC其大小与输入总电容成正比，与跨导的平方根成反比。总输入电容
+	<math>
+            <msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	+JFET的
+	<math>
+            <msub>
+                <mi>C</mi>
+                <mi>f</mi>
+            </msub>
+        </math>
+	+寄生电容越小，理论噪声越低，因为JFET的电压噪声会通过总电容转化为噪声电荷，电容越小，转化后的噪声电荷就越少。<br>
+但在现实中，JFET不是完美的。它的电压噪声和跨导<math>
+            <msub>
+                <mi>gm</mi>
+            </msub>
+        </math>密切相关：<math>
+            <msub>
+                <mi>gm</mi>
+            </msub>
+        </math>越大（电压噪声越小），JFET的输入电容通常也越大。如果追求
+	<math>
+            <msub>
+                <mi>C</mi>
+                <mi>in</mi>
+            </msub>
+        </math>
+	很小，就只能用小JFET，结果Gm小，ENC反而变大。需要在增大
+	<math>
+            <msub>
+                <mi>gm</mi>
+            </msub>
+        </math>
+	和减小<math>
+            <msub>
+                <mi>C</mi>
+                <mi>in</mi>
+            </msub>
+        </math>之间找到最佳平衡点。</p>
+
+<p>当探测器电容<math>
+            <msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	较大时，如果死用一个小<math>
+            <msub>
+                <mi>C</mi>
+                <mi>in</mi>
+            </msub>
+        </math>
+	的JFET，虽然总输入电容增加不多，但因为电压噪声太大，整体噪声反而更高，这时应该主动选择较大<math>
+            <msub>
+                <mi>C</mi>
+                <mi>in</mi>
+            </msub>
+        </math>
+	的JFET（或并联多个JFET），让JFET的输入电容
+	<math>
+		<msub>
+                <mi>C</mi>
+                <mi>in</mi>
+            </msub>
+        </math>
+	接近
+	<math>
+		<msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	此时大
+	<math>
+		<msub>
+                <mi>gm</mi>
+            </msub>
+        </math>
+	带来的噪声降低效果，能超过因
+	<math>
+		<msub>
+                <mi>C</mi>
+                <mi>in</mi>
+            </msub>
+        </math>
+	增大而多出来的那部分噪声，最终ENC达到最低。</p>
+<p>固定同一个JFET时：<math>
+		<msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	越小，ENC越小。增大<math>
+		<msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	会直接让ENC增加。<br>
+	可以调整JFET时：对于不同的<math>
+		<msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	,最佳噪声性能通常出现在<math>
+		<msub>
+                <mi>C</mi>
+                <mi>in</mi>
+            </msub>
+        </math>≈
+	<math>
+		<msub>
+                <mi>C</mi>
+                <mi>det</mi>
+            </msub>
+        </math>
+	附件。这就是为什么老资历工程师会强调大电容探测器要用大电容JFET。</p>
+	<p>关于JFET的工作电流，当<math>
+            <msub>
+                <mi>I</mi>
+                <mi>D</mi>
+            </msub>
+        </math>
+	接近<math>
+            <msub>
+                <mi>I</mi>
+                <mi>DSS</mi>
+            </msub>
+        </math>
+	时（Vgs≈0）：此时跨导<math>
+            <msub>
+                <mi>gm</mi>
+            </msub>
+        </math>
+	确实是最大的。但是，在这个点工作非常危险：最大的问题是栅极电流噪声，当Vgs接近0V甚至微正时，JFET栅极PN结会产生显著漏电流，这会引入巨大的电流噪声。对于核探测器这种高阻抗探测器，电流噪声是致命的。其次是功耗失控，管子发热严重，热噪声随之飙升。<br>
+	当<math>
+            <msub>
+                <mi>I</mi>
+                <mi>D</mi>
+            </msub>
+        </math>
+	取中间值时，虽然<math>
+            <msub>
+                <mi>gm</mi>
+            </msub>
+        </math>
+	相比峰值下降了一点（大约降了20-30%），但此时栅极漏电流极小，且工作点远离截止区和饱和区，线性度最好，电压噪声和电流噪声的综合平衡点最高。</p>
+
+
+	
+	
+	
+	
+  
+
+
+
+</div>
+<footer class="article-foot">
+<nav class="pager" aria-label="上下篇"><a class="pager-link pager-prev" href="../other/info002.html">
+<span>上一篇</span><strong>花岗岩</strong>
+</a><a class="pager-link pager-next" href="../net.html">
+<span>下一篇</span><strong>辐射噪点</strong>
+</a></nav>
+<div class="article-back">
+<a href="../article.html">← 返回文章与笔记</a>
+<a href="#main">回到顶部 ↑</a>
+</div>
+</footer>
+</article>
+<aside class="article-side">
+<nav class="toc" aria-label="本页目录" data-toc>
+<p class="side-title">本页目录</p>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">机制</a></li><li class="toc-item toc-l2"><a href="#sec-2">JFET设计</a></li></ol>
+</nav>
+<!--<div class="side-block">
+<p class="side-title">同主题阅读</p>
+<ul class="side-links"><li><a href="../other/info001.html"><span>中子温度</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="../other/info002.html"><span>花岗岩</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="../net.html"><span>辐射噪点</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li></ul>
+</div>-->
+<a class="side-back" href="../article.html">← 返回文章与笔记</a>
+</aside>
+</div>
+</div>
+</main><footer class="site-footer">
+<div class="shell">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<p>一个关于电离辐射、辐射探测与测量仪器的中文知识库。包含基础概念、剂量与单位、仪器类型、设备评测、能谱查看工具与参考文献。</p>
+<p class="footer-note">静态站点 · 无账号 · 无后端依赖</p>
+</div>
+<div class="footer-col"><h2>知识板块</h2><ul><li><a href="../base.html">基础知识</a></li><li><a href="../info/index.html">测量与仪器</a></li><li><a href="../reviews.html">仪器评测</a></li><li><a href="../article.html">文章与笔记</a></li></ul></div><div class="footer-col"><h2>索引与工具</h2><ul><li><a href="../tools.html">工具与数据</a></li><li><a href="../sitemap.html">全部页面</a></li><li><a href="../changelog.html">更新日志</a></li><li><a href="../search.html">搜索</a></li></ul></div><div class="footer-col"><h2>关于</h2><ul><li><a href="../about.html">关于本站</a></li><li><a href="../about.html#contact">联系方式</a></li><li><a href="http://blog.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">外部博客</a></li><li><a href="http://database.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">数据库</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>Retpaĝo @ 2022-2024.XiaoYi No One Knows the Future<br><span class="muted">Powered by XiaoYi &amp; Mikage</span></p>
+<p class="footer-meta">内容更新至 2024 年 6 月 · <a href="../sitemap.html">站点地图</a> · <a href="../changelog.html">更新日志</a></p>
+</div>
+</div>
+</footer>
+<dialog class="search-dialog" data-search-dialog aria-labelledby="search-dialog-title">
+<div class="search-dialog-inner">
+<div class="search-dialog-head">
+<p class="eyebrow">站点搜索</p>
+<h2 id="search-dialog-title">查找文章、仪器与概念</h2>
+<button class="icon-button" type="button" data-search-close aria-label="关闭搜索"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<form class="search-form" action="../search.html" method="get" role="search" data-search-form>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg>
+<input type="search" name="q" id="site-search-input" placeholder="例如：能量补偿、氡、Cs-137、PM1405" autocomplete="off" data-search-input aria-label="搜索关键词">
+<button type="submit" class="button button-solid">搜索</button>
+</form>
+<div class="search-filters" data-search-filters>
+<button type="button" class="chip is-active" data-section="">全部</button>
+<button type="button" class="chip" data-section="basics">基础知识</button>
+<button type="button" class="chip" data-section="measurement">测量与仪器</button>
+<button type="button" class="chip" data-section="reviews">仪器评测</button>
+<button type="button" class="chip" data-section="articles">文章</button>
+<button type="button" class="chip" data-section="tools">工具</button>
+<button type="button" class="chip" data-section="about">关于</button>
+</div>
+<div class="search-results" data-search-results aria-live="polite"></div>
+<p class="search-footnote">搜索在浏览器本地完成，不会上传查询内容。按 <kbd>Esc</kbd> 关闭，<kbd>↑</kbd> <kbd>↓</kbd> 选择，<kbd>Enter</kbd> 打开。</p>
+</div>
+</dialog>
+<div class="lightbox" data-lightbox hidden>
+<button type="button" class="lightbox-close" data-lightbox-close aria-label="关闭图片"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<figure><img alt="" data-lightbox-img><figcaption data-lightbox-caption></figcaption></figure>
+</div>
+<script src="../js/analytics.js" defer></script>
+<script src="../js/site.js" defer></script>
+
+</body>
+</html>

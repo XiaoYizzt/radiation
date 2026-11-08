@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-base="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>辐射噪点 · 辐射备忘录</title>
+<meta name="description" content="网络图片中的辐射噪点与真实探测器噪点的区别。">
+<meta name="theme-color" content="#f5f4ef">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="辐射及辐射测量仪器备忘录">
+<meta property="og:title" content="辐射噪点 · 辐射备忘录">
+<meta property="og:description" content="网络图片中的辐射噪点与真实探测器噪点的区别。">
+<link rel="icon" href="img/icon.png" sizes="512x512">
+<link rel="stylesheet" href="css/site.css">
+<!-- Existing site analytics, kept from the original pages. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGG4B16Z2G"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YGG4B16Z2G');
+</script>
+
+</head>
+<body class="">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header" data-header>
+<div class="shell header-inner">
+<a class="brand" href="index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<nav class="primary-nav" aria-label="主导航">
+<a href="index.html">首页</a>
+<a href="base.html">基础知识</a><a href="info/index.html">测量与仪器</a><a href="reviews.html">仪器评测</a><a href="article.html" aria-current="page">文章</a><a href="tools.html">工具</a><a href="about.html">关于</a>
+</nav>
+<div class="header-tools">
+<a class="search-link" href="search.html" data-search-open aria-label="搜索本站">
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg><span class="search-link-text">搜索</span><kbd class="key-hint">/</kbd>
+</a>
+<details class="nav-drawer" data-nav-drawer>
+<summary class="nav-toggle" aria-label="打开菜单"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>菜单</span></summary>
+<div class="nav-panel">
+<nav aria-label="移动端导航">
+<a href="index.html">首页</a>
+<a href="base.html">基础知识</a><a href="info/index.html">测量与仪器</a><a href="reviews.html">仪器评测</a><a href="article.html" aria-current="page">文章</a><a href="tools.html">工具</a><a href="about.html">关于</a>
+</nav>
+<a class="nav-panel-search" href="search.html" data-search-open><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg> 搜索文章与仪器</a>
+<div class="nav-panel-meta">
+<a href="sitemap.html">全部页面</a>
+<a href="about.html">关于本站</a>
+</div>
+</div>
+</details>
+</div>
+</div>
+</header>
+<main id="main" class="page page-article">
+<div class="shell">
+<nav class="breadcrumb" aria-label="面包屑"><a href="index.html">首页</a><span class="crumb-sep" aria-hidden="true">/</span><a href="article.html">文章与笔记</a><span class="crumb-sep" aria-hidden="true">/</span><span aria-current="page">辐射噪点</span></nav>
+<div class="article-grid">
+<article class="article">
+<header class="article-head">
+<p class="kicker"><a href="article.html">文章与笔记</a><span class="kicker-sep">/</span><span>核素与现象</span></p>
+<h1>辐射噪点</h1>
+
+<div class="article-meta">
+<span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> 阅读约 1 分钟</span>
+
+<span class="badge badge-intro">入门</span>
+</div>
+<ul class="tag-list"><li>辐射噪点</li><li>图像传感器</li><li>电离</li></ul>
+</header>
+
+
+
+<div class="prose" data-prose>
+<p>之前某些网络热点看到了一些很扯的东西，比如这个</p>
+<img src="img/fs1.png" alt="Big Boat" width="500" height="428" class="content-img" decoding="async">
+<p>实际上真正的辐射噪点是这样的：</p>
+<img src="img/zd.jpg" alt="Big Boat" width="1000" height="1200" class="content-img" decoding="async"> <p>8.25MB?jpg</p>
+<p>可以看到有红绿蓝点以及白点.</p>
+  
+
+
+
+</div>
+<footer class="article-foot">
+<nav class="pager" aria-label="上下篇"><a class="pager-link pager-prev" href="other/info003.html">
+<span>上一篇</span><strong>Fusor</strong>
+</a></nav>
+<div class="article-back">
+<a href="article.html">← 返回文章与笔记</a>
+<a href="#main">回到顶部 ↑</a>
+</div>
+</footer>
+</article>
+<aside class="article-side">
+
+<div class="side-block">
+<p class="side-title">同主题阅读</p>
+<ul class="side-links"><li><a href="other/info001.html"><span>中子温度</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="other/info002.html"><span>花岗岩</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="other/info003.html"><span>Fusor</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li></ul>
+</div>
+
+</aside>
+</div>
+</div>
+</main><footer class="site-footer">
+<div class="shell">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<p>一个关于电离辐射、辐射探测与测量仪器的中文知识库。包含基础概念、剂量与单位、仪器类型、设备评测、能谱查看工具与参考文献。</p>
+<p class="footer-note">静态站点 · 无账号 · 无后端依赖</p>
+</div>
+<div class="footer-col"><h2>知识板块</h2><ul><li><a href="base.html">基础知识</a></li><li><a href="info/index.html">测量与仪器</a></li><li><a href="reviews.html">仪器评测</a></li><li><a href="article.html">文章与笔记</a></li></ul></div><div class="footer-col"><h2>索引与工具</h2><ul><li><a href="tools.html">工具与数据</a></li><li><a href="sitemap.html">全部页面</a></li><li><a href="changelog.html">更新日志</a></li><li><a href="search.html">搜索</a></li></ul></div><div class="footer-col"><h2>关于</h2><ul><li><a href="about.html">关于本站</a></li><li><a href="about.html#contact">联系方式</a></li><li><a href="http://blog.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">外部博客</a></li><li><a href="http://database.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">数据库</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>Retpaĝo @ 2022-2024.XiaoYi No One Knows the Future<br><span class="muted">Powered by XiaoYi &amp; Mikage</span></p>
+<p class="footer-meta">内容更新至 2024 年 6 月 · <a href="sitemap.html">站点地图</a> · <a href="changelog.html">更新日志</a></p>
+</div>
+</div>
+</footer>
+<dialog class="search-dialog" data-search-dialog aria-labelledby="search-dialog-title">
+<div class="search-dialog-inner">
+<div class="search-dialog-head">
+<p class="eyebrow">站点搜索</p>
+<h2 id="search-dialog-title">查找文章、仪器与概念</h2>
+<button class="icon-button" type="button" data-search-close aria-label="关闭搜索"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<form class="search-form" action="search.html" method="get" role="search" data-search-form>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg>
+<input type="search" name="q" id="site-search-input" placeholder="例如：能量补偿、氡、Cs-137、PM1405" autocomplete="off" data-search-input aria-label="搜索关键词">
+<button type="submit" class="button button-solid">搜索</button>
+</form>
+<div class="search-filters" data-search-filters>
+<button type="button" class="chip is-active" data-section="">全部</button>
+<button type="button" class="chip" data-section="basics">基础知识</button>
+<button type="button" class="chip" data-section="measurement">测量与仪器</button>
+<button type="button" class="chip" data-section="reviews">仪器评测</button>
+<button type="button" class="chip" data-section="articles">文章</button>
+<button type="button" class="chip" data-section="tools">工具</button>
+<button type="button" class="chip" data-section="about">关于</button>
+</div>
+<div class="search-results" data-search-results aria-live="polite"></div>
+<p class="search-footnote">搜索在浏览器本地完成，不会上传查询内容。按 <kbd>Esc</kbd> 关闭，<kbd>↑</kbd> <kbd>↓</kbd> 选择，<kbd>Enter</kbd> 打开。</p>
+</div>
+</dialog>
+<div class="lightbox" data-lightbox hidden>
+<button type="button" class="lightbox-close" data-lightbox-close aria-label="关闭图片"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<figure><img alt="" data-lightbox-img><figcaption data-lightbox-caption></figcaption></figure>
+</div>
+<script src="js/analytics.js" defer></script>
+<script src="js/site.js" defer></script>
+
+</body>
+</html>

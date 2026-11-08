@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于能量补偿 · 辐射备忘录</title>
+<meta name="description" content="能量补偿为什么重要：探测器能量响应、补偿方式，以及没有补偿时的读数偏差。">
+<meta name="theme-color" content="#f5f4ef">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="辐射及辐射测量仪器备忘录">
+<meta property="og:title" content="关于能量补偿 · 辐射备忘录">
+<meta property="og:description" content="能量补偿为什么重要：探测器能量响应、补偿方式，以及没有补偿时的读数偏差。">
+<link rel="icon" href="../img/icon.png" sizes="512x512">
+<link rel="stylesheet" href="../css/site.css">
+<!-- Existing site analytics, kept from the original pages. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGG4B16Z2G"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YGG4B16Z2G');
+</script>
+
+</head>
+<body class="">
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header" data-header>
+<div class="shell header-inner">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<nav class="primary-nav" aria-label="主导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html" aria-current="page">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<div class="header-tools">
+<a class="search-link" href="../search.html" data-search-open aria-label="搜索本站">
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg><span class="search-link-text">搜索</span><kbd class="key-hint">/</kbd>
+</a>
+<details class="nav-drawer" data-nav-drawer>
+<summary class="nav-toggle" aria-label="打开菜单"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>菜单</span></summary>
+<div class="nav-panel">
+<nav aria-label="移动端导航">
+<a href="../index.html">首页</a>
+<a href="../base.html">基础知识</a><a href="../info/index.html" aria-current="page">测量与仪器</a><a href="../reviews.html">仪器评测</a><a href="../article.html">文章</a><a href="../tools.html">工具</a><a href="../about.html">关于</a>
+</nav>
+<a class="nav-panel-search" href="../search.html" data-search-open><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg> 搜索文章与仪器</a>
+<div class="nav-panel-meta">
+<a href="../sitemap.html">全部页面</a>
+<a href="../about.html">关于本站</a>
+</div>
+</div>
+</details>
+</div>
+</div>
+</header>
+<main id="main" class="page page-article">
+<div class="shell">
+<nav class="breadcrumb" aria-label="面包屑"><a href="../index.html">首页</a><span class="crumb-sep" aria-hidden="true">/</span><a href="../info/index.html">测量与仪器</a><span class="crumb-sep" aria-hidden="true">/</span><span aria-current="page">关于能量补偿</span></nav>
+<div class="article-grid">
+<article class="article">
+<header class="article-head">
+<p class="kicker"><a href="../info/index.html">测量与仪器</a><span class="kicker-sep">/</span><span>测量与使用</span></p>
+<h1>关于能量补偿</h1>
+
+<div class="article-meta">
+<span class="meta-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> 阅读约 4 分钟</span>
+
+<span class="badge badge-mid">进阶</span>
+</div>
+<ul class="tag-list"><li>能量补偿</li><li>能量响应</li><li>剂量率</li><li>闪烁体</li></ul>
+</header>
+<details class="toc-inline">
+<summary>本页目录 <span>3 节</span></summary>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">检测和补偿辐射能量</a></li><li class="toc-item toc-l2"><a href="#sec-2">探测器能量特性的补偿</a></li><li class="toc-item toc-l2"><a href="#sec-3">使用物理补偿的场景</a></li></ol>
+</details>
+
+
+<div class="prose" data-prose>
+<p>有些辐射测量仪器（盖革计数器）可以进行能量补偿，而有些则不能。</p>
+	
+<p>有能量补偿的型号可以更准确地计算出μSv/h，但如果没有能量补偿，会发生什么情况，请继续阅读。</p> 
+
+
+	<h2 id="sec-1">检测和补偿辐射能量</h2>
+	<p>闪烁体辐射测量仪器可以检测能量的大小。<br>
+       这被用来计算正确的Sv/h。</p>
+	
+	<p>能量补偿有两个目的。<br>
+       我将逐一解释。</p>
+	
+     <h2 id="sec-2">探测器能量特性的补偿</h2>
+	
+	
+<p>辐射探测器包括GM（盖革-缪勒）管和闪烁探测器，两种方法的检测效率都会根据射线能量的高低而变化。</p>
+	
+<p>例如，如果使用能在0.33MeV时检测到30%，在0.66MeV时检测到20%，在1MeV时检测到10%的测量仪器，其计数如以下表格所示。
+(能量越高，辐射被探测到的可能性就越小，因为它更有可能穿过探测器，因此被计数的可能性就越小）。</p>
+	
+<p>为了简化解释，辐射的数量是适当的，详细的数值是近似的。把它看作是一个图像，以察觉有能量补偿和无能量补偿之间的差异。</p>
+
+<table class="noborder layout-table">
+		<tr>
+			<th>0.66MeV（Cs-137）的辐射。</th>
+			<td></td>
+			<th>0.33MeV的辐射</th>
+			<td></td>
+			<th>1 MeV的辐射</th>
+		</tr>
+		<tr>
+			<td colspan="5"><br></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">真实辐射剂量</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>1μSv/h : 0.66MeV×1000个</td>
+					</tr>
+					<tr>
+						<th>总剂量率</th>
+						<td>1μSv/h</td>
+					</tr>
+				</table></div>
+			</td>
+			<td></td>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">真实辐射剂量</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>0.5μSv/h : 0.33MeV×1000个</td>
+					</tr>
+					<tr>
+						<th>总剂量率</th>
+						<td>0.5μSv/h</td>
+					</tr>
+				</table></div>
+			</td>
+			<td></td>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">真实辐射剂量</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>1.5μSv/h : 1MeV×1000个</td>
+					</tr>
+					<tr>
+						<th>总剂量率</th>
+						<td>1.5μSv/h</td>
+					</tr>
+				</table></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">无能量补偿的测量仪器</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>200次计数（计数率20%）</td>
+					</tr>
+					<tr>
+						<th>屏幕显示</th>
+						<td>0.005μSv/h×200＝1μSv/h</td>
+					</tr>
+				</table></div>
+			</td>
+			<td></td>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">无能量补偿的测量仪器</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>300次计数（计数率30%）</td>
+					</tr>
+					<tr>
+						<th>屏幕显示</th>
+						<td><span>0.005μSv/h×300＝1.5μSv/h</span><br>
+							*直接乘以与0.5MeV相同的系数<br>
+                             →高估（显示值高于实际值）
+							</td>
+					</tr>
+				</table></div>
+			</td>
+			<td></td>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">无能量补偿的测量仪器</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>100次计数（计数率10%）</td>
+					</tr>
+					<tr>
+						<th>屏幕显示</th>
+						<td><span>0.005μSv/h×100＝0.5μSv/h</span><br>
+							*直接乘以与0.5MeV相同的系数<br>
+							→ 低估（显示值比实际值低）
+							</td>
+					</tr>
+				</table></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">带能量补偿的测量仪器</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>200次计数（计数率20%）</td>
+					</tr>
+					<tr>
+						<th>屏幕显示</th>
+						<td>0.005μSv/h×200＝1μSv/h</td>
+					</tr>
+				</table></div>
+			</td>
+			<td></td>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">带能量补偿的测量仪器</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>300次计数（计数率30%）</td>
+					</tr>
+					<tr>
+						<th>屏幕显示</th>
+						<td><span>0.00167μSv/h×300＝0.5μSv/h</span><br>
+							*乘以0.33MeV的系数</td>
+					</tr>
+				</table></div>
+			</td>
+			<td></td>
+			<td>
+				<div class="table-scroll" role="region" tabindex="0" aria-label="数据表格，可横向滚动" data-cols="2"><table class="csv">
+					<tr>
+						<th colspan="2">带能量补偿的测量仪器</th>
+					</tr>
+					<tr>
+						<th>γ射线</th>
+						<td>100次计数（计数率10%）</td>
+					</tr>
+					<tr>
+						<th>屏幕显示</th>
+						<td><span>0.01μSv/h×100＝1μSv/h</span><br>
+							*乘以1MeV的系数</td>
+					</tr>
+				</table></div>
+			</td>
+		</tr>
+	</table>
+
+
+
+
+<p>如果你什么都不做就进行测量，那么计算结果就会像上面那个没有能量补偿的例子。</p>
+
+<p>在上面的例子中，没有能量补偿的仪器被校准为0.66MeV。<br>
+(通常校准为0.66MeV的铯-137）。</p>
+
+<p>当测量与校准能量相同的辐射时，剂量率与实际剂量一致。</p>
+
+<p>然而，如果能量改变，每个计数的剂量率就会不同，探测器捕获辐射的概率（计数率）也会改变。<br>
+在上面的例子中，在0.33MeV时，计数率为30%，导致高估的显示值为1.5μSv/h，而它本应是0.5μSv/h。<br>
+另一方面，1MeV的计数率只有10%，所以应该是1.5 µSv/h，却低估了0.5 µSv/h。
+</p>
+
+<p>一般来说，背景辐射往往是低能量的，所以这个数字往往更高。</p>
+
+<p>在能量补偿检测器中，检测器检测辐射的能量，并根据其能量水平改变计算剂量的差异系数，以改善这些差异。<br>
+通过这种方式，可以计算出真实的辐射剂量。</p>
+
+<p>使用能量补偿的仪器，根据能量的不同，可以使用0.33MeV的系数或1MeV的系数来计算正确的剂量率。</p>
+
+<p>然而，即使有能量补偿，补偿的程度也是不同的。<br>
+例如，有的只有四个能量区的系数，而有的则有几百个系数。<br>
+也很难准确地检测到能量的大小，所以不可避免地出现偏差。
+即使提供了能量补偿，它也不是完美的，所以根据机型的不同，显示的值也有差异。</p>
+
+<p>在测量仪器的说明书中有时会有能量特性的图表。大多数昂贵的型号会有一个图。</p>
+
+<h2 id="sec-3">使用物理补偿的场景</h2>
+
+<p>闪烁法可以检测能量，而GM管（盖革-缪勒计数器）只能检测辐射的次数。
+因此，不能使用上述的测量能量大小的方法</p>
+
+<p>因此，采用一种方法，在GM管上物理连接一个过滤器，使根据能量的辐射计数率具有与'1厘米剂量当量'类型中虚线相同的形状。</p>
+
+<p>例如，GAMMA-SCOUT和RadEye G-10</p>
+
+<p>即使有能量补偿，性能也是有差别的，所以在购买测量仪器的时候，最好是检查一下补偿能力的差别。</p>
+
+<p>以上两种型号都是GM管型的，但有些闪烁型的型号也使用物理过滤片来调整能量，因为检测每个能量的成本很高。</p>
+
+
+
+
+</div>
+<footer class="article-foot">
+<nav class="pager" aria-label="上下篇"><a class="pager-link pager-prev" href="../info/info008.html">
+<span>上一篇</span><strong>正确的使用盖革计数器</strong>
+</a><a class="pager-link pager-next" href="../info/info017.html">
+<span>下一篇</span><strong>每分钟计数（CPM）</strong>
+</a></nav>
+<div class="article-back">
+<a href="../info/index.html">← 返回测量与仪器</a>
+<a href="#main">回到顶部 ↑</a>
+</div>
+</footer>
+</article>
+<aside class="article-side">
+<nav class="toc" aria-label="本页目录" data-toc>
+<p class="side-title">本页目录</p>
+<ol class="toc-list"><li class="toc-item toc-l2"><a href="#sec-1">检测和补偿辐射能量</a></li><li class="toc-item toc-l2"><a href="#sec-2">探测器能量特性的补偿</a></li><li class="toc-item toc-l2"><a href="#sec-3">使用物理补偿的场景</a></li></ol>
+</nav>
+<div class="side-block">
+<p class="side-title">同主题阅读</p>
+<ul class="side-links"><li><a href="../info/info008.html"><span>正确的使用盖革计数器</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li><li><a href="../info/info022.html"><span>用盖革计数器测量 β 射线时的错误指示</span><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></li></ul>
+</div>
+<a class="side-back" href="../info/index.html">← 返回测量与仪器</a>
+</aside>
+</div>
+</div>
+</main><footer class="site-footer">
+<div class="shell">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="../index.html" aria-label="辐射备忘录 首页">
+<span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.4" ry="3.9" transform="rotate(120 12 12)"/></svg></span>
+<span class="brand-text"><strong>辐射备忘录</strong><span class="brand-sub">辐射 · 探测器 · 测量</span></span>
+</a>
+<p>一个关于电离辐射、辐射探测与测量仪器的中文知识库。包含基础概念、剂量与单位、仪器类型、设备评测、能谱查看工具与参考文献。</p>
+<p class="footer-note">静态站点 · 无账号 · 无后端依赖</p>
+</div>
+<div class="footer-col"><h2>知识板块</h2><ul><li><a href="../base.html">基础知识</a></li><li><a href="../info/index.html">测量与仪器</a></li><li><a href="../reviews.html">仪器评测</a></li><li><a href="../article.html">文章与笔记</a></li></ul></div><div class="footer-col"><h2>索引与工具</h2><ul><li><a href="../tools.html">工具与数据</a></li><li><a href="../sitemap.html">全部页面</a></li><li><a href="../changelog.html">更新日志</a></li><li><a href="../search.html">搜索</a></li></ul></div><div class="footer-col"><h2>关于</h2><ul><li><a href="../about.html">关于本站</a></li><li><a href="../about.html#contact">联系方式</a></li><li><a href="http://blog.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">外部博客</a></li><li><a href="http://database.xkxiaoyi.ink/" class="external" target="_blank" rel="noopener noreferrer">数据库</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>Retpaĝo @ 2022-2024.XiaoYi No One Knows the Future<br><span class="muted">Powered by XiaoYi &amp; Mikage</span></p>
+<p class="footer-meta">内容更新至 2024 年 6 月 · <a href="../sitemap.html">站点地图</a> · <a href="../changelog.html">更新日志</a></p>
+</div>
+</div>
+</footer>
+<dialog class="search-dialog" data-search-dialog aria-labelledby="search-dialog-title">
+<div class="search-dialog-inner">
+<div class="search-dialog-head">
+<p class="eyebrow">站点搜索</p>
+<h2 id="search-dialog-title">查找文章、仪器与概念</h2>
+<button class="icon-button" type="button" data-search-close aria-label="关闭搜索"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<form class="search-form" action="../search.html" method="get" role="search" data-search-form>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></svg>
+<input type="search" name="q" id="site-search-input" placeholder="例如：能量补偿、氡、Cs-137、PM1405" autocomplete="off" data-search-input aria-label="搜索关键词">
+<button type="submit" class="button button-solid">搜索</button>
+</form>
+<div class="search-filters" data-search-filters>
+<button type="button" class="chip is-active" data-section="">全部</button>
+<button type="button" class="chip" data-section="basics">基础知识</button>
+<button type="button" class="chip" data-section="measurement">测量与仪器</button>
+<button type="button" class="chip" data-section="reviews">仪器评测</button>
+<button type="button" class="chip" data-section="articles">文章</button>
+<button type="button" class="chip" data-section="tools">工具</button>
+<button type="button" class="chip" data-section="about">关于</button>
+</div>
+<div class="search-results" data-search-results aria-live="polite"></div>
+<p class="search-footnote">搜索在浏览器本地完成，不会上传查询内容。按 <kbd>Esc</kbd> 关闭，<kbd>↑</kbd> <kbd>↓</kbd> 选择，<kbd>Enter</kbd> 打开。</p>
+</div>
+</dialog>
+<div class="lightbox" data-lightbox hidden>
+<button type="button" class="lightbox-close" data-lightbox-close aria-label="关闭图片"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<figure><img alt="" data-lightbox-img><figcaption data-lightbox-caption></figcaption></figure>
+</div>
+<script src="../js/analytics.js" defer></script>
+<script src="../js/site.js" defer></script>
+
+</body>
+</html>
