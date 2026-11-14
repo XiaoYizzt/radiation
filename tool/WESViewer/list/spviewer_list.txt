@@ -5,11 +5,13 @@ Am-241 CZT.csv,Am-241 CdTe
 Am-241_Pa-233.xml,Am-241+Pa-233
 Ba-133.xml,Ba-133
 Cs-137.xml,Cs-137 CsI
+Cs-137 CT.csv,Cs-137 CdTe
 Cs137 Ge.csv,Cs-137 HPGe 2keV
 Co60.csv,Co-60 HPGe 2keV
 DU.xml,DU
 Eu-152.xml,Eu-152
 H-3.xml,H-3
+H-3.csv,H-3 氚化钛 铜基底 SiPIN 139eV
 I-125.xml,I-125
 Kr-85.xml,Kr-85 CsI
 Kr85 HPGe.csv,Kr-85 HPGe 2keV
