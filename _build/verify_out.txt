@@ -1,6 +1,6 @@
 {
-  "new_page_count": 81,
-  "old_page_count": 75,
+  "new_page_count": 83,
+  "old_page_count": 83,
   "notes": [
     "pre-existing missing images kept: ['img/ju.jfif', 'other/img/fs1.png', 'other/img/zd.jpg']"
   ],
@@ -125,14 +125,14 @@
     ]
   ],
   "external_urls_new": 48,
-  "image_refs_old": 248,
-  "image_refs_new": 248,
+  "image_refs_old": 253,
+  "image_refs_new": 253,
   "pages_with_js_errors": []
 }
 
 CHECKS:
 PASS all original pages exist
-PASS article body text preserved
+FAIL article body text preserved :: [{"page": "detector.html", "reference_chars": 5117, "new_chars": 5111}, {"page": "other/info003.html", "reference_chars": 879, "new_chars": 875}]
 PASS dropped title headings represented
 PASS WESViewer body text preserved
 PASS all referenced local assets exist
@@ -145,4 +145,4 @@ PASS no duplicate ids
 PASS every page has an h1
 PASS every page has a title
 
-FAILURES: 0
+FAILURES: 1

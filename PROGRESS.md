@@ -1,15 +1,15 @@
 # PROGRESS — 辐射备忘录
 
-> 最后更新：2026-11-03（Asia/Singapore）
+> 最后更新：2026-11-24（Asia/Singapore）
 > 项目根目录：`C:\Users\XkXia\Desktop\radiation`
-> 当前状态：核心重构已完成，可部署；WESViewer 已支持 CSV/TXT 并同步到全部工作区，新增完全本地的用户文件导入，手机端图表空白问题已修复；无阻塞性开发任务。
+> 当前状态：核心重构已完成，可部署；WESViewer 已支持 CSV/TXT、完全本地的用户文件导入和手机端图表，新增峰选区 FWHM（keV/%）显示；`article/info006.html` 已接入文章目录、上下篇、搜索和站点地图；无阻塞性开发任务。
 > 本文件是交接记录；详细操作说明见 [README.md](README.md)。
 
 ---
 
 ## 0. 一句话状态
 
-原有纯 HTML 辐射知识网站已完成整站前端重构：81 个 HTML 页面（75 个原有页面 + 6 个新增页面）和 1 个 PDF 已统一为现代静态知识门户，保留原 URL、文章正文、图片、链接、锚点、公式/表格与交互工具；自动完整性校验 13 项全部通过。WESViewer 已新增通用 CSV/TXT 光谱解析并同步到全部工作区，访问者可直接在浏览器内导入自己的 CSV/XML/TXT（不上传、不持久化）；示例文件、旧 XML、计数-only 和手机端场景均已测试。下一步主要是人工验收、按需修复旧站遗留失效链接，以及真实设备测试。
+原有纯 HTML 辐射知识网站已完成整站前端重构：82 个 HTML 页面（75 个原有页面 + 7 个新增页面/文章）和 1 个 PDF 已统一为现代静态知识门户，保留原 URL、文章正文、图片、链接、锚点、公式/表格与交互工具；自动完整性校验 13 项中 12 项通过，`detector.html` / `other/info003.html` 仅各有 6/4 字符的旧正文差异（与本次 WESViewer 改动无关）。WESViewer 已新增通用 CSV/TXT 光谱解析并同步到全部工作区，访问者可直接在浏览器内导入自己的 CSV/XML/TXT（不上传、不持久化）；峰选区现在显示 FWHM（keV）和 FWHM/E（%）。示例文件、旧 XML、计数-only、手机端、FWHM 和新文章场景均已测试。下一步主要是人工验收、按需修复旧站遗留失效链接，以及真实设备测试。
 
 ---
 
@@ -19,7 +19,7 @@
 | --- | --- |
 | 正式站点 | 项目根目录，入口 [index.html](index.html) |
 | 旧站备份 | `_build/orig/`，仅用于重建与校验，**不要部署** |
-| HTML 页面 | 81 个（原有 75 + 新增 6） |
+| HTML 页面 | 82 个（原有 75 + 新增 7） |
 | PDF | 1 个：[修正关于KB6011型辐射计能量响应的方案.pdf](修正关于KB6011型辐射计能量响应的方案.pdf) |
 | 技术栈 | HTML + CSS + 原生 JavaScript |
 | 运行时后端 | 无 |
@@ -103,7 +103,7 @@ node _build/tests/test_parsers.js
 - 新增统一面包屑；所有栏目页与文章页都有明确上级路径。
 - 修正原站分类混乱：文章、评测、工具、医学辐射、存档页面分别归位。
 - 首页从“文章链接目录”改为门户：主题卡片、阅读路径、精选评测、最近更新、工具入口、随机知识提示。
-- 新增 [sitemap.html](sitemap.html)，全站 81 个 HTML + 1 个 PDF 均可从索引到达。
+- 新增 [sitemap.html](sitemap.html)，全站 82 个 HTML + 1 个 PDF 均可从索引到达。
 - 新增 [changelog.html](changelog.html)，合并旧首页更新日志与“先前的更新历史”。
 - 保留旧首页、旧重复页面、缺失资源页面等为带说明的存档页。
 
@@ -365,7 +365,7 @@ node _build/tests/test_parsers.js
 | 手机 390px 选择/导入 | PASS：导入区可见，图表正常 |
 | 网站库在导入后继续加载 | PASS |
 | 网络请求 | 只记录到站点原有的 Google Analytics `page_view`；无文件上传、无文件内容/文件名进入请求；无 XHR/fetch 导入请求 |
-| 语法检查 / 站点校验 | 9 份 `spviewer.js` 通过 `node --check`；`FAILURES: 0` |
+| 语法检查 / 站点校验 | 9 份 `spviewer.js` 通过 `node --check`；WESViewer/链接/资源相关检查 PASS；站点正文另有 2 页旧差异（详见第 6 节） |
 
 截图：[wesviewer-import-desktop.png](_build/screenshots/wesviewer-import-desktop.png)、[wesviewer-import-mobile.png](_build/screenshots/wesviewer-import-mobile.png)、[wesviewer-import-click.png](_build/screenshots/wesviewer-import-click.png)、[wesviewer-import-click-mobile.png](_build/screenshots/wesviewer-import-click-mobile.png)、[wesviewer-import-list-desktop.png](_build/screenshots/wesviewer-import-list-desktop.png)、[wesviewer-import-xml.png](_build/screenshots/wesviewer-import-xml.png)、[wesviewer-import-counts-only.png](_build/screenshots/wesviewer-import-counts-only.png)。
 
@@ -382,6 +382,89 @@ node _build/tests/test_parsers.js
 - 不做持久化；刷新/关闭即清除，符合本次隐私要求。
 - 未在真实 iOS Safari / Android Chrome 上人工验收；手机端使用 Chrome Headless 390px 测试。
 - 用户导入 XML 的多光谱选择沿用现有 XML 行为；若出现既有 `undefined` 子项，不是导入面板新增的问题。
+
+### 峰选区 FWHM 显示（2026-11-24）
+
+**功能**：
+
+- 在“光标位置信息”表格中新增两行：
+  - `FWHM`：单位 keV；
+  - `FWHM/E`：单位 %（FWHM ÷ 峰位能量 × 100）。
+- 用户在谱图上拖选一个峰（或点击范围预设）后自动计算；鼠标移开光标后数值保留，直到重新选峰或切换光谱。
+- 选择 BG 左/右区域时不计算峰 FWHM，避免把 BG 区误当峰；无能量刻度的文件显示 `—`，不虚构 keV。
+
+**算法**：
+
+1. 在选区 `[from, to]` 内寻找最大计数通道，作为峰位候选；
+2. 以峰高一半为半高，从峰位向左右**越过选区边界继续搜索**，直到找到半高交点；因此选区稍窄（只框住峰顶）也能计算；
+3. 峰高默认扣除以当前选区左右 BG 拟合出的线性本底（与图上红线一致）；若本底拟合无法得到有效交点，回退到原始谱；
+4. 左右交点用相邻通道线性插值，再通过现有逐通道能量刻度换算为 keV；
+5. `FWHM/E = FWHM_keV / 峰位能量_keV × 100`；
+6. 悬停可看到提示：峰位能量、FWHM、FWHM/E 和使用的本底方式。
+
+**实测**：
+
+- Cs-137 单独工作区，范围预设选择 633.02–714.99 keV：
+  - 峰位约 650.66 keV；
+  - FWHM **37.07 keV**；
+  - FWHM/E **5.70%**；
+  - 光标移开后数值保持。
+- 选区略窄时通过向外搜索半高交点成功计算。
+- 无能量刻度路径保留 `—`。
+- 截图：[wesviewer-fwhm.png](_build/screenshots/wesviewer-fwhm.png)。
+
+**修改文件**：
+
+- 9 个工作区 `spviewer.js`：注入 FWHM 行、计算函数、选区更新调用。
+- [PROGRESS.md](PROGRESS.md)、[README.md](README.md)。
+
+**边界**：
+
+- FWHM 依赖选区中包含峰最大值；若选到噪声/肩峰，结果只是该局部最大值的半高宽。
+- 默认使用选区左右 BG 线性本底；`BG光谱对比` 的 `without_bg` 模式使用原始谱。
+- 不计算 FWHM 的不确定度；多峰重叠时只按当前选区最大峰估算。
+- 只有有能量刻度的光谱才显示 keV/%；通道-only 文件显示 `—`。
+
+### 新文章 `article/info006.html`（2026-11-24）
+
+**文章**：`使用JFET作为探测器`，正文由用户撰写，位于 `article/info006.html`。
+
+**接入内容**：
+
+- 从原页面的 `.prose` 抽取正文，写入构建源片段 `_build/orig/article/info006.html`；新增 `article/info006.html` 到 `_build/site_data.py`。
+- 用现有 `render_article()` 模板重新生成页面：
+  - 标题、面包屑、文章头、阅读时间、日期、标签、进阶徽章；
+  - 正文中的 5 张图片（JFET、CSA、脉冲、整形、MCA 谱图）均存在；
+  - 本页目录 6 项：`#sec-1` 至 `#sec-6`，包含“脉冲”和“多通道分析仪”两个 h3；
+  - 上一篇：`article/info005.html`（野狼 V1019 氚手表）；
+  - 下一篇：`other/info005.html`（网站一周年！）；
+  - 同主题阅读：info001 / info002 / info003。
+- 更新相邻文章：
+  - `article/info005.html` 的下一篇改为新文章；
+  - `other/info005.html` 的上一篇改为新文章。
+- 更新文章索引 [article.html](article.html)：实验与记录 5→6 篇、总数 11→12 篇，并新增文章卡片。
+- 更新 [sitemap.html](sitemap.html)：文章与笔记 11→12，站点总数 81→82 HTML。
+- 更新 [js/search-index.js](js/search-index.js)：新增 `article/info006.html` 条目（含正文摘要，可直接搜索 JFET）。
+- 更新 [index.html](index.html) 的“最近更新”和 [changelog.html](changelog.html)：新增 2026/11/24 条目；`_build/changelog.json` 同步加入，便于以后构建。
+- 元数据暂定：日期 `2026/11/24`、分组“实验与记录”、等级“进阶”、标签 JFET/半导体探测器/前置放大器/整形放大器；如需改日期或等级，修改 `_build/site_data.py` 后重新渲染该页即可。
+
+**验证**：
+
+- 桌面 1440px、手机 390px 页面正常，无横向溢出。
+- 6 个目录锚点全部存在，5 张正文图片全部加载成功。
+- 上一篇/下一篇链接和标题正确；相关阅读 3 条正常。
+- 文章索引卡片、12 篇计数、实验与记录 6 篇计数正确。
+- 站点地图链接和搜索 `JFET` 均能找到新文章。
+- 截图：[article-info006-desktop.png](_build/screenshots/article-info006-desktop.png)、[article-info006-mobile.png](_build/screenshots/article-info006-mobile.png)。
+- 自动校验未报告新文章正文/链接问题；站点仍有 2 页旧正文差异（见第 6 节）。
+
+**修改文件**：
+
+- [article/info006.html](article/info006.html)
+- [article.html](article.html)、[sitemap.html](sitemap.html)、[js/search-index.js](js/search-index.js)、[index.html](index.html)、[changelog.html](changelog.html)
+- `_build/orig/article/info006.html`、`_build/site_data.py`、`_build/changelog.json`
+- [article/info005.html](article/info005.html)、[other/info005.html](other/info005.html)（上下篇）
+- [PROGRESS.md](PROGRESS.md)
 
 ### 清理
 
@@ -434,7 +517,7 @@ node _build/tests/test_parsers.js
 
 ### 新增页面
 
-[reviews.html](reviews.html)、[tools.html](tools.html)、[about.html](about.html)、[search.html](search.html)、[sitemap.html](sitemap.html)、[changelog.html](changelog.html)
+[reviews.html](reviews.html)、[tools.html](tools.html)、[about.html](about.html)、[search.html](search.html)、[sitemap.html](sitemap.html)、[changelog.html](changelog.html)、[article/info006.html](article/info006.html)
 
 ### 新增样式
 
@@ -452,8 +535,11 @@ node _build/tests/test_parsers.js
 
 - 全部 75 个原有 HTML 页面重写为统一模板。
 - 9 个 WESViewer 工作区页面加入站点壳与 `viewer.css`，业务脚本升级为统一解析器版本。
-- [tool/WESViewer/list/spviewer.js](tool/WESViewer/list/spviewer.js) 及 8 个单独工作区 `spviewer.js`：新增 CSV/TXT 解析、无能量刻度分支、错误提示、零索引映射修正、手机端刻度数量限制，以及完全本地的用户文件导入（FileReader、拖放、多文件、删除、local hash 隔离）。
+- [tool/WESViewer/list/spviewer.js](tool/WESViewer/list/spviewer.js) 及 8 个单独工作区 `spviewer.js`：新增 CSV/TXT 解析、无能量刻度分支、错误提示、零索引映射修正、手机端刻度数量限制、完全本地的用户文件导入（FileReader、拖放、多文件、删除、local hash 隔离），以及峰选区 FWHM（keV/%）显示。
 - `tool/WESViewer/isotope/Am-241/Am-241/spviewer_list.txt`：把错误的 `Am-241.txt` 改为实际文件 `Am241.txt`。
+- [article/info006.html](article/info006.html) 及其构建源 `_build/orig/article/info006.html`：新增 JFET 文章，目录/上下篇/相关阅读由统一模板生成。
+- [article.html](article.html)、[sitemap.html](sitemap.html)、[js/search-index.js](js/search-index.js)、[index.html](index.html)、[changelog.html](changelog.html)：加入新文章卡片、索引、搜索和更新日志。
+- [article/info005.html](article/info005.html)、[other/info005.html](other/info005.html)：更新相邻文章上下篇。
 - [css/viewer.css](css/viewer.css)：增加无能量刻度提示样式、导入/拖放/列表/手机端样式；修正手机端浮动重置规则误命中 Flot `.tickLabel` 导致图表空白的问题。
 - [README.md](README.md)、[PROGRESS.md](PROGRESS.md) 文档更新。
 
@@ -483,7 +569,7 @@ python _build/verify.py
 | 检查项 | 结果 |
 | --- | --- |
 | 原有 75 个页面全部存在 | PASS |
-| 文章正文逐页对比 | PASS |
+| 文章正文逐页对比 | 2 页差异：`detector.html` 6 字符、`other/info003.html` 4 字符（与本次 WESViewer 改动无关，需人工确认） |
 | 原 H1/标题日期被页面标题表示 | PASS |
 | WESViewer 工作区正文逐页对比 | PASS |
 | 引用本地 CSS/JS/图片存在 | PASS |
@@ -496,11 +582,11 @@ python _build/verify.py
 | 每页有 H1 | PASS |
 | 每页有 `<title>` | PASS |
 
-**FAILURES: 0**
+**FAILURES: 1**（仅上述两页旧正文差异；WESViewer 相关检查、链接、资源、锚点、H1/title 均 PASS）
 
-结构化检查另行确认：81 页均含统一 station header、footer、`main id="main"`、搜索 dialog、`site.css`、`site.js`。
+结构化检查另行确认：82 页均含统一 station header、footer、`main id="main"`、搜索 dialog、`site.css`、`site.js`。
 
-构建可复现性：删除开发临时文件后重新运行 `python _build/build.py`，仍生成 81 页且校验通过。
+构建源可复现性：新文章正文片段 `_build/orig/article/info006.html` 与 `_build/site_data.py` 元数据已加入，后续 `python _build/build.py` 会按统一模板生成该文章；本轮为避免覆盖用户现有页面改动，只单独渲染了 info006 及其相邻导航，没有全量重跑构建。
 
 WESViewer 解析器另有离线回归测试：`node _build/tests/test_parsers.js`，覆盖两个示例、计数-only、无表头单列和错误输入；结果见 [parser-test-output.txt](_build/tests/parser-test-output.txt)。
 
@@ -540,6 +626,8 @@ WESViewer 解析器另有离线回归测试：`node _build/tests/test_parsers.js
 - 灵敏度模拟：Canvas 正常。
 - WESViewer：原有 Am-241 XML 正常；Ra-226 CSV 与 Am241 TXT 正常绘图；计数-only CSV 的通道轴/无能量提示正常；390px 手机视口下 Cs-137、Am-241、CSV/TXT 图表修复后均能看到曲线和双轴；500px 无横向溢出；Am-241 单独工作区 TXT 和临时 CSV 均实测可打开。
 - WESViewer 本地导入：CSV/XML/TXT 三个文件一次导入、分别切换、拖放、重复跳过、删除、刷新清除、空文件/损坏文件/不支持扩展名/超 10 MB、计数-only、手机 390px 全部实测通过；导入期间无文件上传请求，只有站点原有 Google Analytics 的 page_view。
+- WESViewer FWHM：Cs-137 单体页面拖选/范围预设 633.02–714.99 keV，峰位约 650.66 keV，FWHM **37.07 keV**，FWHM/E **5.70%**；光标移开后保持；无能量刻度显示 `—`。
+- 新文章 `article/info006.html`：桌面/手机渲染、6 个目录锚点、5 张图片、上下篇、相关阅读、文章索引、站点地图和搜索 `JFET` 全部通过。
 
 ---
 
@@ -623,7 +711,7 @@ WESViewer 解析器另有离线回归测试：`node _build/tests/test_parsers.js
    python _build/verify.py
    ```
 
-   预期末尾为 `FAILURES: 0`。
+   预期 WESViewer/链接/资源相关项为 PASS；若出现正文差异，先确认是否为人工内容修改，不要直接更新基线。
 4. 不要移动/改名现有 HTML、图片、PDF；旧 URL 兼容是硬性要求。
 5. 不要直接改 `_build/orig/`；它只是基线备份。
 6. 部署时上传根目录除 `_build/` 外的文件。
@@ -664,6 +752,7 @@ python -m http.server 8000
 
 - 网站已经是可部署的正式版本，**不是** `_build/orig`。
 - 内容完整性、链接目标、锚点、图片引用和页面结构自动校验均通过。
-- WESViewer 已支持 CSV/TXT 并同步到全部单独工作区；示例文件、旧 XML、计数-only、Am-241 单独工作区和完全本地的用户文件导入均已实际测试；手机端 390px 图表空白问题已修复并复测。
+- WESViewer 已支持 CSV/TXT 并同步到全部单独工作区；示例文件、旧 XML、计数-only、Am-241 单独工作区、完全本地的用户文件导入和峰选区 FWHM（keV/%）均已实际测试；手机端 390px 图表空白问题已修复并复测。
+- 新文章 `article/info006.html` 已加入文章索引、上下篇、搜索、站点地图、首页最近更新和更新日志，桌面/手机实测通过。
 - 没有阻塞性 Bug。
 - 需要你决策的是：旧站遗留失效链接是否修复、是否扩大搜索范围、是否压缩媒体资源、是否继续扩展其他仪器格式，以及真实设备验收。

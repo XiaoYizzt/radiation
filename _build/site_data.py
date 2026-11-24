@@ -407,6 +407,14 @@ PAGES = {
         summary="野狼 V1019 氚手表、T25/T100 的含义与夜光表现。",
         image="img/T100/A1.jpg", date="2024/2/21",
     ),
+    "article/info006.html": dict(
+        title="使用JFET作为探测器",
+        card="使用 JFET 作为探测器",
+        section="articles", sub="fieldnotes", level="进阶",
+        tags=["JFET", "半导体探测器", "前置放大器", "整形放大器"],
+        summary="用 JFET 的半导体结构尝试探测电离辐射：PN 结与耗尽区响应、CSA/整形放大链路和初步能谱。",
+        image="img/article/JFET.png", date="2026/11/24",
+    ),
     "other/info005.html": dict(
         title="网站一周年！",
         card="网站一周年：仪器、数据与回顾",

@@ -42,6 +42,8 @@ var sp_cursor_selection_multi_html;
 
 function spviewer_init() {
 	
+	init_fwhm_info_rows();
+	
 	sp_info_html = $("#sp_info").html();
 	sp_cursor_info_html = $("#sp_cursor_info").html();
 	sp_cursor_info_compare_html = $("#sp_cursor_info_compare").html();
@@ -5420,6 +5422,7 @@ function draw_graph_common(spectrum) {
 		if(selected_spectrum['without_bg']) {
 			update_selection_info_without_bg(selected_spectrum, spectrum_data_ch, ranges, find_ev_x, cpsDecimals);
 		} else {
+			var fwhm_is_peak = (range_select_mode == 'center');
 			if(range_select_mode == 'center') {
 				range_selectd = ranges;
 				var from = Math.round(ranges.xaxis.from);
@@ -5446,6 +5449,9 @@ function draw_graph_common(spectrum) {
 			$("#bg_range_left").css('background-color', '');
 			$("#bg_range_right").css('background-color', '');
 			update_selection_info(selected_spectrum, spectrum_data_ch, range_selectd, find_ev_x, cpsDecimals);
+			if(!fwhm_is_peak) {
+				clear_fwhm_info("请在峰中心完整拖选峰范围");
+			}
 		}
 	});
 	
@@ -6233,6 +6239,164 @@ function draw_graph_common_log_tick_generator(min_cps, axis) {
 	return res;
 }
 
+function init_fwhm_info_rows() {
+	var table = $("#sp_cursor_info table");
+	if(table.length === 0 || $("#fwhm").length > 0) {
+		return;
+	}
+	table.append('<tr><th title="拖选完整峰后计算">FWHM</th>'
+		+ '<td style="text-align: right"><span id="fwhm" title="拖选完整峰后计算">—</span> keV</td></tr>'
+		+ '<tr><th title="FWHM / 峰位能量">FWHM/E</th>'
+		+ '<td style="text-align: right"><span id="fwhm_percent" title="拖选完整峰后计算">—</span>%</td></tr>');
+}
+
+function clear_fwhm_info(message) {
+	var hint = message || "拖选完整峰后计算";
+	$("#fwhm").text("—").attr("title", hint);
+	$("#fwhm_percent").text("—").attr("title", hint);
+}
+
+function fwhm_format_kev(value) {
+	return value < 0.1 ? value.toFixed(3) : value.toFixed(2);
+}
+
+function fwhm_format_percent(value) {
+	return value < 0.1 ? value.toFixed(3) : value.toFixed(2);
+}
+
+function fwhm_energy_at(ch, find_ev_x) {
+	var lo = Math.floor(ch);
+	var hi = Math.ceil(ch);
+	var ev_lo = find_ev_x(lo);
+	var ev_hi = find_ev_x(hi);
+	if(ev_lo === undefined || ev_lo === null || !isFinite(ev_lo)) {
+		ev_lo = ev_hi;
+	}
+	if(ev_hi === undefined || ev_hi === null || !isFinite(ev_hi)) {
+		ev_hi = ev_lo;
+	}
+	if(ev_lo === undefined || ev_lo === null || !isFinite(ev_lo)) {
+		return null;
+	}
+	if(hi === lo || ev_hi === undefined || ev_hi === null || !isFinite(ev_hi)) {
+		return ev_lo;
+	}
+	return ev_lo + (ev_hi - ev_lo) * (ch - lo);
+}
+
+function calculate_fwhm(spectrum_data_ch, from, to, find_ev_x, has_energy, baseline_fn) {
+	if(has_energy === false || !spectrum_data_ch || spectrum_data_ch.length < 3) {
+		return null;
+	}
+	from = Math.max(0, Math.floor(from));
+	to = Math.min(spectrum_data_ch.length - 1, Math.ceil(to));
+	if(to - from < 2) {
+		return null;
+	}
+
+	function value_at(index) {
+		var value = spectrum_data_ch[index][1];
+		if(baseline_fn) {
+			value -= baseline_fn(spectrum_data_ch[index][0]);
+		}
+		return value;
+	}
+
+	var peak_index = -1;
+	var peak_value = -Infinity;
+	for(var i = from; i <= to; i++) {
+		var v = value_at(i);
+		if(v > peak_value) {
+			peak_value = v;
+			peak_index = i;
+		}
+	}
+	if(peak_index < 0 || !(peak_value > 0)) {
+		return null;
+	}
+
+	var half = peak_value / 2;
+	var left = null;
+	var right = null;
+
+	for(var i = peak_index; i > 0; i--) {
+		var v_prev = value_at(i - 1);
+		var v_cur = value_at(i);
+		if(v_prev <= half && v_cur >= half) {
+			if(v_cur === v_prev) {
+				left = spectrum_data_ch[i][0];
+			} else {
+				left = spectrum_data_ch[i - 1][0]
+					+ (spectrum_data_ch[i][0] - spectrum_data_ch[i - 1][0])
+					* (v_prev - half) / (v_prev - v_cur);
+			}
+			break;
+		}
+	}
+	for(var i = peak_index; i < spectrum_data_ch.length - 1; i++) {
+		var v_cur = value_at(i);
+		var v_next = value_at(i + 1);
+		if(v_next <= half && v_cur >= half) {
+			if(v_cur === v_next) {
+				right = spectrum_data_ch[i][0];
+			} else {
+				right = spectrum_data_ch[i][0]
+					+ (spectrum_data_ch[i + 1][0] - spectrum_data_ch[i][0])
+					* (v_cur - half) / (v_cur - v_next);
+			}
+			break;
+		}
+	}
+	if(left === null || right === null || right <= left) {
+		return null;
+	}
+
+	var ev_left = fwhm_energy_at(left, find_ev_x);
+	var ev_right = fwhm_energy_at(right, find_ev_x);
+	var ev_peak = fwhm_energy_at(spectrum_data_ch[peak_index][0], find_ev_x);
+	if(ev_left === null || ev_right === null || ev_peak === null) {
+		return null;
+	}
+	var fwhm_kev = ev_right - ev_left;
+	if(!(fwhm_kev > 0)) {
+		return null;
+	}
+	var percent = ev_peak > 0 ? (fwhm_kev / ev_peak * 100) : null;
+	return {
+		fwhm_kev: fwhm_kev,
+		percent: percent,
+		peak_ev: ev_peak,
+		peak_ch: spectrum_data_ch[peak_index][0],
+		left_ch: left,
+		right_ch: right
+	};
+}
+
+function update_fwhm_info(spectrum_data_ch, from, to, find_ev_x, has_energy, baseline_fn, baseline_label) {
+	var result = calculate_fwhm(spectrum_data_ch, from, to, find_ev_x, has_energy, baseline_fn);
+	var used_label = baseline_label;
+	if(!result && baseline_fn) {
+		result = calculate_fwhm(spectrum_data_ch, from, to, find_ev_x, has_energy, null);
+		used_label = "原始谱（本底拟合无效）";
+	}
+	if(!result) {
+		if(has_energy === false) {
+			clear_fwhm_info("未提供能量刻度，无法计算 keV FWHM");
+		} else {
+			clear_fwhm_info("拖选完整峰后计算");
+		}
+		return;
+	}
+	var fwhm_text = fwhm_format_kev(result.fwhm_kev) + " keV";
+	var percent_text = result.percent === null ? "—" : fwhm_format_percent(result.percent) + "%";
+	var detail = "峰位 " + result.peak_ev.toFixed(2) + " keV；"
+		+ "FWHM " + fwhm_text + "；FWHM/E " + percent_text
+		+ (used_label ? "；" + used_label : "");
+	$("#fwhm").text(fwhm_format_kev(result.fwhm_kev)).attr("title", detail);
+	$("#fwhm_percent").text(result.percent === null ? "—" : fwhm_format_percent(result.percent)).attr("title", detail);
+}
+
+
 function update_curosr_info(ch, ev, cps, cpsDecimals, time, find_ch_from_ev) {
 	$("#ch").text(ch);
 	$("#cps").text(cps.toFixed(cpsDecimals + 1));
@@ -6333,7 +6497,7 @@ function update_selection_info(spectrum, spectrum_data_ch, ranges, find_ev_x, cp
 	if(from < 0)
 		from = 0;
 	if(to >= spectrum_data_ch.length)
-		to = spectrum_data_ch.length;
+		to = spectrum_data_ch.length - 1;
 	
 	$("#sel_s_ch").text(from);
 	$("#sel_e_ch").text(to);
@@ -6423,6 +6587,10 @@ function update_selection_info(spectrum, spectrum_data_ch, ranges, find_ev_x, cp
 	
 	var bgline = [];
 	var bgline_slope = (right_bg_cps - left_bg_cps) / (right_bg_ch - left_bg_ch);
+	var fwhm_baseline = function(ch) {
+		return left_bg_cps + (ch - left_bg_ch) * bgline_slope;
+	};
+	update_fwhm_info(spectrum_data_ch, from, to, find_ev_x, spectrum['has_energy'] !== false, fwhm_baseline, "线性本底扣除");
 	for(var ch = left_bg_ch; ch < right_bg_ch; ch += 1) {
 		bgline.push([ch, left_bg_cps + (ch - left_bg_ch) * bgline_slope]);
 	}
@@ -6529,7 +6697,7 @@ function update_selection_info_without_bg(spectrum, spectrum_data_ch, ranges, fi
 	if(from < 0)
 		from = 0;
 	if(to >= spectrum_data_ch.length)
-		to = spectrum_data_ch.length;
+		to = spectrum_data_ch.length - 1;
 	
 	$("#sel_s_ch").text(from);
 	$("#sel_e_ch").text(to);
@@ -6542,6 +6710,8 @@ function update_selection_info_without_bg(spectrum, spectrum_data_ch, ranges, fi
 	for(var i = from; i <= to; i++) {
 		gross += spectrum_data_ch[i][1];
 	}
+	
+	update_fwhm_info(spectrum_data_ch, from, to, find_ev_x, spectrum['has_energy'] !== false, null, "原始谱（未扣BG）");
 	
 	var net_html = '';
 	net_html += gross.toFixed(cpsDecimals);

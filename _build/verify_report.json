@@ -1,6 +1,6 @@
 {
-  "new_page_count": 81,
-  "old_page_count": 75,
+  "new_page_count": 83,
+  "old_page_count": 83,
   "checks": [
     {
       "name": "all original pages exist",
@@ -9,8 +9,8 @@
     },
     {
       "name": "article body text preserved",
-      "ok": true,
-      "detail": "[]"
+      "ok": false,
+      "detail": "[{\"page\": \"detector.html\", \"reference_chars\": 5117, \"new_chars\": 5111}, {\"page\": \"other/info003.html\", \"reference_chars\": 879, \"new_chars\": 875}]"
     },
     {
       "name": "dropped title headings represented",
@@ -68,7 +68,12 @@
       "detail": ""
     }
   ],
-  "failures": [],
+  "failures": [
+    {
+      "name": "article body text preserved",
+      "detail": "[{\"page\": \"detector.html\", \"reference_chars\": 5117, \"new_chars\": 5111}, {\"page\": \"other/info003.html\", \"reference_chars\": 879, \"new_chars\": 875}]"
+    }
+  ],
   "notes": [
     "pre-existing missing images kept: ['img/ju.jfif', 'other/img/fs1.png', 'other/img/zd.jpg']"
   ],
@@ -193,7 +198,7 @@
     ]
   ],
   "external_urls_new": 48,
-  "image_refs_old": 248,
-  "image_refs_new": 248,
+  "image_refs_old": 253,
+  "image_refs_new": 253,
   "pages_with_js_errors": []
 }
